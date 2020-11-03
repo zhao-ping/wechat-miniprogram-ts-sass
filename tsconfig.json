@@ -1,0 +1,27 @@
+{
+    "compilerOptions": {
+        "strictNullChecks": true,
+        "strictPropertyInitialization": true,
+        "module": "commonjs",
+        "target": "ES5",
+        "experimentalDecorators": true,
+        "noImplicitThis": true,
+        "noImplicitReturns": true,
+        "alwaysStrict": true,
+        "noFallthroughCasesInSwitch": true,
+        "noUnusedLocals": true,
+        "strict": true,
+        "pretty": true,
+        "lib": [
+            "es2016",
+            "dom"
+        ]
+    },
+    "include": [
+        "./miniprogram/**/*.ts"
+    ],
+    "exclude": [
+        "node_modules",
+        "src"
+    ]
+}

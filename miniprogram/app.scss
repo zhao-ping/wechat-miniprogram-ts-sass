@@ -1,0 +1,41 @@
+$orange:#FD7649;
+$green:#50CC94;
+$blue:#369EFB;
+$red:#E71717;
+$white:#fff;
+$black:#000;
+$grey:#999;
+$color-2f:#2f2f2f;
+$color-f7:#f7f7f7;
+
+@each $name,$color in 
+(orange,$orange),
+(green,$green),
+(blue,$blue),
+(red,$red),
+(white,$white),
+(black,$black),
+(grey,$grey),
+(2f,$color-2f),
+(f7,$color-f7),
+{
+  .color-#{$name}{color:$color;}
+  .bg-#{$name}{color:$color;}
+}
+
+$i:10;
+@while $i < 50 {
+  .font-#{$i}{font-size: 2rpx * $i;}
+  $i:$i+2;
+}
+
+.ub{
+  display: flex;
+  .ub-f1{flex: 1;}
+  .ub-f2{flex: 2;}
+  .ub-f3{flex: 3;}
+}
+.ub.ub-ac{align-items: center;}
+.ub.ub-around{justify-content: space-around;}
+.ub.ub-between{justify-content: space-between;}
+.ub.ub-ver{flex-direction: column;}
