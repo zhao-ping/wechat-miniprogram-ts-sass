@@ -1,0 +1,60 @@
+<import src="../temp.wxml"></import>
+<page-loadding show="{{info}}">
+    <template is="majorHeader" data="{{info}}"></template>
+    <view wx:if="{{items}}" class="bb-1">
+        <tab items="{{items}}" index="{{tab}}" bind:change="changeTab"></tab>
+    </view>
+    <view wx:if="{{tab==0}}" class="p-16">
+        <view wx:if="{{employment[0].values&&employment[0].values.length==0}}">
+            <no-data></no-data>
+        </view>
+        <view wx:else>
+            <view wx:for="{{employment[0].values}}" wx:for-item="item" class="p-tb-8 ub ub-ac">
+                <view class="font-12 color-2f text-right" style="width:100rpx">{{item.k}}</view>
+                <view class="bg-ea br-4 ub-f1 m-lr-16" style="height:12rpx;">
+                    <view class="bg-blue br-4" style="height:12rpx;width:{{item.v}}%"></view>
+                </view>
+                <view class="font-12 color-2f" style="width:100rpx">{{item.v}}%</view>
+            </view>
+        </view>
+    </view>
+    <view wx:if="{{tab==1}}" class="p-16">
+        <view wx:if="{{employment[1].values&&employment[1].values.length==0}}">
+            <no-data></no-data>
+        </view>
+        <view wx:else>
+            <view wx:for="{{employment[1].values}}" wx:for-item="item" class="p-tb-8 ub ub-ac">
+                <view class="font-12 color-2f text-right" style="width:100rpx">{{item.k}}</view>
+                <view class="bg-ea br-4 ub-f1 m-lr-16" style="height:12rpx;">
+                    <view class="bg-blue br-4" style="height:12rpx;width:{{item.v}}%"></view>
+                </view>
+                <view class="font-12 color-2f" style="width:100rpx">{{item.v}}%</view>
+            </view>
+        </view>
+    </view>
+    <view wx:if="{{tab==2}}" class="p-16">
+        <view wx:if="{{employment[1].values&&employment[1].values.length==0}}">
+            <no-data></no-data>
+        </view>
+        <view wx:else>
+            <view class="ub ub-ac">
+                <view bind:tap="changeJobIndex" data-index="{{jobIndex==0?employment[2].values.length-1:jobIndex-1}}" class="iconfont iconnav_back p-16"></view>
+                <view class="ub-f1">
+                    <view wx:if="{{employment[2]}}" class="margin-auto" style="width:400rpx;">
+                        <cicle-pie id="jobPercent" items="{{employment[2].values}}" index="{{jobIndex}}"></cicle-pie>
+                    </view>
+                </view>
+                <view bind:tap="changeJobIndex" data-index="{{jobIndex<employment[2].values.length-1?jobIndex+1:0}}" class="iconfont iconnav_right p-16"></view>
+            </view>
+            <view class="pt-24">
+                <view class="col3 clearfix mb-16 font-12 color-2f">
+                    <view wx:for="{{employment[2].values}}" wx:for-item="item" wx:for-index="index" bind:tap="changeJobIndex" data-index="{{index}}" class="col vertical-middle p-tb-8">
+                        <view class="dot-8 mr-4" style="background-color: {{item.color}};"></view> 
+                        {{item.k}}
+                    </view>
+                </view> 
+                <view class="line-h-24 bg-f7 br-6 p-8 color-2f font-14 line-h-28 br-4 text-justify">{{employment[2].values[jobIndex].describe}}</view>
+            </view>
+        </view>
+    </view>
+</page-loadding>

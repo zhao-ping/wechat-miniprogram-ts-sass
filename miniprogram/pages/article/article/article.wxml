@@ -1,0 +1,26 @@
+<view wx:if="{{info}}">
+    <view class="article bg-white mb-16">
+    <view class="p-16 bb-1">
+        <view class="title">{{info.title}}</view>
+        <view class="pt-8">
+            <view class="display-ib font-14 mr-8 color-2f">{{info.author}}</view>
+            <view class="display-ib font-14 color-grey">{{info.created}}</view>
+        </view>
+    </view>
+    <view wx:if="{{info.article_content}}" class="content p-16">
+        <article-content content="{{info.article_content}}"/>
+    </view>
+</view>
+<view class="p-lr-8">
+    <view class="title-bl-green">
+        相关推荐
+    </view>
+</view>
+<navigator hover-class="none" wx:for="{{info.recommend_article_list}}" wx:for-item="article" open-type="redirect"  url="/pages/article/article/article?article_id={{article.article_id}}" class="p-16 ub ub-ac m-8 bg-white br-4">
+    <view class="ub-f1 mr-16">
+        <view class="font-16 line-h-20 hidden" style="height:120rpx;">{{article.title}}</view>
+        <view class="font-12 color-grey"><view class="display-ib">{{article.article_class_name}}</view> <view class="ml-8 display-ib">{{article.created}}</view></view>
+    </view>
+    <image class="img-84-76 br-4" src="{{article.photo}}" mode="aspectFit" lazy-load="true"></image>
+</navigator>
+</view>

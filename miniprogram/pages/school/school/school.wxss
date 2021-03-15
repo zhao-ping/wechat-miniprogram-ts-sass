@@ -1,0 +1,12 @@
+.schoolBg{height: 360rpx;}
+.logoContianer{border-radius: 16rpx 16rpx 0 0;background-color: white;padding: 8rpx;}
+.timerBox{position: relative;}
+.timerBox .timer{width: 25%;box-sizing: border-box;position: relative;}
+.timerBox .dot{width: 12rpx;height: 12rpx;box-sizing: border-box; border-radius: 50%;background-color: #E9C38B;border: 1rpx solid white;display: inline-block;}
+.timerBox:before{content: "";position: absolute; height:4rpx;width:100%; background-color:#E9C38B;opacity: 0.2; top: 42%;display: block;}
+.dot-8{width: 16rpx;height:16rpx;border-radius: 50%;display: inline-block;}
+.dot-orange-8{width: 16rpx;height: 16rpx;border-radius:10rpx;overflow: hidden; background: #DD4E2C;display: block;}
+.round-grey-26{width: 52rpx;height: 52rpx;background: rgba(47, 47, 47, 0.6);border-radius: 50%;display: table-cell;vertical-align: middle;text-align: center;}
+.circle50{display: table-cell;vertical-align: middle;text-align: center;box-sizing: border-box;width: 100rpx;height: 100rpx;border-radius: 50%;}
+.attatch{width: 100%;height: 160rpx;object-fit: cover;display: block;}
+.attach-name{position: absolute;white-space: nowrap; text-overflow: ellipsis; bottom: 0;left: 0;right: 0;padding:8rpx 16rpx;background-color: rgba(0,0,0,0.4);color: white;font-size: 24rpx; text-align: center;}

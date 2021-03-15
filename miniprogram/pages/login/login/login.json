@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "ym-input":"../../component/input/input"
+  }
+}

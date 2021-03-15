@@ -1,0 +1,19 @@
+<page-loadding show="{{info}}">
+    <scroll-view class="full-screen" id="scrollbox" scroll-into-view="{{userRank}}" scroll-x="{{false}}" scroll-y="{{true}}" scroll-with-animation="{{true}}">
+        <mp-sticky>
+            <view class="shadow w-100vw">
+                <view  wx:if="{{subjects.length>0}}">
+                    <tab items="{{subjects}}" index="{{subIndex}}" bind:change="changeSub"/>
+                </view>
+                <view class="ub ub-ac bg-f7 p-tb-12">
+                    <view wx:for="{{info.table_header}}" wx:for-item="item" class="ub-f1 text-center color-2f font-16">{{item}}</view>
+                </view>
+            </view>
+        </mp-sticky>
+        <view wx:for="{{info.rank_list}}" wx:for-item="item" wx:for-index="index" id="{{info.rank_list[index+6].is_user_rank?'scrollIntoView':''}}"  class="ub ub-ac bb-1 p-tb-12 text-center font-14 {{item.is_user_rank?'bg-golden-light color-orange':'color-2f'}} ">
+            <view wx:for-item="item" class="ub-f1">{{item.score}}</view>
+            <view wx:for-item="item" class="ub-f1">{{item.people_count}}</view>
+            <view wx:for-item="item" class="ub-f1">{{item.all_count}}</view>
+        </view>
+    </scroll-view>
+</page-loadding>

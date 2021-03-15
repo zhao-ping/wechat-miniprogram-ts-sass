@@ -1,0 +1,13 @@
+<view wx:if="{{info}}">
+    <view class="p-16 color-grey font-14">{{info.tip}}</view>
+    <view class="bg-white p-32">
+        <view wx:for="{{info.score_info}}" class="mb-16">
+            <ym-input model:value="{{item.score}}" bind:change="change" placeholder="请输入分数" data-index="{{index}}" clear="{{false}}" type="number">
+                <view class="line-h-48 color-grey bg-f7 text-center" style="width:180rpx;">{{item.subject_name}}</view>
+                <view slot="right" class="line-h-48 color-grey p-lr-16 ml-8">分</view>
+            </ym-input>
+        </view>
+    </view>
+</view>
+<view style="height:100rpx"></view>
+<view bind:tap="submit" class="fixed bottom p-16 bg-green text-center font-16 color-white">确定</view>

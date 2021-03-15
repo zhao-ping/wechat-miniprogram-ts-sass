@@ -1,0 +1,232 @@
+<import src="../../temp.wxml"/>
+<page-loadding show="{{info}}">
+    <scroll-view scroll-y="{{true}}" scroll-x="{{false}}" refresher-background="#50CC94">
+        <view class="bg-green br-b-round text-center color-white">
+            <view class="color-white font-16 text-center p-16">{{info.base_info.user_info}}</view>
+            <view wx:if="{{info.base_info.describe}}" class=" br-8 m-lr-8 font-14">
+                <!-- <view class="iconfont icontishi mr-4"></view> -->
+                <view>{{info.base_info.describe}}</view>
+            </view>
+            <view style="height:240rpx;"></view>
+        </view>
+        <!-- 目标 -->
+        <view style="margin-top:-240rpx;z-index:1;" class="relative">
+            <view class="m-lr-16 shadow bg-white br-8 overflow-hidden">
+                <view class="text-center line-h-48 color-green font-20 bb-dashed bg-green-light">我的目标</view>
+                <view class="p-tb-16">
+                    <view class="ub">
+                        <view class="ub-f1"></view>
+                        <view class="p-lr-16 pt-16 ub">
+                            <view wx:if="{{info.report_info.target_info.logo}}">
+                                <image class="img-40 mr-16" src="{{info.report_info.target_info.logo}}"></image>
+                            </view>
+                            <view class="ub-f1">
+                                <view wx:if="{{info.report_info.target_info.school_id}}">
+                                    <view>
+                                        <view class="font-18 bold display-ib mr-4">{{info.report_info.target_info.school_name}}</view>
+                                        <view class="font-14 color-grey display-ib">{{info.report_info.target_info.admit_order_name}}</view>
+                                    </view>
+                                    <view class="pt-8"><rich-text class="font-14" nodes="{{info.report_info.target_info.school_info}}"></rich-text></view>
+                                    <view class="ub-f1 mr-16 pt-8">
+                                        <view wx:if="{{info.report_info.target_info.subject_Limit}}" class="pt-8"><rich-text class="font-14" nodes="{{info.report_info.target_info.subject_Limit}}"></rich-text></view>
+                                        <view class="pt-8">
+                                            <rich-text wx:for="{{info.report_info.target_info.score_info}}" wx:for-item="score" nodes="{{score}}" class="color-grey font-14 line-h-24"></rich-text>
+                                        </view>
+                                    </view>
+                                </view>
+                                <view wx:if="{{info.report_info.target_info.result.length>0}}" class="p-tb-8 mt-16">
+                                    <view class="ub ub-ac p-tb-8 font-14" wx:for="{{info.report_info.target_info.result}}" wx:for-item="item">
+                                        <image wx:if="item.Image" src="{{item.Image}}" style="width:36rpx;height:36rpx"></image>
+                                        <rich-text class="ml-4" nodes="{{item.content}}"></rich-text>
+                                    </view>
+                                </view>
+                            </view>
+                        </view> 
+                        <view class="ub-f1"></view>
+                    </view>
+                    <navigator hover-class="none" url="/pages/scoreReport/setSchool/setSchool" class="p-tb-16 ub ub-ac ub-center color-orange font-14">
+                        <view>{{info.report_info.target_info.school_id?'修改':'设置'}}目标学校</view>
+                        <view class="iconfont iconicon_bianji font-14 ml-4"></view>
+                    </navigator>
+                </view>
+            </view>
+        </view>
+        <!-- 我的成绩 -->
+        <view class="bg-white overflow-hidden mt-16">
+            <view class="text-center line-h-48 color-green font-20 bb-dashed bg-green-light">我的成绩</view>
+            <!-- 位次&批次对比 -->
+            <view wx:for="{{info.report_info.compare_info}}" wx:for-item="table" class="p-tb-16">
+                <view class="p-tb-16">
+                    <view class="title-bl-green">{{table.title}}</view>
+                </view>
+                <view class="p-lr-16">
+                    <view class="pt-16">
+                        <table table="{{table.tables}}"></table>
+                    </view>
+                    <view class="pt-16">
+                        <rich-text class="color-grey font-14 line-h-24" nodes="{{table.result}}"></rich-text>
+                    </view>
+                </view>
+            </view>
+            <!-- 对应大学 -->
+            <view class="p-tb-16">
+                <view class="p-tb-16"><view class="title-bl-green">{{info.report_info.score_school_list.title}}</view></view>
+                <view class="color-grey font-14 p-lr-16 pb-16 line-h-24">{{info.report_info.score_school_list.describe}}</view>
+                <view hover-class="none" wx:for="{{info.report_info.score_school_list.school_list}}" wx:for-item="school"  class="p-16 bt-1 ub">
+                    <image class="img-40 mr-16" src="{{school.logo}}"></image>
+                <view class="ub-f1">
+                    <navigator hover-class="none" url="/pages/school/school/school?school_id={{school.school_id}}">
+                        <view class="ub ub-ac">
+                            <view class="font-16 ub-f1">{{school.school_name}}</view>
+                            <view class="font-14 color-grey">{{school.city}}</view>
+                        </view>
+                        <view class="pt-8"><rich-text class="font-14" nodes="{{school.school_info}}"></rich-text></view>
+                    </navigator>
+                    <view class="ub ub-ac" bind:tap="getSchoolInfo" data-item="{{school}}">
+                        <view class="ub-f1 mr-16">
+                            <view wx:if="{{school.subject_Limit}}" class="pt-8"><rich-text class="font-14" nodes="{{school.subject_Limit}}"></rich-text></view>
+                            <view class="pt-8">
+                                <rich-text wx:for="{{school.score_info}}" wx:for-item="score" nodes="{{score}}" class="color-grey font-14 line-h-24"></rich-text>
+                            </view>
+                        </view>
+                        <view class="iconfont iconarrow-right font-10 color-grey"></view>
+                    </view>
+                </view>
+                </view> 
+            </view>
+        </view>
+        <!-- 努力方向 -->
+        <view class="bg-white overflow-hidden mt-16">
+            <view wx:if="{{info.report_info.directive.directive_info[directiveTab].school_list.length>0}}">
+                <view class="text-center line-h-48 color-green font-20 bb-dashed bg-green-light">努力方向</view>
+                <view class="p-tb-16">
+                    <view class="p-tb-16"><view class="title-bl-green">{{info.report_info.directive.title}}</view></view>
+                    <view class="ub ub-ac p-lr-8">
+                        <view wx:for="{{info.report_info.directive.directive_info}}" wx:for-index="i" wx:for-item="item" data-index="{{i}}" bindtap="changeDirectiveTab" wx:if="{{item.score}}" class="p-8 mb-8 ub-f1">
+                            <view class="br-4 line-h-32 text-center {{i==directiveTab?'bg-green b-1-green color-white':'b-1'}}" >{{item.score}}</view>
+                        </view>
+                    </view>
+                    <view wx:if="{{info.report_info.directive.directive_info[directiveTab].describe}}" class="p-lr-16"><rich-text class="font-14 color-grey" nodes="{{info.report_info.directive.directive_info[directiveTab].describe}}"></rich-text></view>
+                </view>
+                <view hover-class="none" wx:for="{{info.report_info.directive.directive_info[directiveTab].school_list}}" wx:for-item="school"  class="p-16 bt-1 ub">
+                    <image class="img-40 mr-16" src="{{school.logo}}"></image>
+                    <view class="ub-f1">
+                        <navigator hover-class="none" url="/pages/school/school/school?school_id={{school.school_id}}">
+                            <view class="ub ub-ac">
+                                <view class="font-16 ub-f1">{{school.school_name}}</view>
+                                <view class="font-14 color-grey">{{school.city}}</view>
+                            </view>
+                            <view class="pt-8"><rich-text class="font-14" nodes="{{school.school_info}}"></rich-text></view>
+                        </navigator>
+                        <view class="ub ub-ac" bind:tap="getSchoolInfo" data-item="{{school}}">
+                            <view class="ub-f1 mr-16">
+                                <view wx:if="{{school.subject_Limit}}" class="pt-8"><rich-text class="font-14" nodes="{{school.subject_Limit}}"></rich-text></view>
+                                <view class="pt-8">
+                                    <rich-text wx:for="{{school.score_info}}" wx:for-item="score" nodes="{{score}}" class="color-grey font-14 line-h-24"></rich-text>
+                                </view>
+                            </view>
+                            <view class="iconfont iconarrow-right font-10 color-grey"></view>
+                        </view>
+                    </view>
+                </view> 
+            </view>
+        </view>
+        <!-- 专业方向推荐 -->
+        <view  class="overflow-hidden mt-16">
+            <view class="text-center line-h-48 color-green font-20 bb-dashed bg-green-light">专业方向推荐</view>
+            <view class="bg-white">
+                <view wx:if="{{info.report_info.recommended_major.title}}" class="pt-32 pb-16">
+                    <view class="title-bl-green">
+                        {{info.report_info.recommended_major.title}}
+                    </view>
+                </view>
+                <view wx:for="{{info.report_info.recommended_major.major_list}}" class="p-8">
+                    <view class="m-8 br-16 p-16 shadow bg-white">
+                        <view class="bold font-18 text-center">
+                            <view class="display-ib p-lr-8" style="background: linear-gradient(to bottom, white 40%,#E2F7EE 40%);">
+                            {{item.major_name}} <view class="font-14 display-ib">（{{item.major_type}}）</view>
+                            </view>
+                        </view>
+                        <view class="mt-32">
+                            <view class="bold mb-8 font-16">包含专业:</view>
+                            <view style="margin:0 -4rpx;">
+                                <view wx:for="{{item.include_major}}" wx:for-item="major" class="display-ib bg-f7 line-h-28 br-4 p-lr-8 m-4">{{major}}</view>
+                            </view>
+                        </view>
+                        <view class="mt-32">
+                            <view class="bg-green mb-8 bold color-white display-ib p-lr-8 line-h-28 br-4">推荐理由</view>
+                            <view style="margin:0 -4rpx;">
+                                <view wx:for="{{item.reason}}" wx:for-item="reason" wx:for-index="i" class="p-tb-16 ub {{i==0?'':'bt-1'}}">
+                                    <view class="color-grey mr-8">{{i+1}}.</view>
+                                    <view class="ub-f1 ling-h-14">{{reason}}</view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+                <view class="p-16"  hover-stop-propagation="false">
+                    <view wx:if="{{info.report_info.recommended_major.desc}}">
+                        <view class="text-center mb-16 color-orange">
+                            <view class="iconfont iconicon_prompt mr-4"></view>{{info.report_info.recommended_major.desc}}
+                        </view>
+                        <view wx:if="{{info.report_info.recommended_major.set_state.length>0}}" class="ub ub-ac text-center">
+                            <view wx:for="{{info.report_info.recommended_major.set_state}}" wx:for-item="set" wx:for-index="i" class="ub-f1 p-16 {{i==0?'':'ml-32'}}">
+                                <view class="font-18 bold">{{set.name}}</view>
+                                <view class="font-18 pt-8" style="color:{{set.color}};">{{set.state}}</view>
+                            </view>
+                        </view>
+                    </view>
+                    <view wx:else class="bold mb-16">如实填写 ，推荐更准确</view>
+                    <view class="ub ub-ac text-center">
+                        <view class="ub-f1 mr-32">
+                            <navigator hover-class="none" class="ub-f1 btn b-1 br-4" url="/pages/user/singleScore/singleScore">
+                                设置单科成绩 <view class="iconfont iconicon_bianji color-green ml-4"></view>
+                            </navigator>
+                        </view>
+                        <view class="ub-f1">
+                            <navigator hover-class="none" class="ub-f1 btn b-1 br-4" url="/pages/user/nature/nature">
+                                设置性格特征 <view class="iconfont iconicon_bianji color-green ml-4"></view>
+                            </navigator>
+                        </view>
+                    </view>
+                </view>
+                <view class="p-16">
+                    <view class="bg-orange line-h-40  br-20 color-white font-16 ub ub-ac ub-center" bindtap="download" style="width: 70%; margin: 64rpx auto;">
+                        <view class="iconfont iconxiazai1"></view> <view class="ml-4">下载成绩报告</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <!-- 为您推荐更多 -->
+        <view class="overflow-hidden mt-16">
+            <view class="text-center line-h-48 color-green font-20 bb-dashed bg-green-light">为您推荐更多</view>
+            <view class="p-16">
+                <navigator hover-class="none" class="shadow bg-white br-8 ub ub-ac p-16 mb-16" url="/pages/zhiyuan/possibleSchools/possibleSchools">
+                    <view class="ub-f1">
+                        <rich-text class="bold font-18" nodes="{{info.report_info.vip_school_count}}"></rich-text>
+                        <view class="pt-8"><rich-text class="color-grey font-14" nodes="{{info.report_info.vip_school_tag}}"></rich-text></view>
+                    </view>
+                    <view class="bg-orange line-h-24 br-12 color-white p-lr-8 font-12">马上看</view>
+                    <view class="iconfont iconarrow-right font-10 color-grey ml-4"></view>
+                </navigator>
+                <navigator hover-class="none" class="shadow bg-white br-8 p-16 mb-16" url="/pages/zhiyuan/scoreMajor/scoreMajor">
+                    <view class="ub ub-ac">
+                        <view class="ub-f1">
+                            <view class="font-18 bold">按分数选 <image class="display-ib" style="height:18px;width:40px;" src="https://m.ymzy.cn/static/images/home/wordMajor.png" ></image> </view>
+                        </view>
+                        <view class="iconfont iconarrow-right font-10 color-green ml-4"></view>
+                    </view>
+                    <view class="pt-8">
+                        <view class="display-ib mr-32">
+                            <view class="iconfont iconCheckbox_Selected color-green mr-4"></view>支持关键词搜索
+                        </view>
+                        <view class="display-ib mr-32">
+                            <view class="iconfont iconCheckbox_Selected color-green mr-4"></view>支持自定义条件
+                        </view>
+                    </view>
+                </navigator>
+            </view>
+        </view>
+        <template is="popupSchool" data="{{popupSchool}}"></template>
+    </scroll-view>
+</page-loadding>

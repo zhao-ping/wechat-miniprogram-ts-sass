@@ -1,0 +1,15 @@
+<import src="../temp.wxml"/>
+<template is="schoolHeader" data="{{info}}"/>
+<view class="schoolHistory relative p-16 p-tb-8 bg-white">
+    <view class="pt-16">
+        <view wx:for="{{info.developing_time_list}}" wx:for-item="step" class="step mb-24">
+            <view class="ub pl-16">
+                <view class="color-golden mr-16 line-h-22">{{step.year}}年</view>
+                <view class="ub-f1">
+                    <view class="font-18">{{step.tag}}</view>
+                    <view class="pt-8 color-grey">{{step.content}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,2 @@
+.input{min-height: 96rpx;overflow: hidden;}
+.placeholder{font-size: 28rpx;color: #999;}

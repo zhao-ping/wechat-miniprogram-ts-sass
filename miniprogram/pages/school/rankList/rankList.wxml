@@ -1,0 +1,61 @@
+<view class="full-screen ub ub-ver">
+    <!-- 筛选条件栏 -->
+    <view id="topContianer">
+        <view wx:if="{{rank_all_type}}" class="ub ub-ac bg-white pr-16 bb-1" style="overflow-y:hidden;">
+            <view class="ub-f1 mr-8">
+                <scroll-view scroll-with-animation="{{true}}" scroll-into-view="rank-{{currentRank.type_id}}" scroll-x="{{true}}" enhanced="{{true}}" show-scrollbar="{{false}}" style="width:572rpx;">
+                    <view class="p-2 provinceList" style="white-space:nowrap;">
+                        <view wx:for="{{rank_all_type}}" wx:for-item="item" wx:for-index="index" id="rank-{{item.type_id}}" bindtap="changeRankType" data-index="{{rankIndex}}" data-item="{{item}}" class="{{item.type_id==currentRank.type_id?'bb-4-green':'color-grey'}} prov mr-4 line-h-40 br-4 p-lr-8 font-14 display-ib">{{item.title}}</view>
+                    </view>
+                </scroll-view>
+            </view>
+            <view bindtap="showFilter" class="b-1 br-20 p-lr-8 line-h-28 font-14" style="height:56rpx;">筛选 <view class="color-green bold display-i">{{filter.count}}</view> </view>
+        </view>
+    </view>
+    <scroll-view style="height:{{scrollBoxHeight}}px" scroll-top="{{scrollTop}}" scroll-x="{{false}}" scroll-y="{{true}}" bindscroll="onScroll"  bindscrolltolower="getList">
+        <view wx:if="{{list.length>0&&listPage.page>0}}">
+            <view wx:for="{{list}}" wx:for-item="rank" wx:for-index="i">
+                <view wx:if="{{rank.base_info.warning}}" class="stickyContianer" style="height:{{stickys[i].height}}px;">
+                    <view class="sticky bg-f7 p-16 w-100" style="{{stickys[i].isSticky?'position:fixed;top:'+topContainerHeight+'px':'position:relative'}};">
+                    <view class="ub ub-ac">
+                        <view class="fon-18 bold ub-f1">
+                            {{rank.base_info.tag}} 
+                            <view wx:id="rank.base_info.class_name" class="display-ib color-green">{{rank.base_info.class_name}}</view>
+                        </view>
+                        <view class="color-2f cont-14">{{rank.base_info.count}}所</view>
+                    </view>
+                    <view class="pt-8 color-grey font-14">{{rank.base_info.warning}}</view>
+                </view>
+                </view>
+                <navigator hover-class="none" wx:for="{{rank.data_list}}" wx:for-item="school" url="/pages/school/school/school?school_id={{school.school_id}}" class="bg-white ub bb-1 p-16">
+                    <view wx:if="{{school.index}}" class="" style="width:68rpx;">
+                        <view wx:if="{{school.index<=10}}" class="rankTag mt-4">{{school.index}}</view>
+                        <view wx:else class="mt-4">{{school.index}}</view>
+                    </view>
+                    <view class="ub-f1">
+                        <view class="ub">
+                            <view class="ub-f1 font-18">{{school.school_name}}</view>
+                            <view wx:if="{{school.prov_name}}" class="font-14 color-grey">{{school.prov_name}}</view>
+                        </view>
+                        <view wx:if="{{school.sub}}" class="color-grey font-14 mr-8 pt-4"> | 隶属于{{school.sub}}</view>
+                        <view wx:if="{{school.major_names}}" class="pt-8 color-grey font--14">{{school.major_names}}</view>
+                        <view wx:if="{{school.content}}" class="pt-8 color-grey font-14">{{school.content}}</view>
+                        <view wx:if="{{school.school_class_name}}" class="ub pt-8">
+                            <view class="color-grey font-14 mr-8 pt-4">{{school.school_class_name}}</view>
+                            <view class="ub-f1">
+                                <view wx:for="{{school.fame_list}}" wx:for-item="fame" class="tag-f7-24 m-4">{{fame}}</view>
+                            </view>
+                        </view>
+                    </view>
+                </navigator>
+            </view>
+            <view wx:if="{{listPage.page<listPage.page_count}}" bindtap="getList" class="text-center font-14 color-grey bg-f7 p-16">点击加载下一页</view>
+                <view wx:else class="text-center font-14 color-grey bg-f7 p-16">数据已经全部加载完毕</view>
+            </view>
+        <view wx:else style="padding-top:200rpx" class="text-center color-grey font-16">
+            暂无搜索结果
+        </view>
+    </scroll-view>
+</view>
+<!-- 筛选条件 -->
+<school-filter wx:if="{{search_list}}" id="filter" submit-on-hide="{{true}}" binddone="getList" filters="{{search_list}}"></school-filter>

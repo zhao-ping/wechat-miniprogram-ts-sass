@@ -1,0 +1,5 @@
+.loaddingPage{text-align: center;font-size: 32rpx; color: #999;opacity: 0;transition: all 0.3s;}
+.loaddingPage.show{opacity: 1;transition: all 0.3s;}
+.loaddingText{padding-top: 32rpx;}
+.pageContaienr{opacity: 0;transition: all 0.3s;}
+.pageContaienr.show{opacity: 1;transition: all 0.3s;}

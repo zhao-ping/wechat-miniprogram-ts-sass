@@ -1,0 +1,17 @@
+<import src="../temp.wxml"/>
+<template name="suxueArticleList">
+    <view class="bg-white">
+        <navigator hover-class="none" wx:for="{{list}}" url="/pages/article/suxueDetail/suxueDetail?article_id={{item.article_id}}" class="bb-1 p-16">
+            <view class="font-16 line-h-24">{{item.title}}</view>
+            <image wx:if="{{item.photo}}" src="{{item.photo}}" class="mt-8 img-suxue"></image>
+            <view class="pt-8 color-grey font-14 ub ub-ac">
+            <view class="ub-f1">{{item.views}}</view>
+            <view class="">{{item.author}}</view>
+            </view>
+        </navigator>
+    </view>
+</template>
+<template name="suxueArticleListPage">
+    <template is="suxueArticleList" data="{{list}}"></template>
+    <template is="listPage" data="{{list,listPage}}"></template>
+</template>

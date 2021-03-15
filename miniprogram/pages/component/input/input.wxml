@@ -1,0 +1,10 @@
+<view class="{{clas}}" style="{{styl}}">
+  <view class="ub ub-ac b-1 br-4 input {{disabled?'bg-ea':''}} {{mode=='round'?'br-24':''}}">
+    <slot></slot>
+    <view class="ub-f1 p-lr-16"> <input model:value="{{value}}" type="{{type}}" placeholder-class="placeholder" placeholder="{{placeholder}}" auto-focus="{{autofocus}}" bindconfirm="bindconfirm" bindinput="cahngeValue" disabled="{{disabled}}" /></view>
+    <view wx:if="{{clear}}" bindtap="clearValue" class="iconfont iconicon_cancel color-ea p-lr-8"></view>
+    <view bindtap="rightSlotTap">
+      <slot name="right"></slot>
+    </view>
+  </view>
+</view>

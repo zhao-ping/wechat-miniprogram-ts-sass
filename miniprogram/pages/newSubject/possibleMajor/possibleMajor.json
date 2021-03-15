@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "我的选科能报的专业",
+  "usingComponents": {
+    "circle-percent":"../../component/circlePercent/circlePercent"
+  }
+}

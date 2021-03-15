@@ -1,0 +1,8 @@
+<view wx:if="{{info}}" class="article bg-white mb-16">
+    <view class="p-16 bb-1">
+        <view class="title">{{info.title}}</view>
+    </view>
+    <view class="content p-16">
+        <rich-text class="font-16" nodes="{{info.article_content}}"></rich-text>
+    </view>
+</view>

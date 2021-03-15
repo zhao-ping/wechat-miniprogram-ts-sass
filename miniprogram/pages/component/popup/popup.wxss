@@ -1,0 +1,4 @@
+.popupContainer{ box-sizing: border-box;position: fixed;transition: all 0.1s ease-out;background-color: white;z-index:10001;border-radius: 32rpx;overflow: hidden;transform: translate(-50%,50%);top: 120vh;left: 50%;}
+.popupContainer.show{transition: all 0.1s ease-out;top:50vh;transform: translate(-50%,-50%);}
+.popupContainerBg{position: fixed;left: 0;right: 0;bottom: 0;top: 0;background-color: rgba(0,0,0,0.3);opacity: 0;display: none;transition: all 0.3s ease-in;z-index: 10001;}
+.popupContainerBg.show{opacity: 1;display: block;transition: all 0,3s ease-in;}

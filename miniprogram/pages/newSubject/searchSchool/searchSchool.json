@@ -1,0 +1,8 @@
+{
+  "navigationBarBackgroundColor": "#50CC94",
+  "navigationBarTextStyle": "white",
+  "navigationBarTitleText": "按学校查选科要求",
+  "usingComponents": {
+    "ym-input":"../../component/input/input"
+  }
+}

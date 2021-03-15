@@ -1,0 +1,60 @@
+<import src="../../temp.wxml" />
+<scroll-view wx:if="{{list}}" class="full-screen" scroll-x="{{false}}" scroll-into-view="{{scrollView}}" scroll-y="{{true}}">
+    <view wx:if="{{moreMajors.base_info.score_tip}}" class="p-16 text-center">
+        <rich-text class="color-orange font-14" nodes="{{moreMajors.base_info.score_tip}}"></rich-text>
+    </view>
+    <view wx:for="{{list}}">
+        <view wx:if="{{index==moreMajors.base_info.index}}" class="p-16 text-center color-grey">
+            {{moreMajors.base_info.index_desc}}
+        </view>
+        <view id="major-{{index}}" class="bg-white mb-8">
+            <view class="ub p-lr-16 pb-16 pt-20 bb-1" bind:tap="getMajorInfo" data-item="{{item}}">
+                <view wx:if="{{item.probability||item.probability_level}}" class="w-46">
+                    <view wx:if="{{item.probability}}" class="font-10">
+                        <view class="font-20 display-ib font-number">{{item.probability<10?'<9':item.probability}}</view>%
+                    </view>
+                    <view wx:if="{{item.probability_level}}" class="possibility" style="border: 1px solid {{item.probability_level_color}}; color: {{item.probability_level_color}};">
+                        {{item.probability_level}}
+                    </view>
+                </view>
+                <view class="ub-f1">
+                    <view>
+                        <view class="font-16 mr-8 color-00">
+                        {{item.major_name}}
+                            <view wx:if="{{item.subject_limit}}" class="ml-8 bg-f7 br-3 display-ib line-h-24 p-lr-8 font-12 color-grey">{{item.subject_limit}}</view>
+                        </view>
+                    </view>
+                    <view wx:if="{{item.major_tag}}" class="pt-8 text-ellipsis font-12 color-grey">{{item.major_tag}}</view>
+                    <view class="ub ub-ac">
+                        <view class="ub-f1">
+                            <view wx:for="{{item.score_info}}" wx:for-item="node" class="color-grey pt-8">
+                                <rich-text nodes="{{node}}"></rich-text>
+                            </view>
+                        </view>
+                        <view class="iconfont iconarrow-right font-10 color-grey"></view>
+                    </view>
+                    <view class="clearfix" style="max-height: 6rem; overflow: hidden; margin: 0.8rem -0.4rem -0.4rem;">
+                        <view wx:for="{{item.major_tags}}" wx:for-item="tag" class="bg-green-light font-12 line-h-22 color-grey display-b m-4 p-lr-16 br-12 float-l">{{tag}}</view>
+                    </view>
+                </view>
+            </view>
+            <view wx:if="{{item.is_have_plan_desc}}" class="text-center bt-1 text-center ">{{item.is_have_plan_desc}}</view>
+            <view wx:else>
+                <view wx:if="{{isZhiyuanPage}}" bind:tap="addORrDelMajor" data-index="{{index}}">
+                    <view wx:if="{{item.is_application_checked}}" class="ub ub-ac ub-center h-48 color-green"><i class="iconfont iconCheckbox_Selected text-16 mr-4"></i> <span>已填报</span></view>
+                    <view wx:else class="ub ub-ac ub-center h-48"><i class="iconfont iconjiarubeixuan text-16  mr-4"></i> <span>填报该专业</span></view>
+                </view>
+                <view wx:else bind:tap="chooseMajor" data-index="{{index}}">
+                    <view wx:if="{{item.is_alternative}}" class="ub ub-ac ub-center h-48 color-green"><i class="iconfont iconCheckbox_Selected text-16 mr-4"></i> <span>已备选</span></view>
+                    <view wx:else class="ub ub-ac ub-center h-48"><i class="iconfont iconjiarubeixuan text-16  mr-4"></i> <span>加入备选</span></view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view wx:if="{{moreMajors.base_info.index>=list.length}}" class="p-16 text-center color-grey">
+        {{moreMajors.base_info.index_desc}}
+    </view>
+    <view style="height:100rpx;"></view>
+    <template is="popupMajor" data="{{popupMajor,isZhiyuanPage}}"></template>
+    <view bind:tap="beixuanBatch" class="fixed bottom bg-green p-16 text-center color-white font-16">确定</view>
+</scroll-view>

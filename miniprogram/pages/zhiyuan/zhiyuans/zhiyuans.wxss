@@ -1,0 +1,2 @@
+.state{transform: translateX(0);transition: all 0.1s;}
+.state.state2{transform: translateX(96rpx);transition: all 0.1s;}

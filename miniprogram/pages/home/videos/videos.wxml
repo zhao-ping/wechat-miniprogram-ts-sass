@@ -1,0 +1,27 @@
+<import src="../../temp.wxml" />
+<scroll-view class="full-screen" scroll-x="{{false}}" scroll-y="{{true}}" lower-threshold="50" 
+    bindscrolltolower="getList" bindscroll="">
+    <view wx:if="{{types}}">
+        <mp-sticky>
+            <view class="w-100vw"><tabs mode="object" items="{{types}}" key="class_name" index="{{tabIndex}}" bind:change="changeTab"/></view>
+        </mp-sticky>
+    </view>
+    <view wx:if="{{list}}" class="pt-16 p-lr-16">
+        <view wx:for="{{list}}" data-index="{{index}}" bind:tap="videoDetail" class=" overflow-hidden br-8 bg-white mb-16">
+            <view wx:if="{{playingVideoIndex==index}}">
+                <video id="video" style="width:100%;height:375rpx" src="{{item.url}}"  autoplay="{{true}}" auto-pause-if-open-native="{{true}}" show-progress="{{true}}" show-fullscreen-btn="{{true}}" show-play-btn="{{true}}" show-center-play-btn="{{true}}"></video>
+            </view>
+            <view wx:else class="relative" style="height:50vw;background:url({{item.picture}});background-size:cover;">
+                <view class="videoTitle">{{item.title}}</view>
+                <view wx:if="{{item.user_played}}" class="videoViewed">看过</view>
+                <view class="absolute" style="top:50%;left:50%;transform:translate(-50%,-50%);"> <view class="iconfont iconsanjiaoxing color-white font-32"></view> </view>
+            </view>
+            <view class="ub ub-ac p-lr-16 line-h-32 color-grey">
+                <view class="ub-f1"></view>
+                <view class="iconfont iconicon_browse mr-4"></view> <view class="mr-16">{{item.view_num}} 人看过</view>
+                <view class="iconfont iconicon_time mr-4"></view> <view class="">{{item.duration}}</view>
+            </view>
+        </view>
+    </view>
+    <template is="listPage" data="{{list:list||null,listPage}}" />
+</scroll-view>

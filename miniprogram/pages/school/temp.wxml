@@ -1,0 +1,9 @@
+<template name="schoolHeader">
+    <view class="bg-white p-16 bb-1 ub ub-ac">
+         <image class="img-48 mr-16" src="{{info.logo}}"></image>
+         <view class="ub-f1">
+             <view class="font-18">{{info.school_name}}</view>
+             <view class="pt-4 font-14 color-grey">{{info.school_info_splice}}</view>
+         </view>
+    </view>
+</template>

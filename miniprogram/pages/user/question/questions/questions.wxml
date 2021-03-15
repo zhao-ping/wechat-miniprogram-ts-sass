@@ -1,0 +1,20 @@
+<scroll-view class="full-screen relative" scroll-x="{false}" scroll-y="{{true}}" >
+    <view wx:if="info">
+        <view class="fixed top shadow">
+            <tab wx:if="{{items}}" items="{{items}}" index="{{tabIndex}}" bind:change="changeTabIndex"></tab>
+        </view>
+    </view>
+    <view style="margin-top:116rpx;margin-bottom:100rpx;" class="bg-white p-lr-16">
+        <view wx:for="{{info}}" wx:for-item="questions" wx:for-index="index">
+            <view wx:if="{{index==tabIndex}}">
+                <navigator hover-class="none" wx:for="{{questions.article_list}}" wx:for-item="item" wx:for-index="i" url="/pages/user/question/question/question?article_id={{item.article_id}}" class="p-tb-16 ub ub-ac {{i<questions.article_list.length-1?'bb-1':''}}">
+                    <view class="ub-f1 mr-8 font-14">{{item.index}}. {{item.title}}</view>
+                    <view class="iconfont iconarrow-right font-10 color-grey"></view>
+                </navigator>
+            </view>
+        </view>
+    </view>
+    <navigator hover-class="none" url="/pages/user/contactUs/contactUs" class="fixed bottom bg-white p-16 ub ub-center text-16 color-green">
+        <view class="iconfont iconicon_Customerservice font-16 mr-8"></view><view>联系客服</view>
+    </navigator>
+</scroll-view>

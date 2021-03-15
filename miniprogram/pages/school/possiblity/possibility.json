@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "page-loadding":"../../component/pageLoadding/pageLoadding",
+    "possibility":"../../component/chartPossibility/chartPossibility",
+    "line-chart":"../../component/chartLine/chartLine",
+    "right-in-container":"../../component/rightInContainer/rightInContainer"
+  }
+}

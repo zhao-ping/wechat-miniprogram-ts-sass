@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "circle-percent":"../../component/circlePercent/circlePercent",
+    "mp-sticky":"@miniprogram-component-plus/sticky",
+    "tab":"../../component/tab/tab"
+  }
+}

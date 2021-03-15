@@ -1,0 +1,3 @@
+<view id="circlePercentContainer">
+    <canvas style="width:{{width}}px;height:{{width}}px;" type="2d" id="canvas"></canvas>
+</view>

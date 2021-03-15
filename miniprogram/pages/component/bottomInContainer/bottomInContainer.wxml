@@ -1,0 +1,4 @@
+<view class="bottomContainerBg {{isShow?'show':''}}" bindtap="toHide"></view>
+<view class="bottomContainer {{isShow?'show':''}}">
+    <slot></slot>
+</view>

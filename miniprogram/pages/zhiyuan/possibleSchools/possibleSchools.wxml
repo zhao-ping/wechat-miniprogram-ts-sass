@@ -1,0 +1,43 @@
+<import src="../temp.wxml" />
+<view>
+    <scroll-view class="full-screen" scroll-x="{{false}}" scroll-top="{{scrollTop}}" scroll-with-animation="{{true}}" enhanced="{{true}}" scroll-y="{{true}}" upper-threshold="50" lower-threshold="50" bindscrolltolower="getList">
+        <mp-sticky>
+            <view class="w-100vw bg-white ub ub-around ub-ac ub-between p-8 shadow">
+                <view wx:if="{{admitList}}">
+                    <view wx:if="admitList.values.length==0">{{admitList.default_value.k}}</view>
+                    <view wx:else>
+                        <picker wx:if="{{admitList}}" bindchange="changeAdmit"  range="{{admitList.values}}" range-key="k" mode="selector">
+                            <view class="ub ub-ac">
+                                <view>{{admitList.default_value.k}}</view>
+                                <view wx:if="{{admitList.values.length>1}}" class="iconfont iconicon_drop-down color-grey ml-4 font-8"></view>
+                            </view>
+                        </picker>
+                    </view>
+                </view>
+                <picker wx:if="{{sortList}}" bindchange="changeSort"  range="{{sortList.values}}" range-key="k" mode="selector">
+                    <view class="ub ub-ac">
+                        <view>{{sortList.default_value.k}}</view>
+                        <view wx:if="{{sortList.values.length>1}}" class="iconfont iconicon_drop-down color-grey ml-4 font-8"></view>
+                    </view>
+                </picker>
+                <view bind:tap="toShowFilter" class="p-lr-16 line-h-28 b-1 br-24 text-center">
+                    筛选
+                    <view wx:if="{{filter&&filter.count>3}}" class="color-green display-ib">{{filter.count-3}}</view>
+                </view>
+            </view>
+        </mp-sticky>
+        <page-loadding show="{{list}}">
+            <view class="p-16 ub ub-between">
+                <rich-text class="font-12 color-grey" nodes="{{baseInfo.first_tip}}"></rich-text>
+                <view bind:tap="changeRange">
+                    <rich-text class="font-12 color-grey" nodes="{{baseInfo.second_tip}}"></rich-text>
+                </view>
+            </view>
+            <template is="schoolList" data="{{list,listPage,popupMajor,popupSchool,isZhiyuanPage,prov_model_ex:globalUserInfo.prov_model_ex,mode:globalUserInfo.mode}}"></template>           
+        </page-loadding>
+        <view style="height:104rpx;"></view>
+        <navigator hover-class="none" url="/pages/zhiyuan/beixuan/beixuan" class="fixed bottom bg-green p-12 text-center font-16 color-white">查看我的备选</navigator>
+        <!-- 筛选条件 -->
+        <school-filter wx:if="{{filterList}}" id="school-filter" submit-on-hide="{{true}}" bind:done="setFilter" filters="{{filterList}}"></school-filter>
+    </scroll-view>
+</view>

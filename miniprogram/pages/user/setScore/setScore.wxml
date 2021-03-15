@@ -1,0 +1,40 @@
+<view wx:if="{{info}}" class="p-24">
+    <view class="ub ub-ac">
+        <view class="ub-f1 font-18 bold">{{info.show_info.show_title}}</view>
+        <view class="color-grey mr-4">{{info.user_info.prov_name}}</view>
+        <view class="iconfont iconicon_Password2 color-grey"></view>
+    </view>
+    <view class="pt-16 color-grey">{{info.show_info.show_content}}</view>
+    <view class="p-tb-24">
+        <view class="mb-16">
+            <ym-input model:value="{{score}}" auto-focus="{{true}}" clear="{{false}}" placeholder="请输入分数" type="number" bind:change="getRank">
+                <view class="line-h-48 color-grey bg-f7 text-center" style="width:180rpx;">{{showInfo.show_state==1?'模考总分':'高考总分'}}</view>
+                <view slot="right" class="line-h-48 color-grey p-lr-16 ml-8">分</view>
+            </ym-input>
+        </view>
+        <view wx:if="{{info.show_info.show_state!=1}}" class="mb-16" style="'background-color':{{info.user_info.isrank?'#fafafa':''}}">
+            <ym-input disabled="{{info.user_info.isrank}}" model:value="{{rank}}" auto-focus="{{true}}" clear="{{false}}" placeholder="{{info.show_info.is_input_tip}}" type="number">
+                <view class="line-h-48 color-grey bg-f7 text-center" style="width:180rpx;">排  名</view>
+                <view slot="right" class="line-h-48 color-grey p-lr-16 ml-8">位</view>
+            </ym-input>
+        </view>
+    </view>
+    <view wx:if="{{info.show_info.show_source}}" class="mb-32 font-12">{{info.show_info.show_source}}</view>
+    <view wx:if="{{info.show_info.show_state!=1&&info.show_info.show_what}}" class="mb-32 text-right font-12">
+        <view bind:tap="showRank" ><view class="iconfont iconicon_commonproblem color-orange"></view> 不知道位次怎么办？</view>
+    </view>
+    <!-- 科目 -->
+    <view wx:for="{{subjects}}" wx:for-item="subInfo" wx:for-index="index" class="mb-32">
+        <view class="font-16 mb-8">{{subInfo.title}}</view>
+            <view class="clearfix p-tb-8 col3"  style="margin: 0px -0.8rem;">
+            <view wx:for="{{subInfo.values}}" wx:for-index="i" class="col p-8">
+                <view bind:tap="checkSub" data-index="{{[index,i]}}" class="line-h-40 text-center br-4 {{item.checked?'bg-green color-white':'bg-f7 color-27'}}" >{{item.k}}</view>
+            </view>
+        </view>
+    </view>
+    <view bind:tap="setUserInfo" class="btn green mb-32">确定</view>
+    <view wx:if="{{info.show_info.show_fillin}}" class="mb-32 font-12">{{info.show_info.show_fillin}}</view>
+    <mp-dialog title="修改确认" show="{{showComfirm}}" bindbuttontap="tapDialogButton" buttons="{{[{text: '取消',extClass:'color-grey'}, {text: '修改',extClass:'color-green'}]}}">
+        <rich-text class="line-h-32" nodes="{{confirmNode}}"></rich-text>
+    </mp-dialog>
+</view>

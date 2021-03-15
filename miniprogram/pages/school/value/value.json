@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "page-loadding":"../../component/pageLoadding/pageLoadding"
+  },
+  "navigationBarBackgroundColor":"#50CC94",
+  "navigationBarTextStyle":"white",
+  "backgroundColorTop":"#50CC94"
+}

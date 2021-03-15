@@ -1,0 +1,154 @@
+<page-loadding show="{{info}}">
+    <scroll-view scroll-x="{{false}}" scroll-y="{{true}}" bounces="{{false}}">
+        <view class="bg-white">
+        <view class="schoolBg ub ub-ver" style="background-image:url({{info.home_bgp}});background-size:cover;">
+            <view class="ub">
+                <view class="ub-f1"></view>
+                <view class="round-grey-26 m-16" bind:tap="attentSchool">
+                    <view wx:if="{{info.is_attention}}" class="iconfont iconbutton_attention font-12 color-orange"></view>
+                    <view wx:else class="iconfont iconbutton_attention font-12 color-white"></view>
+                </view>
+            </view>
+            <view class="ub-f1"></view>
+            <div class="ub ub-ac p-lr-16 bg-liner-transparent">
+                <view class="logoContianer mr-16">
+                    <image class="img-36" src="{{info.logo}}"></image>
+                </view>
+                <view class="ub-f1 color-white line-h-24 font-16">
+                    {{info.school_name}}
+                </view>
+            </div>
+        </view>
+        <view class="p-lr-16">
+            <view class="shadow p-16 br-b-16 bg-white">
+                <view class="font-16">{{info.school_info_splice}}</view>
+                <view wx:if="{{info.fame_list.length>0}}" class="pt-16" style="margin:0 -8rpx">
+                    <view wx:for="{{info.fame_list}}" wx:for-item="tag" class="tag-f7-24 m-4">{{tag}}</view>
+                </view>
+            </view>
+        </view>
+        <!-- 简介 -->
+        <navigator hover-class="none" wx:if="{{info.school_content}}" url="/pages/school/intro/intro?school_id={{info.school_id}}" class="p-16">
+            <view class="line-h-24 font-14">
+                {{info.school_content}} <view class="display-ib color-grey">更多></view>
+            </view>
+        </navigator>
+        <!-- 发展历程 -->
+        <navigator hover-class="none" url="/pages/school/history/history?school_id={{info.school_id}}" wx:if="{{info.developing_time_list.length>0}}" class="p-lr-16 pb-16 mb-8">
+            <view class="ub ub-ac ub-around timerBox">
+                <view wx:for="{{info.developing_time_list}}" wx:for-item="item" class="timer text-center">
+                    <view class="line-h-40 text-16 color-golden">{{item.year}}年</view> 
+                    <view class="dot"></view> 
+                    <view class="line-h-40 text-16 color-2f p-lr-8" style="overflow: hidden; height: 4rem;">{{item.tag}}</view>
+                </view>
+            </view>
+            <view class="text-center color-grey font-14">详细发展历程 ></view>
+        </navigator>
+    </view>
+    <!-- 求学价值 -->
+    <navigator hover-class="none" wx:if="{{info.study_value_fame_list.length>0||info.research_teaching_list.length>0||info.rank_data_list.length>0}}"  url="/pages/school/value/value?school_id={{info.school_id}}" class="bg-white mb-8">
+        <view class="font-18 bold p-16 bb-1">求学价值</view>
+        <view wx:if="{{info.study_value_fame_list.length>0}}" class="pt-16 p-lr-16" style="margin:0 -8rpx;">
+            <view wx:for="{{info.study_value_fame_list}}" wx:for-item="tag" class="tag-b-green m-4">{{tag}}</view>
+        </view>
+        <view wx:if="{{info.research_teaching_list.length>0}}" class="ub ub-ac ub-around p-tb-16">
+            <view wx:for="{{info.research_teaching_list}}" wx:for-item="item" class="text-center">
+                <view class="circle50 b-1-golden">
+                    <view class="font-number color-golden font-24">{{item.v}}</view>
+                </view>
+                <view class="font-14 pt-8">{{item.k}}</view>
+            </view>
+        </view>
+        <view wx:if="{{info.rank_data_list.length>0}}" class="col2 clearfix font-14 p-8 color-99">
+            <view wx:for="{{info.rank_data_list}}" wx:for-item="rank" class="col p-4">
+                <view class="bg-f7 ub ub-ac" style="height: 108rpx">
+                    <view class="ub-f1"></view>
+                    <view class="text-center display-ib"> {{rank.k}}：<view class="font-number font-18 color-00 display-ib">{{rank.v}}</view></view>
+                    <view class="ub-f1"></view>
+                </view>
+            </view>
+        </view>
+        <view class="text-center color-grey p-tb-16 font-14">求学价值详情 ></view>
+    </navigator>
+    <view wx:if="{{info.employment_report_list.length>0}}" class="bg-white mb-8">
+        <view class="font-18 bold p-16 bb-1">就业报告</view>
+        <view class="ub ub-ac ub-around">
+            <view wx:for="{{info.employment_report_list}}" wx:for-item="report" data-pdf="{{report}}" bindtap="openPdf" class="text-center p-tb-16 display-b" style="max-width: 9rem;">
+                <view class="iconfont iconicon_form1 font-32 color-green"></view> 
+                <view class="mt-8 liine-h-16 font-14">{{report.k}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="bg-white mb-8" wx:if="{{info.admission_key_point_list.length>0||info.admission_key_point_list.length>0}}">
+        <view class="font-18 bold p-16 bb-1">招生概要</view>
+        <view class="p-lr-16 pt-16">
+            <view wx:if="info.admission_key_point_list.length>0" class="ub ub-ac bg-f7 br-4 p-4">
+                <view class="line-h-48 br-4 text-center ub-f1 {{zhaoshengTab==0?'bg-white shadow bold':''}}" bindtap="changeTab" data-tab="0">招生简章</view>
+                <view class="line-h-48 br-4 text-center ub-f1 {{zhaoshengTab==1?'bg-white shadow':''}}" bindtap="changeTab" data-tab="1">
+                    <view class="display-ib relative">招录重点<view class="dot bg-red absolute" style="top:32rpx;right:-16rpx;"></view></view>
+                </view>
+            </view>
+            <view wx:if="{{zhaoshengTab==0}}">
+                <navigator hover-class="none" wx:for="{{info.admissions_guide}}" wx:for-item="item" url="/pages/school/planDetail/planDetail?id={{item.v}}" class="bb-1 p-tb-16 line-h-24 ub ub-ac">
+                    <view class="ub-f1 font-16 mr-8">{{item.k}}</view>
+                    <view class="iconfont iconarrow-right font-8 color-grey"></view>
+                </navigator>
+                <navigator hover-class="none" url="/pages/school/plan/plan?school_id={{info.school_id}}" class="p-tb-16 text-center color-grey text-14">查看更多 ></navigator> 
+            </view>
+            <view wx:elif="{{info.admission_key_point_list.length>0}}">
+                <view wx:for="{{info.admission_key_point_list}}" wx:for-item="item">
+                    <view class="font-16 pt-16">{{item.k}}</view>
+                    <view class="color-grey font-14 line-h-24 pt-8 pb-16">{{item.v}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <!-- 校园风光 -->
+    <navigator hover-class="none" wx:if="{{info.attach_list.length>0}}" url="/pages/school/picture/picture?school_id={{info.school_id}}" class="bg-white mb-8">
+        <view class="ub ub-ac p-16 bb-1">
+            <view class="ub-f1 font-18 bold">校园风光</view>
+            <view class="color-grey font-12">更多 ></view>
+        </view>
+        <view class="p-lr-8 p-tb-16 col3">
+            <view wx:for="{{info.attach_list}}" wx:for-item="attach" class="col p-4">
+                <view class="relative br-4 overflow-hidden">
+                    <image src="{{attach.v}}" class="attatch" lazy-load="false" binderror="" bindload=""></image>
+                    <view class="attach-name">{{attach.k||'校园风光'}}</view>
+                </view>
+            </view>
+        </view>
+    </navigator>
+    <view class="bg-white mb-8" wx:if="{{info.official_website||info.contact_list.length>0}}">
+        <view class="font-18 bold p-16 bb-1">联系方式</view>
+        <view class="ub ub-ac p-tb-16">
+            <view wx:if="info.official_website" class="ub-f1 text-center font-16 ub ub-ac ub-center br-1" bindtap="copyWebsite">
+                <view class="color-green iconfont iconContact_icon_WebsiteAddress font-14 mr-8 color-green"></view>
+                <view>学校官网</view>
+            </view>
+            <view bindtap="contact" class="ub-f1 text-center font-16 ub ub-ac ub-center">
+                <view class="color-green iconfont icondianhua font-14 mr-8 color-green"></view>
+                <view>联系招办</view>
+            </view>
+        </view>
+    </view>
+    <view style="height:100rpx;"></view>
+    </scroll-view>
+    <!-- 底部菜单 -->
+    <view class="fixed bottom bg-green p-tb-4">
+        <view class="ub ub-ac ub-around text-center color-white">
+            <view bindtap="toSchoolData" data-tab="0" class="">
+                <view class="iconfont iconTab_Admissiondata font-20"></view>
+                <view class="font-12">录取数据</view>
+            </view>
+            <view wx:if="{{globalUserInfo.prov_model_ex<20}}" bind:tap="toPossibility"  class="">
+                <view class="iconfont iconicon_evaluating1 font-20"></view>
+                <view class="font-12">概率评测</view>
+            </view>
+            <view bindtap="toSchoolData" data-tab="2"  class="">
+                <view class="iconfont iconTab_RecruitmentPlan font-20"></view>
+                <view class="font-12">招生计划</view>
+            </view>
+        </view>
+    </view>
+</page-loadding>
+

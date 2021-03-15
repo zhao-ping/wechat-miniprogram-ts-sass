@@ -1,0 +1,67 @@
+<import src="../temp.wxml" />
+<page-loadding show="{{info}}">
+<template is="majorHeader" data="{{info}}"/>
+<view class="bg-white bt-1">
+    <view wx:if="{{info.professional_knowledge.major_warning}}" class="color-orange line-h-24 font-14 p-16">{{info.professional_knowledge.major_warning}}</view>
+    <view wx:if="{{info.professional_knowledge.major_describe}}" class="pb-32">
+        <view class="p-tb-16"><view class="title-bl-green">专业介绍</view></view>
+        <view class="p-lr-16 line-h-32 color-grey">
+            {{info.professional_knowledge.major_describe}}
+        </view>
+    </view>
+    <view wx:if="{{info.professional_knowledge.training_objectives}}" class="pb-32">
+        <view class="p-tb-16"><view class="title-bl-green">培养目标</view></view>
+        <view class="p-lr-16 line-h-32 color-grey">
+            {{info.professional_knowledge.training_objectives}}
+        </view>
+    </view>
+    <view wx:if="{{info.professional_knowledge.major_describe}}" class="pb-32">
+        <view class="p-tb-16"><view class="title-bl-green">培养要求</view></view>
+        <view class="p-lr-16 line-h-32 color-grey">
+            {{info.professional_knowledge.training_requirement}}
+        </view>
+    </view>
+    <view wx:if="{{info.professional_knowledge.employment_oriented}}" class="pb-32">
+        <view class="p-tb-16"><view class="title-bl-green">就业方向</view></view>
+        <view class="p-lr-16 line-h-32 color-grey">
+            {{info.professional_knowledge.employment_oriented}}
+        </view>
+    </view>
+    <view wx:if="{{info.professional_knowledge.employment_oriented}}" class="pb-32">
+        <view class="p-tb-16"><view class="title-bl-green">主要职业能力</view></view>
+        <view wx:for="{{info.professional_knowledge.main_professional_ability}}" wx:for-item="item" class="p-lr-16 line-h-32 color-grey p-tb-4">
+            {{item}}
+        </view>
+    </view>
+    <view wx:if="{{info.professional_knowledge.major_describe}}" class="pb-32">
+        <view class="p-tb-16"><view class="title-bl-green">核心课程</view></view>
+        <view class="p-lr-16 line-h-32 color-grey">
+            {{info.professional_knowledge.major_course}}
+        </view>
+    </view>
+    <view wx:if="{{info.professional_knowledge.internship_training}}" class="pb-32">
+        <view class="p-tb-16"><view class="title-bl-green">实习实训</view></view>
+        <view class="p-lr-16 line-h-32 color-grey">
+            {{info.professional_knowledge.internship_training}}
+        </view>
+    </view>
+    <view wx:if="{{info.professional_knowledge.certificate_list}}" class="pb-32">
+        <view class="p-tb-16"><view class="title-bl-green">职业资格证书举例</view></view>
+        <view wx:for="{{info.professional_knowledge.certificate_list}}" wx:for-item="item" wx:for-index="i" class="p-lr-16 line-h-32 color-grey p-tb-4">
+            {{i+1}}. {{item}}
+        </view>
+    </view>
+    <view wx:if="{{info.sex_ratio_list.length>0}}" class="pb-32">
+        <view class="p-tb-16"><view class="title-bl-green">男女比例</view></view>
+        <view class="margin-auto p-16" style="width:400rpx;">
+            <circle-percent bg-color="#fe5462" line-width="0.2" percent="{{info.sex_ratio_list[0].v/100}}" title=""></circle-percent>
+        </view>
+        <view class="ub ub-ac ub-center">
+            <view class="dot-12 bg-blue mr-4" style="background-color: rgb(77, 137, 255);"></view> 
+            <view class="pr-24">男: <view class="font-number display-ib">{{info.sex_ratio_list[0].v}}%</view></view> 
+            <view class="dot-12 bg-blue mr-4" style="background-color: rgb(254, 84, 98);"></view> 
+            <view>女: <view class="font-number display-ib">{{info.sex_ratio_list[1].v}}%</view></view>
+        </view>
+    </view>
+</view>
+</page-loadding>

@@ -1,0 +1,9 @@
+{
+  "backgroundColorTop": "#FD7649",
+  "navigationBarBackgroundColor": "#FD7649",
+  "navigationBarTextStyle": "white",
+  "navigationBarTitleText":"高校招生计划查询",
+  "usingComponents": {
+    "ym-input":"../../component/input/input"
+  }
+}

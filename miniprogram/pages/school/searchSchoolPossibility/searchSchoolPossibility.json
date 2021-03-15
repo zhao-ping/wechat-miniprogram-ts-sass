@@ -1,0 +1,9 @@
+{
+  "backgroundColorTop": "#369EFB",
+  "navigationBarBackgroundColor": "#369EFB",
+  "navigationBarTextStyle": "white",
+  "navigationBarTitleText":"录取概率测评",
+  "usingComponents": {
+    "ym-input":"../../component/input/input"
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "article-content":"../../component/articleContent/articleContent"
+  }
+}

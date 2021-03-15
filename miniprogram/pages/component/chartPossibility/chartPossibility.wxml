@@ -1,0 +1,7 @@
+<wxs src="../../../util.wxs" module="tools" />
+<view id="circlePercentContainer" class="relative">
+    <view class="absolute w-100 text-center font-20 font-number" style="top:50%;transform: translateY(-50%);color:{{color}}"> 
+        <view class="display-ib font-40">{{percent<0.1?'<9':tools.toFixed(percent*100,0)}}</view>%
+    </view>
+    <canvas style="width:{{width}}px;height:{{width}}px;" type="2d" id="canvas"></canvas>
+</view>

@@ -1,0 +1,131 @@
+<view wx:if="{{info}}">
+    <view class="bg-green br-b-round overflow-hidden">
+        <view class="text-center relative color-white">
+            <view class="font-16 pt-32">{{info.application.base_info}}</view>
+            <view class="pt-32">
+                <rich-text class="font-18" nodes="{{info.application.optimal_desc}}"></rich-text>
+            </view>
+        </view>
+    </view>
+    <view class="p-16" style="margin-top:-100rpx;">
+        <view wx:if="{{info.application.page_model==3}}" class="bg-white shadow br-8 p-16 text-center mb-16" style="padding-top:100rpx;">
+            <view class="color-orange font-18 bold">整体优化建议</view>
+            <view class="bb-1 pb-24 pt-16 text-left">
+                <view wx:for="{{info.whole_advise}}" wx:for-item="advice" wx:for-index="i" class="font-16 p-tb-8 font-16 color-2f"><rich-text class="display-i" nodes="{{(i+1)+'. '+advice}}"></rich-text></view>
+            </view>
+            <view class="text-center p-tb-24 font-14 color-grey">{{info.once_check_desc}}</view>
+            <view bind:tap="downLoad" class="btn orange br-24 font-16">下载评估报告 <view class="iconfont iconxiazai1 white"></view> </view>
+        </view>
+        <view wx:for="{{info.risk_assessment_school_rslt}}" class="bg-white shadow mb-12 br-8 p-tb-16" style="{{info.application.page_model!=3&&index==0?'padding-top:100rpx':''}}">
+            <view class="ub">
+                <view class="p-tb-20">
+                    <view class="tagA">{{item.sort_index_str}}</view>
+                </view>
+                <view class="ub-f1 p-lr-16">
+                    <view class="p-tb-20 ub">
+                        <view class="ub-f1 ub ub-ac">
+                            <view class="ub-f1">
+                                <!-- 常规省和上海版本 -->
+                                <view wx:if="{{info.application.page_model!=3}}" class="ub">
+                                    <view class="ub-f1">
+                                        <view class="font-18">{{item.school_name}} <view wx:if="{{item.city}}" class="display-ib color-grey font-12 ml-4">{{item.city}}</view></view>
+                                        <view wx:if="{{item.subject_info}}" class="ml-4 color-grey font-12 display-ib">{{item.subject_info}}</view>
+                                    </view>
+                                    <view class="no-wrap" style="color:{{item.adjust_color}};">
+                                        {{item.adjust_desc}}
+                                    </view>
+                                </view>
+                                <!-- 浙江版本 -->
+                                <view wx:else class="ub mb-8">
+                                    <view wx:if="{{item.probability||item.probability_level}}" class="w-46">
+                                        <view wx:if="{{item.probability}}" class="font-10">
+                                            <view class="font-20 display-ib font-number">{{item.probability<10?'<9':item.probability}}</view>%
+                                        </view>
+                                        <view wx:if="{{item.probability_level}}" class="possibility" style="border: 1px solid {{item.probability_level_color}}; color: {{item.probability_level_color}};">
+                                            {{item.probability_level}}
+                                        </view>
+                                    </view>
+                                    <view class="ub-f1">
+                                        <view class="font-18">
+                                            <view class="display-ib bold">{{item.major_name}} </view>
+                                            <view wx:if="{{item.subject_info}}" class="ml-4 bg-f7 line-h-24 p-lr-4 br-4 font-12 display-ib">{{item.subject_info}}</view></view>
+                                        <view class="pt-8">
+                                            {{item.school_name}}<view wx:if="{{item.city}}" class="display-ib color-grey font-12 ml-4">{{item.city}}</view>
+                                        </view>
+                                    </view>
+                                    <view class="no-wrap" style="color:{{item.adjust_color}};">
+                                        {{item.adjust_desc}}
+                                    </view>
+                                </view>
+                                <view wx:for="{{item.score_info}}" wx:for-item="score" class=" color-grey pt-8">
+                                    <rich-text class="" nodes="{{score}}"></rich-text>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="p-lr-16">
+                <!-- 数据表格 -->
+                <view wx:if="{{info.application.page_model!=3}}">
+                    <view wx:if="{{item.major_tables.row_list.length!=0}}">
+                        <view class="bg-ea ub ub-ac text-center color-grey">
+                            <view style="width:36rpx;"> </view>
+                            <view wx:for="{{item.major_tables.header_list}}" wx:for-item="th" wx:for-index="i" class="p-4 {{i==0?'text-left':'ub-f1'}}" style="{{i==0?'width:36%;':''}}">{{th}}</view>
+                        </view>
+                        <view wx:for="{{item.major_tables.row_list}}" wx:for-item="row" wx:for-index="rowIndex">
+                            <view wx:for="{{row.row_values}}" class="bb-1 ub ub-ac"  wx:for-item="mj">
+                                <view style="width:36rpx;" class="color-grey">
+                                    {{rowIndex+1}}. 
+                                </view>
+                                <view style="width:36%" class="text-left p-4">{{mj.major_name}}</view>
+                                <view class="ub-f1">
+                                    <view wx:for="{{mj.major_score}}" wx:for-item="scores" wx:for-index="scoreIndex" class="ub ub-ac p-lr-4 p-tb-8 text-center {{scoreIndex==0?'':'bt-1'}}">
+                                        <view wx:for="{{scores}}" wx:for-item="score" class="ub-f1 color-grey">{{score}}</view>
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                    <view wx:else class="text-center p-tb-16 font-18 color-orange">暂未选择专业</view>
+                    <view class="ub ub-ac ub-center pt-32 pb-16">
+                        <view class="font-14 color-grey">你被以上专业录取的概率为：</view>
+                        <view>
+                            <view class="display-ib font-number font-32">{{item.probability>10?item.probability:'<9'}}</view>
+                            <view class="display-ib font-16">%</view>
+                        </view>
+                        <view wx:if="{{item.probability_level}}" class="possibility ml-8" style="color:{{item.probability_level_color}};border:1rpx solid {{item.probability_level_color}}">{{item.probability_level}}</view>
+                    </view>
+                </view>
+                <!-- 优化建议 -->
+                <view wx:if="{{item.school_optimal.length>0}}" class="pt-16 mb-16 color-2f">
+                    <view class="bg-f7 br-4 text-center font-14 line-h-36 mb-8">志愿{{item.sort_index_str}}优化建议</view>
+                    <view wx:for="{{item.school_optimal}}" wx:for-item="school_optimal" class="ub pt-8">
+                        <i class="iconfont iconicon_bianji1 color-d5 mr-8"></i>
+                        <view class="ub-f1"><rich-text class="" nodes="{{school_optimal}}"></rich-text></view>
+                    </view>
+                </view>
+                <!-- 优势分析 -->
+                <view wx:if="{{item.advantage.length>0}}" class="pt-16 mb-16 color-2f">
+                    <view class="bg-f7 br-4 text-center font-14 line-h-36 mb-8">志愿{{item.sort_index_str}}优势分析</view>
+                    <view wx:for="{{item.advantage}}" wx:for-item="advantage" class="ub pt-8">
+                        <i class="iconfont iconicon_bianji1 color-d5 mr-8"></i>
+                        <view class="ub-f1"><rich-text class="" nodes="{{advantage}}"></rich-text></view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view wx:if="{{info.application.page_model!=3}}" class="bg-white shadow br-8 p-16 text-center" style="{{info.risk_assessment_school_rslt.length==0?'padding-top:100rpx;':''}}">
+            <view class="color-orange font-18 bold">整体优化建议</view>
+            <view class="bb-1 pb-24 pt-16 text-left">
+                <view wx:for="{{info.whole_advise}}" wx:for-item="advice" wx:for-index="i" class="font-16 p-tb-8 font-16 color-2f"><rich-text class="display-i" nodes="{{(i+1)+'. '+advice}}"></rich-text></view>
+            </view>
+            <view class="text-center p-tb-24 font-14 color-grey">{{info.once_check_desc}}</view>
+            <view bind:tap="downLoad" class="btn orange br-24 font-16">下载评估报告 <view class="iconfont iconxiazai1 white"></view> </view>
+        </view>
+    </view>
+    <view style="height:100rpx"></view>
+    <view bind:tap="back" class="fixed bottom btn green" style="border-radius:0;">
+        <view class="iconfont iconicon_bianji white"></view> 修改志愿
+    </view>
+</view>

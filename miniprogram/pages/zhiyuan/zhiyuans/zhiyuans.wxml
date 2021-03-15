@@ -1,0 +1,65 @@
+<import src="../../temp.wxml"/>
+<scroll-view class="full-screen" scroll-x="{{false}}" scroll-y="{{true}}" upper-threshold="50" lower-threshold="50" bindscrolltolower="getList">
+    <view wx:if="{{info}}" class="p-16 ub ub-ac">
+        <view class="iconfont iconicon_about color-orange mr-8"></view>
+        <view class="ub-f1">
+            <rich-text class="font-14 color-grey" nodes="{{info.waring_msg}}"></rich-text>
+        </view>
+    </view>
+    <view wx:if="{{list&&list.length==0}}">
+        <view bind:tap="toShowAdmit" class="p-32 text-center bg-white">
+            <view class="iconfont iconicon_add color-green font-22"></view>
+            <view class="pt-8 color-grey font-14">新增志愿表</view>
+        </view>
+    </view>
+    <view wx:for="{{list}}" class="mb-8 bg-white relative">
+        <view bind:tap="checkZhiyuan" data-index="{{index}}" class="absolute" style="top:50%;transform:translateY(-50%);left:48rpx">
+            <view wx:if="{{item.checked}}" class="iconfont iconCheckbox_Selected color-green"></view>
+            <view wx:else class="iconfont iconCheckbox_Unselected color-grey"></view>
+        </view>
+        <view class="relative bg-white p-16 ub state {{state==2?'state2':''}}">
+            <view bind:tap="checkZhiyuan" data-index="{{index}}" class="ub-f1 bg-white relative">
+                <view class="bold font-16">{{item.application_name}}</view>
+                <view class="pt-8 color-grey font-14">更新：{{item.update_str}}</view>
+                <view class="pt-8 font-14">{{item.base_info}}</view>
+            </view>
+            <view bind:tap="checkZhiyuan" data-index="{{index}}" data-pinggu="{{true}}">
+                <view wx:if="{{item.state==0}}" class="text-center">
+                    <view class="font-20 color-grey bold">{{item.state_name}}</view>
+                    <view class="font-14 color-grey pt-8">志愿评估</view>
+                </view>
+                <view wx:else>
+                    <view class="text-center">
+                        <view hover-class="none" url="">
+                            <view class="font-20 bold" style="color: {{item.state_color}};">{{item.optimal_number}}</view>
+                            <view class="pt-4 color-grey cont-12">优化建议</view>
+                        </view>
+                        <view bind:tap="downlaod" data-item="{{item}}" class="b-1 br-12 line-h-24 p-lr-8 display-b mt-8 font-12">
+                            <view class="iconfont iconxiazai1 color-green mr-4"></view>
+                            评估报告
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <template is="listPage" data="{{list,listPage,hideNoList:true}}"></template>
+    <view style="height:100rpx;"></view>
+    <view class="fixed bottom ub ub-ac bg-green color-white shadow text-center h-48">
+        <view class="ub-f1" bind:tap="changeState"><view class="iconfont {{state==1?'iconicon_edit1':(checkedCount>0?'iconlaji':'iconicon_edit1')}} display-ib"></view> {{state==1?'编辑':(checkedCount>0?'删除':'取消')}}</view>
+        <view class="ub-f1" bind:tap="toShowAdmit"><view class="iconfont iconicon_add1 display-ib"></view> 新增</view>
+    </view>
+    <popup id="admitList">
+        <view style="width:80vw;">
+            <view class="p-16 text-center font-grey">
+                <rich-text class="" nodes="{{info.user_info.title}}"></rich-text>
+            </view>
+            <view wx:for="{{info.admit_order_type_list}}" bind:tap="newZhiyuan" data-admit="{{item.v}}" class="ub ub-ac p-16 bt-1">
+                <view class="ub-f1 color-2f font-16">{{item.k}}</view>
+                <view>
+                    <view class="btn small p-lr-16 {{item.v==info.user_info.admit_order_type?'green':'b-1-green color-green'}}">填报</view>
+                </view>
+            </view>
+        </view>
+    </popup>
+</scroll-view>

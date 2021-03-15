@@ -1,0 +1,7 @@
+<view wx:if="{{!show}}" class="loaddingPage {{show?'':'show'}}" style="padding-top:400rpx">
+    <loadding></loadding>
+    <view class="loaddingText">加载中,请稍后</view>
+</view>
+<view class="pageContaienr {{show?'show':''}}">
+    <slot></slot>
+</view>

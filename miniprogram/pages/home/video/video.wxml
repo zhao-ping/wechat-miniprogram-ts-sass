@@ -1,0 +1,50 @@
+
+<page-loadding show="info">
+    <view class="bg-white">
+        <view class="w-100vw">
+            <video id="video" style="width:100%;height:{{info.current_video.horizon==1?'50vh':'56.3vw'}}" src="{{info.current_video.url}}"  autoplay="{{true}}" auto-pause-if-open-native="{{true}}" show-progress="{{true}}" show-fullscreen-btn="{{true}}" show-play-btn="{{true}}" show-center-play-btn="{{true}}"></video>
+        </view>
+        <scroll-view style="height:{{scrollViewHeight}}px" scroll-x="{{false}}" scroll-y="{{true}}">
+            <view class="p-16 bb-1">
+                <view class="bold font-16">{{info.current_video.title}}</view>
+                <view class="line-h-24 font-14 mt-8">{{info.current_video.introduce}}</view>
+            </view>
+            <view class="p-16 ub ub-ac color-grey font-14">
+                <view class="iconfont iconfont iconicon_browse mr-4"></view>
+                <view>{{info.current_video.view_num}}人看过</view>
+            </view>
+            <view class="p-tb-16">
+                <view class="p-tb-16"><view class="title-bl-green">{{info.topic_list.title}}</view></view>
+                <scroll-view class="w-100" scroll-with-animation="{{true}}" scroll-x="{{true}}" scroll-into-view="{{'currentVideo'+index}}" enhanced="{{true}}" show-scrollbar="{{false}}">
+                    <view class="clearfix" style="width:{{info.topic_list.list.length*168*2}}rpx;">
+                        <view wx:for="{{info.topic_list.list}}" wx:for-index="i" bind:tap="change" data-video="{{item}}" class="relative float-l m-lr-8" id="{{'currentVideo'+i}}">
+                            <view class="item-video p-lr-16 ub ub-ac br-4 bg-f7" hover-class="none" hover-stop-propagation="false">
+                                <view class="{{index==i?'color-orange':''}}">{{item.title}}</view>
+                            </view>
+                            <view wx:if="{{index==i}}" class="playing ub ub-ae ub-between"><view class="item"></view> <view class="item delay25"></view> <view class="item delay50"></view> <view class="item delay75"></view></view>
+                        </view>
+                    </view>
+                </scroll-view>
+            </view>
+            <view wx:if="{{info.recommend_list.list.length>0}}" class="p-tb-16">
+                <view class="p-tb-16"><view class="title-bl-green">{{info.recommend_list.title}}</view></view>
+                <view class="p-lr-16">
+                    <view wx:for="{{info.recommend_list.list}}" bind:tap="change" data-video="{{item}}" class="p-tb-8 ub ub-ac">
+                        <view class="relative mr-16">
+                            <image  class="img-116-63" src="{{item.picture}}" mode="aspectFill" lazy-load="{{true}}"></image>
+                            <view class="line-h-14 br-12 display-b p-lr-8 color-white" style="background: rgba(0, 0, 0, 0.4); position: absolute; bottom: 0.2rem; right: 4rpx;">
+                                <view class="iconfont iconsanjiaoxing colot-white mr-4 font-10"></view>
+                                <view class="font-10 display-ib">{{item.duration}}</view>
+                            </view>
+                        </view> 
+                        <view class="ub-f1" style="height: 126rpx;">
+                            <view class="line-h-22 font-14" style="height: 88rpx;">{{item.title}}</view> 
+                            <view class="color-99 font-12 line-h-20"><view class="display-ib">{{item.view_num}}</view> 人看过</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </scroll-view>
+        
+    </view>
+</page-loadding>

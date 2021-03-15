@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "我的关注",
+  "usingComponents": {
+    "tab":"../../component/tab/tab",
+    "mp-sticky": "@miniprogram-component-plus/sticky",
+    "no-data":"../../component/noData/noData"
+  }
+}

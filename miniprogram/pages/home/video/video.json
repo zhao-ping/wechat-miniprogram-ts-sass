@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "mp-sticky": "@miniprogram-component-plus/sticky",
+    "page-loadding":"../../component/pageLoadding/pageLoadding"
+  }
+}

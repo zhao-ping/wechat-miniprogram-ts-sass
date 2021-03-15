@@ -1,0 +1,4 @@
+<view bind:longpress="show"  class="relative">
+    <view wx:if="{{isShowCopy}}" bind:tap="copy" class="copyBtn">复制</view>
+    <slot></slot>
+</view>

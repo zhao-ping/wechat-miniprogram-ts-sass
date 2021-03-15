@@ -1,0 +1,146 @@
+<wxs src="../../../util.wxs" module="tools" />
+<scroll-view class="full-screen" scroll-x="{{false}}" scroll-y="{{true}}" scroll-into-view="{{scrollViewId}}" >
+    <page-loadding show="{{info}}">
+        <view wx:if="{{info}}">
+            <!-- 概率信息 -->
+            <view class="bg-white p-16 text-center mb-8">
+                <view>
+                    <view class="font-16 display-ib">{{info.school_probability_info.subject_group_name||info.school_probability_info.school_name}}</view>
+                    <view wx:if="{{info.school_probability_info.admit_order_type_list.length>0}}" class="display-ib" >
+                        <picker bindchange="changeAdmit" value="{{admitIndex}}" range="{{info.school_probability_info.admit_order_type_list}}" range-key="k">
+                            <view class="font-12 line-h-24 p-lr-8 display-ib ml-8 bg-f7 br-12"> 
+                                {{info.school_probability_info.admit_order_type_list[admitIndex].k}}<view wx:if="{{info.school_probability_info.admit_order_type_list.length>1}}" class="display-ib iconfont iconComboicon color-ea font-10"></view>
+                            </view>
+                        </picker>
+                    </view>
+                </view>
+                <view wx:if="{{info.school_probability_info.subject_limit}}" class="pt-16 font-14 color-grey">
+                    科目要求：<view class="display-ib color-green">{{info.school_probability_info.subject_limit}}</view>
+                </view>
+                <view style="width:200rpx;" class="margin-auto p-16">
+                    <possibility id="possibility" percent="{{info.school_probability_info.probability/100}}" color="{{info.school_probability_info.probability_color}}"></possibility>
+                </view>
+                <view wx:if="{{info.school_probability_info.probability_tip}}" class="font-14 color-grey pt-16">{{info.school_probability_info.probability_tip}}</view>
+                <view wx:if="{{info.exceed_major_info.not_exceed_major_desc}}" bind:tap="scrollToView" data-id="exceed_major" class="bg-orange line-h-26 br-12 color-white p-lr-16 mt-16 display-ib" hover-class="none" hover-stop-propagation="false">
+                    {{info.exceed_major_info.not_exceed_major_desc}}
+                </view>
+            </view>
+            <!-- 选专业侧概率 -->
+            <view wx:if="{{info.is_support_major_evalution||(enroll_evaluation_major_list&&enroll_evaluation_major_list.length>0)}}">
+                <view wx:if="{{enroll_evaluation_major_list&&enroll_evaluation_major_list.length>0}}" class="mb-8 p-lr-16 pt-8 bg-white">
+                    <view class="ub ub-ac p-tb-16">
+                        <view class="ub-f1 font-16">概率包含专业</view>
+                        <view bind:tap="clearMajors" class="iconfont iconicon_cancel color-grey"></view>
+                    </view>
+                    <view wx:for="{{enroll_evaluation_major_list}}" wx:for-item="major" wx:for-index="majorIndex" class="p-tb-8 ub ub-ac">
+                        <view wx:if="showChao" style="width: 40rpx;" class="mr-8">
+                            <view wx:if="{{major.is_exceed_min_score}}" class="bg-blue color-white br-4 display-ib text-center line-h-20" style="width: 40rpx; height: 40rpx;">超</view>
+                        </view>
+                        <view class="ub-f1 font-16" >{{majorIndex+1}}. {{major.major_name}}</view>
+                    </view>
+                    <view class="bt-1 p-tb-16 ub ub-ac mt-16">
+                        <view wx:if="{{majorsBeixuan}}" class="ub-f1 text-center br-1" bind:tap="MultyBeixuan">
+                            <view class="iconfont iconicon_reasonable color-green mr-8"></view><view class="display-ib">已备选所选专业</view>
+                        </view>
+                        <view wx:else class="ub-f1 text-center br-1" bind:tap="MultyBeixuan">
+                            <view class="iconfont iconjiarubeixuan color-grey mr-8"></view><view class="display-ib">备选所选专业</view>
+                        </view>
+                        <view class="ub-f1 text-center br-1" bind:tap="showMajors">
+                            <view class="iconfont iconsort color-grey mr-8"></view><view class="display-ib">更换专业</view>
+                        </view>
+                    </view>
+                </view>
+                <view wx:else bind:tap="showMajors" class="bg-white mb-8 p-24 ub ub-center ub-ac">
+                    <view class="font-16 mr-16 relative">
+                        <view>自选专业，重测概率</view> 
+                        <view class="absolute line-h-16 bg-red color-white font-12 p-lr-4 display-b" style="left: 100%; bottom: 100%; border-radius: 1rem 1rem 1rem 0px;white-space: nowrap;">创新功能</view>
+                    </view> 
+                    <view class="iconfont color-grey iconnav_right font-12 mr-16"></view>
+                </view>
+            </view>
+            <!-- 最低位次对比 -->
+            <view wx:if="{{info.min_score_def_table.length>0}}" class="bg-white mb-8 p-16">
+                <view class="bold font-18 pt-16">{{info.min_score_def_table_tag.def_tag}}</view>
+                <view class="pt-16 font-14 color-2f">我的：<view class="display-ib">{{info.min_score_def_table_tag.user_info.score_info}}</view></view>
+                <view wx:for="{{info.min_score_def_table}}" wx:for-item="table" class="pt-16">
+                    <view class="color-2f font-14" style="border-bottom:1rpx solid rgba(247,247,247,0.5);">
+                        <view class="bg-ea ub ub-stretch p-12 color-grey">
+                            <view wx:for="{{table.header_list}}" wx:for-item="th" wx:for-index="i" class="ub-f1 {{i==0?'':'text-center'}}">{{th}}</view>
+                        </view>
+                        <view wx:for="{{table.row_list}}" wx:for-index="rowIndex" wx:for-item="row" class="{{rowIndex%2==0?'':'bg-f7-5'}} ub ub-stretch p-12">
+                            <view wx:for="{{row.row_values}}" wx:for-item="td" wx:for-index="i" style="color:{{td.color}}" class="ub-f1 {{i>0&&tools.hasStr(row.row_values[0].v,'最低')?'bold':''}} {{i>0?'text-center':'text-left'}}">{{td.v}}</view>
+                        </view>
+                    </view>
+                    <view class="pt-8 color-grey font-12">{{info.min_score_def_table_tag.remark}}</view>
+                </view>
+            </view>
+            <!-- 平均位次对比 -->
+            <view wx:if="{{info.avg_score_def_table.length>0}}" class="bg-white mb-8 p-16">
+                <view class="bold font-18 pt-16">{{info.avg_score_def_table_tag.def_tag}}</view>
+                <view class="pt-16 font-14 color-2f">我的：<view class="display-ib">{{info.avg_score_def_table_tag.user_info.score_info}}</view></view>
+                <view wx:for="{{info.avg_score_def_table}}" wx:for-item="table" class="pt-16">
+                    <view class="color-2f font-14" style="border-bottom:1rpx solid rgba(247,247,247,0.5);">
+                        <view class="bg-ea ub ub-stretch p-12 color-grey">
+                            <view wx:for="{{table.header_list}}" wx:for-item="th" wx:for-index="i" class="ub-f1 {{i==0?'':'text-center'}}">{{th}}</view>
+                        </view>
+                        <view wx:for="{{table.row_list}}" wx:for-index="rowIndex" wx:for-item="row" class="{{rowIndex%2==0?'':'bg-f7-5'}} ub ub-stretch p-12">
+                            <view wx:for="{{row.row_values}}" wx:for-item="td" wx:for-index="i" style="color:{{td.color}}" class="ub-f1 {{i>0&&tools.hasStr(row.row_values[0].v,'最低')?'bold':''}} {{i>0?'text-center':'text-left'}}">{{td.v}}</view>
+                        </view>
+                    </view>
+                    <view class="pt-8 color-grey font-12">{{info.avg_score_def_table_tag.remark}}</view>
+                </view>
+            </view>
+            <!-- 专业数据对比 -->
+            <navigator hover-class="none" id="exceed_major" wx:if="{{info.exceed_major_info.major_compare_desc}}" class="relative mb-8" url="/pages/school/exceedMajor/exceedMajor?school_id={{info.school_probability_info.school_id}}&subject_group_id={{info.school_probability_info.subject_group_id}}&admit_order_type={{info.school_probability_info.admit_order_type}}" >
+                <view class="bg-white ub ub-ac p-tb-24 p-lr-16">
+                    <view class="ub-f1"><rich-text class="font-16" nodes="{{info.exceed_major_info.major_compare_desc}}"></rich-text></view>
+                    <view class="iconfont color-grey iconnav_right font-8 mr-16"></view>
+                </view>
+                <view wx:if="{{info.exceed_major_info.not_exceed_major_count}}" class="absolute bg-red display-ib br-12 color-white p-lr-4 line-h-14 font-12" style="right: 1.6rem; top: 0.8rem;">{{info.exceed_major_info.not_exceed_major_count}}</view>
+            </navigator>
+            <view wx:if="{{info.plan_wave_info.datas.length>0}}" class="bg-white mb-8 p-16">
+                <view class="bold font-18 pt-16">招生人数波动：{{info.plan_wave_info.min_number}} ~ {{info.plan_wave_info.min_number}} {{info.plan_wave_info.data_tag}}</view>
+                <view class="pt-16 font-14 color-2f">
+                    <rich-text class="color-grey font-14" nodes="{{info.plan_wave_info.compare_info}}"></rich-text>
+                </view>
+                <view wx:if="{{lineChartParams}}" class="pt-16">
+                    <line-chart id="lineChart" datas="{{lineChartParams}}"></line-chart>
+                </view>
+            </view>
+        </view>
+    </page-loadding>
+</scroll-view>
+<right-in-container id="chooseMajor">
+    <view class="full-screen relative">
+        <scroll-view scroll-x="{{false}}" scroll-y="{{true}}" class="full-screen">
+            <view wx:if="{{major_evalution}}" class="ub ub-ver" style="height: 100%;">
+                <view class="ub-f1 bg-f7 p-16 relative" style="overflow-y: auto;">
+                    <view class="pb-16 color-grey font-14">共 <b class="color-2f">{{major_evalution.major_list.length}}</b> 个可选，你已选中 <b class="color-green">9</b> 个</view>
+                    <view wx:for="{{major_evalution.major_list}}" wx:for-item="major" wx:for-index="majorIndex" bind:tap="checkMajor" data-index="{{majorIndex}}" class="mb-8 waveMajor {{major.checked?'active':''}}">
+                        <view class="check"><view class="iconfont icongou"></view></view>
+                        <view class="p-lr-16 p-tb-20 major">
+                            <view class="ub">
+                                <view wx:if="{{major.is_exceed_min_score}}" class="bg-blue color-white br-3 display-ib text-center line-h-20 mr-8" style="width: 40rpx; height: 40rpx;">超</view>
+                                <view class="ub-f1 font-16" >{{major.major_name}}</view>
+                            </view>
+                            <view wx:if="{{major.score_info.length>0}}" wx:for-item="item" class="ub ub-ac pt-8">
+                                <view wx:for="{{major.score_info}}" wx:for-item="item"  class="ub-f1 color-grey">
+                                    <rich-text class="" nodes="{{item}}"></rich-text>
+                                </view> 
+                            </view>
+                            <view class="clearfix" style="max-height: 6rem; overflow: hidden; margin: 0.8rem -0.4rem -0.4rem;">
+                                <view wx:for='{{major.major_tags}}' wx:for-item="tag" class="bg-green-light font-12 line-h-22 color-grey display-b m-4 p-lr-16 br-12 float-l">{{tag}}</view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view style="height:96rpx;"></view>
+        
+    </scroll-view>
+    <view class="absolute bg-white w-100 line-h-48 text-center ub ub-ac" style="bottom:0;">
+        <view class="ub-f1" bind:tap="hideMajors">取消</view>
+        <view bind:tap="getInfo" class="ub-f1 bg-green color-white">马上测评</view>
+    </view>
+</view>
+</right-in-container>

@@ -1,0 +1,56 @@
+Component({
+  behaviors:[],
+  options:{
+    multipleSlots:true,
+    addGlobalClass:true,
+  },
+  properties:{
+    /**
+     * 是否可用
+     */
+    disabled:{
+      type:Boolean,
+      value:false,
+    },
+    clear:{
+      type:Boolean,
+      value:true,
+    },
+    mode:String,
+    value:null,
+    autofocus:Boolean,
+    placeholder:String,
+    required:Boolean,
+    type:String,
+    clas:String,
+    styl:String,
+    confirmtype:String,
+  },
+  data:{
+  },
+  lifetimes:{
+    attached(){
+
+    },
+    created(){
+
+    },
+  },
+  methods:{
+    cahngeValue(e:any):any{
+      // 监听value值
+      this.setData({value:e.detail.value||null});
+      this.triggerEvent('change',this.data.value);
+    },
+    rightSlotTap(){
+      this.triggerEvent('rightslottap');
+    },
+    clearValue(){
+      this.setData({value:null});
+      this.triggerEvent('change');
+    },
+    bindconfirm(){
+      this.triggerEvent('confirm');
+    }
+  }
+})

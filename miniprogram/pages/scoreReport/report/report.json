@@ -1,0 +1,12 @@
+{
+  "navigationBarTitleText":"",
+  "backgroundColorTop":"#50CC94",
+  "navigationBarBackgroundColor":"#50CC94",
+  "navigationBarTextStyle":"white",
+  "usingComponents": {
+    "page-loadding":"../../component/pageLoadding/pageLoadding",
+    "table":"../../component/table/table",
+    "bottom-in-container":"../../component/bottomInContainer/bottomInContainer",
+    "ym-table":"../../component/table/table"
+  }
+}

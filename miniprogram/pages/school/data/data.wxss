@@ -1,0 +1,1 @@
+.scroll-x{padding:32rpx 16rpx;white-space:nowrap}.scroll-x .item{display:inline-block;line-height:96rpx;border-radius:48rpx;background-color:white;color:#2f2f2f;font-size:32rpx;padding:0 32rpx;margin:0 16rpx}.scroll-x .item.active{background-color:#50CC94;color:white}

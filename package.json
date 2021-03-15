@@ -5,13 +5,14 @@
   "scripts": {
     "compile": "./node_modules/typescript/bin/tsc",
     "tsc": "node ./node_modules/typescript/lib/tsc.js",
-    "sass" : "node-sass-chokidar ./miniprogram -o ./miniprogram --watch --output-style compressed"
+    "sass": "node-sass-chokidar ./miniprogram -o ./miniprogram --watch --skip-initial --output-style compressed"
   },
   "keywords": [],
   "author": "",
   "license": "",
   "dependencies": {
-    "@types/weixin-app": "^2.9.1"
+    "@types/weixin-app": "^2.9.1",
+    "tim-upload-plugin": "^1.0.1"
   },
   "devDependencies": {
     "typescript": "^3.3.3333"

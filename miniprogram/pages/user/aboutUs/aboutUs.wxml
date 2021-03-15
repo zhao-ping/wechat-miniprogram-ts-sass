@@ -1,0 +1,60 @@
+<view class="bg-green " hover-class="none" hover-stop-propagation="false">
+    <view class="p-tb-24 ub ub-ac ub-center">
+        <image style="width:60rpx;height:76rpx" src="https://m.ymzy.cn/static/images/logo-white.png"></image>
+        <view class="font-24 bold color-white ml-8">圆梦志愿</view>
+    </view>
+    <view style="height:60rpx"></view>
+</view>
+<view class="bg-white br-t-16" style="margin-top:-60rpx">
+    <view class="p-16 pb-32">
+        <view class="text-20 bold p-tb-16"> <i class="iconfont iconarrow-right1 color-green font-14"></i> 公司与产品</view>
+        <view class="p-lr-16 line-h-28 font-16">“圆梦志愿”由成都圆梦时刻科技有限公司开发，完全拥有自主知识产权，是基于云计算和大数据分析的高考志愿辅助决策系统，向全国28个省普通批次的学生提供志愿填报智能分析。</view>
+    </view>
+    <view class="p-16 pb-32">
+        <view class="text-20 bold p-tb-16"> <i class="iconfont iconarrow-right1 color-green font-14"></i> 数据来源</view>
+        <view class="col2 clearfix p-8 text-center">
+            <view class="col p-8">
+                <image style="width:284rpx;height:220rpx;" src="https://m.ymzy.cn/static/images/aboutUs/shuju1.png"></image>
+                <view class="pt-8 font-16">书</view>
+            </view>
+            <view class="col p-8">
+                <image style="width:284rpx;height:220rpx;" src="https://m.ymzy.cn/static/images/aboutUs/shuju2.png"></image>
+                <view class="pt-8 font-16">教育考试院</view>
+            </view>
+            <view class="col p-8">
+                <image style="width:284rpx;height:220rpx;" src="https://m.ymzy.cn/static/images/aboutUs/shuju3.png"></image>
+                <view class="pt-8 font-16">教育部官网</view>
+            </view>
+            <view class="col p-8">
+                <image style="width:284rpx;height:220rpx;" src="https://m.ymzy.cn/static/images/aboutUs/shuju4.png"></image>
+                <view class="pt-8 font-16">学校官网</view>
+            </view>
+        </view>
+    </view>
+    <view class="p-16 pb-32 bg-f6">
+        <view class="text-20 bold p-tb-16"> <i class="iconfont iconarrow-right1 color-green font-14"></i> 产品优势</view>
+        <view class="text-center">
+            <view class="bold font-16 font-number p-16 mt-32">01. 数据一目了然</view>
+            <image style="width:718rpx;height:706rpx;" src="https://m.ymzy.cn/static/images/aboutUs/pic1.png"></image>
+            <view class="bold font-16 font-number p-16 mt-32">02. 关键内容整理</view>
+            <image style="width:718rpx;height:618rpx;"src="https://m.ymzy.cn/static/images/aboutUs/pic2.png"></image>
+            <view class="bold font-16 font-number p-16 mt-32">03. 精选“大学”</view>
+            <image style="width:532rpx;height:798rpx;"src="https://m.ymzy.cn/static/images/aboutUs/pic3.png"></image>
+            <view class="bold font-16 font-number p-16 mt-32">04. 高级搜专业</view>
+            <image style="width:718rpx;height:1000rpx;"src="https://m.ymzy.cn/static/images/aboutUs/pic4.png"></image>
+            <view class="bold font-16 font-number p-16 mt-32">05. 位次波动+标准线差法</view>
+            <view class="p-lr-16 pb-16 line-h-28 font-16">由于历年高考难度不同，历史录取分不具有直接可比性。圆梦志愿采用较为<view>稳定的录取位次为主要计算依据，标准线差修正算法，以三年加权平均数核算波动情况，</view>结合专业录取密度分布，大大提高了预测准确性。</view>
+            <image style="width:660rpx;height:562rpx;" src="https://m.ymzy.cn/static/images/aboutUs/pic5.png"></image>
+        </view>
+    </view>
+    <view class="p-16 bg-white pb-32">
+        <view class="pb-16">
+            <view class="text-20 bold p-tb-16"> <view class="iconfont iconarrow-right1 color-green font-14"></view> 声明</view>
+            <view class="p-lr-16 line-h-28 font-16 color-2f">高校实际录取过程是一个动态化的。圆梦志愿“录取概率评测”结果，仅供考生和家长参考，不对录取结果提供任何保证和担保。</view>
+        </view>
+        <view class="pb-16">
+            <view class="text-20 bold p-tb-16 color-2f"> <view class="iconfont iconarrow-right1 color-green font-14"></view> 联系我们</view>
+            <view class="p-lr-16 line-h-32 font-16">座机：<view class="display-ib">028-82889070</view><view>周一至周六9点-18点</view></view>
+        </view>
+    </view>
+</view>

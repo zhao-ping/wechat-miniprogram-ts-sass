@@ -1,0 +1,30 @@
+<view class="full-screen ub ub-ver">
+    <view id="topContainer">
+        <view wx:if="{{tabItems}}" class="bb-1">
+            <tab items="{{tabItems}}" index="{{tabIndex}}" bind:change="changeTab"></tab>
+        </view>
+    </view>
+    <view class="ub-f1 relative">
+        <view class="ub">
+            <view style="width:260rpx;">
+                <scroll-view class="bg-f7"style="height:{{scrollViewHeight}}px;" scroll-x="{{false}}" scroll-y="{{true}}" scroll-into-view="lv1-{{lv1}}" scroll-with-animation="{{true}}">
+                    <view wx:for="{{info[tabIndex].root_major_list}}" wx:for-item="rootMajor" wx:for-index="rootIndex" data-index="{{rootIndex}}" id="lv1-{{rootIndex}}" bind:tap="changeRootMajor" class="font-18 p-tb-24 p-lr-16 bb-1 {{rootIndex==lv1?'bg-white color-green':''}}">{{rootMajor.major_name}}</view>
+                </scroll-view>
+            </view>
+            <view class="ub-f1 pl-16 bg-white">
+                <scroll-view style="height:{{scrollViewHeight}}px;" scroll-x="{{false}}" scroll-y="{{true}}" scroll-into-view="lv2-{{lv2}}"  scroll-with-animation="{{true}}">
+                    <view wx:for="{{info[tabIndex].root_major_list[lv1].sec_major_list}}" wx:for-item="secMajor" wx:for-index="secIndex" id="lv2-{{secIndex}}" class="">
+                        <view class="p-tb-16 pr-16 bb-1 ub ub-ac {{secIndex==lv2?'color-green':''}}" data-index="{{secIndex}}" bind:tap="changeSecMajor">
+                            <view class="ub-f1 font-18">{{secMajor.major_name}}</view>
+                            <view class="iconfont font-14 {{secIndex==lv2?'iconarrowup':'iconarrowdown'}}"></view>
+                        </view>
+                        <navigator hover-class="none" wx:if="{{secIndex==lv2}}" wx:for="{{info[tabIndex].root_major_list[lv1].sec_major_list[lv2].third_major_list}}" wx:for-item="thirdMajor" wx:for-index="thirdIndex" url="/pages/major/major/major?major_id={{thirdMajor.major_id}}"  class="bb-1 p-16 ub ub-ac" hover-class="none" hover-stop-propagation="false">
+                            <view class="ub-f1 font-16">{{thirdMajor.major_name}}</view>
+                            <view class="iconfont font-12 iconfont color-grey iconarrow-right"></view>
+                        </navigator>
+                    </view>
+                </scroll-view>
+            </view>
+        </view>
+    </view>
+</view>

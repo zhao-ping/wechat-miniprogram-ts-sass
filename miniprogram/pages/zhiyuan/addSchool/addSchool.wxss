@@ -1,0 +1,12 @@
+.fixedSchoolSort{position: fixed;bottom: 160rpx;right: 0;}
+.sortBtn{background: #50CC94;width: 56rpx;height: 56rpx;line-height: 28rpx;text-align: center;border-radius: 50%;overflow: hidden;color: white;font-size: 24rpx;padding: 16rpx;}
+.fixedSchoolSort .sortItem{margin-bottom: 16rpx;line-height: 32rpx;display:block;background-color: white;color: #999;border-radius:32rpx 0 0 32rpx;transform: translateX(160%);box-shadow: 0 0 24rpx 0 #ddd;padding: 16rpx 32rpx;font-size: 28rpx;}
+.fixedSchoolSort .sortItem.item0{transition:all 0.3s 0s;}
+.fixedSchoolSort .sortItem.item1{transition:all 0.3s 0.1s;}
+.fixedSchoolSort .sortItem.item2{transition:all 0.3s 0.2s;}
+.fixedSchoolSort .sortItem.item3{transition:all 0.3s 0.3s;}
+.fixedSchoolSort.active .sortItem.item0{transform: translateX(0);transition:all 0.3s 0s;}
+.fixedSchoolSort.active .sortItem.item1{transform: translateX(0);transition:all 0.3s 0.1s;}
+.fixedSchoolSort.active .sortItem.item2{transform: translateX(0);transition:all 0.3s 0.2s;}
+.fixedSchoolSort.active .sortItem.item3{transform: translateX(0);transition:all 0.3s 0.3s;}
+.fixedSchoolSort .sortItem.active{color: #50CC94;}

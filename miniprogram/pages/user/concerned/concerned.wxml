@@ -1,0 +1,39 @@
+<import src="../../temp.wxml"></import>
+<scroll-view class="full-screen" scroll-x="{{false}}" scroll-y="{{true}}" upper-threshold="50" lower-threshold="50" bindscrolltolower="getList">
+    <mp-sticky>
+        <view class="bb-1 bg-white w-100vw">
+            <tab index="tabIndex" items="{{['学校','专业']}}" bind:change="changeTab"></tab>
+        </view>
+    </mp-sticky>
+    <view wx:if="{{list}}">
+        <view class="bg-white">
+            <view wx:if="{{tabIndex==0}}">
+                <!-- 学校 -->
+                <navigator hover-class="none" wx:for="{{list}}" url="/pages/school/school/school?school_id={{item.school_id}}" class="bb-1 p-16 ub ub-ac">
+                    <image class="img-48" src="{{item.logo}}"></image>
+                    <view class="ub-f1 p-lr-16">
+                        <view class="ub ub-ac">
+                            <view class="ub-f1 font-16">{{item.school_name}}</view>
+                            <view class="color-grey cont-14">{{item.city}}</view>
+                        </view>
+                        <rich-text class="pt-8 font-14" nodes="{{item.school_info}}"></rich-text>
+                    </view>
+                </navigator>
+            </view>
+            <view wx:else>
+                <!-- 专业 -->
+                <navigator hover-class="none" wx:for="{{list}}" url="/pages/major/major/major?major_id={{item.major_id}}" class="bb-1 p-16 ub ub-ac">
+                    <image class="img-48 round" src="{{item.major_logo}}"></image>
+                    <view class="ub-f1 p-lr-16">
+                        <view class="ub ub-ac">
+                            <view class="ub-f1 font-16">{{item.major_name}}</view>
+                            <view class="color-grey cont-14">{{item.city}}</view>
+                        </view>
+                        <view class="font-14 color-grey">{{item.root_major_name}} > {{item.parent_major_name}}</view>
+                    </view>
+                </navigator>
+            </view>
+        </view>
+        <template is="listPage" data="{{listPage,list}}"></template>
+    </view>
+</scroll-view>

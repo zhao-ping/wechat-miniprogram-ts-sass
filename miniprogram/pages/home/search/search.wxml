@@ -1,0 +1,106 @@
+<import src="../../temp.wxml" />
+<scroll-view
+ class="full-screen"
+ scroll-x="{{false}}"
+ scroll-y="{{true}}"
+ scroll-top="0"
+ scroll-with-animation="{{true}}"
+ bindscrolltolower="getList"
+>
+	<mp-sticky>
+		<view class="bg-white" style="width:100vw;">
+			<tabs items="{{['学校搜索','专业搜索']}}" index="{{tabIndex}}" bind:change="changeTab" />
+			<view class="p-lr-16 p-tb-8 ub ub-ac bt-1">
+				<view class="ub-f1">
+					<ym-input
+					 clas="bg-f7 br-24"
+					 model:value="{{searchStr}}"
+					 mode="round"
+					 placeholder="请输入搜索关键词"
+					 type="text"
+					 confirmtype="reGetList"
+					 data-page="1"
+					 bind:confirm="reGetList"
+					>
+						<view class="iconfont iconicon_search color-d5 ml-16" />
+					</ym-input>
+				</view>
+				<view bind:tap="reGetList" class="line-h-48 color-grey font-16 ml-16"> 搜索</view>
+			</view>
+		</view>
+	</mp-sticky>
+    <!-- 搜索历史&关注的 -->
+	<view wx:if="{{!list}}" class="bg-white">
+		<view wx:if="{{(tabIndex==0&historySchool.length>0)||tabIndex==1&historyMajor.length>0}}" class="pt-16">
+			<view class="ub ub-ac p-lr-16">
+				<view class="ub-f1 bold font-16">搜索历史</view>
+				<view bind:tap="removeHistory" class="iconfont iconlaji color-grey" />
+			</view>
+			<view class="clearfix p-16" style="margin: 0 -8rpx;">
+				<view wx:for="{{tabIndex==0?historySchool:historyMajor}}" bind:tap="addHistory" data-item="{{item}}" class="display-b float-l line-h-32 p-lr-16 color-grey bg-f7 m-4">{{item}}</view>
+			</view>
+		</view>
+		<view wx:if="{{collectionMajor&&collectionMajor.length>0&&tabIndex==1}}" class="pb-16 p-lr-16">
+			<view class="p-tb-16 bold"> 我关注的专业</view>
+			<view class="clearfix" style="margin: 0px -0.4rem;">
+				<navigator
+				 wx:for="{{collectionMajor}}"
+				 hover-class="none"
+				 url="/pages/major/major/major?major_id={{item.major_id}}"
+				 class="display-b float-l color-2f line-h-32 p-lr-16 b-1 m-4 br-3"
+				>{{item.major_name}}
+				</navigator>
+			</view>
+		</view>
+		<view wx:if="{{collectionSchool&&collectionSchool.length>0&&tabIndex==0}}" class="pb-16 p-lr-16">
+			<view class="p-tb-16 bold"> 我关注的学校</view>
+			<view class="clearfix" style="margin: 0px -0.4rem;">
+				<navigator
+				 wx:for="{{collectionSchool}}"
+				 hover-class="none"
+				 url="/pages/school/school/school?school_id={{item.school_id}}"
+				 class="display-b float-l color-2f line-h-32 p-lr-16 b-1 m-4 br-3"
+				>{{item.school_name}}
+				</navigator>
+			</view>
+		</view>
+	</view>
+	<view wx:else class="be-white">
+		<!-- 学校列表 -->
+		<view wx:if="{{tabIndex==0}}">
+			<navigator
+			 hover-class="none"
+			 wx:for="{{list}}"
+			 wx:for-item="school"
+			 url="/pages/school/school/school?school_id={{school.school_id}}"
+			 class="bg-white bb-1 p-16 ub ub-start"
+			>
+				<image src="{{school.logo}}" class="img-48 mr-16" />
+				<view class="ub-f1">
+					<view class="ub ub-ac">
+						<view class="ub-f1 font-18 bold">{{school.school_name}}</view>
+						<view class="font-14 color-grey">{{school.city}}</view>
+					</view>
+					<view class="pt-8">
+						<rich-text nodes="{{school.school_info}}" />
+					</view>
+					<view wx:if="{{school.fame_list.length>0}}" class="pt-8" style="margin:0 -8rpx;">
+						<view wx:for="{{school.fame_list}}" wx:for-item="fame" class="tag-f7-24 m-4">{{fame}}</view>
+					</view>
+				</view>
+			</navigator>
+		</view>
+		<view wx:if="{{tabIndex==1}}" class="bg-white">
+			<navigator hover-class="none" wx:for="{{list}}" url="{{item.deep==3?('/pages/major/major/major?major_id='+item.major_id):('/pages/major/majors/majors?root_major_id='+item.root_major_id+'&major_type='+item.major_type+'&major_id='+item.major_id)}}" class="ub ub-ac p-tb-20 p-lr-16 display-b bb-1">
+				<view class="font-16">{{item.major_name}}</view>
+				<view class="ub-f1 m-lr-4">
+					<view class="display-ib  p-lr-8 br-3 font-12 color-grey bg-f7 line-h-20">{{item.major_type_name}}</view>
+				</view>
+				<view wx:if="{{item.deep!=3}}" class="color-grey font-12">查看大类下的专业</view>
+				<view class="iconfont iconarrow-right font-10 color-grey ml-4" />
+			</navigator>
+		</view>
+		<template is="listPage" data="{{list:list||null,listPage}}" />
+	</view>
+</scroll-view>
+

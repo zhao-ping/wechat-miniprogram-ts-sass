@@ -1,0 +1,22 @@
+<view class="full-screen bg-white ub ub-ver">
+    <view class="ub-f1"></view>
+    <view wx:if="{{info}}" class="text-center">
+        <view class="font-32 color-green bold">支付成功</view>
+        <icon class="icon-box-img pt-32" type="success" size="120"></icon>
+        <view class="font-16 pt-32">{{info.user}}</view>
+        <view class="font-32 bold pt-8">{{info.goods_name}}</view>
+        <view class="font-18 pt-8"><rich-text class="color-grey" nodes="{{info.group_exp_time_str}}"></rich-text></view>
+        <view class="p-32">
+            <view class="btn green" bind:tap="updateUserInfo">开启圆梦志愿</view>
+        </view>
+    </view>
+    <view wx:if="{{failMsg}}" class="text-center">
+        <view class="font-32 bold">支付失败</view>
+        <icon class="icon-box-img pt-32" type="warn" size="120"></icon>
+        <view class="font-18 pt-32"><rich-text nodes="{{failMsg}}"></rich-text></view>
+        <view class="p-32">
+            <view class="btn green" bind:tap="back">确定</view>
+        </view>
+    </view>
+    <view class="ub-f1"></view>
+</view>

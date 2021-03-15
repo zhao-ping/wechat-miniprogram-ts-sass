@@ -1,0 +1,25 @@
+<wxs src="../../../util.wxs" module="tools"></wxs>
+<page-loadding show="{{types}}">
+    <view wx:if="{{types}}" class="full-screen ub ub-ver">
+        <scroll-view class="full-screen" scroll-top="{{scrollTop}}" scroll-with-animation="{{true}}" scroll-x="{{false}}" scroll-y="{{true}}" bindscrolltolower="getList">
+                <mp-sticky>
+                    <view class="shadow w-100vw">
+                        <tab items="{{tools.getMaps(types,'k')}}" index="{{typesIndex}}" bind:change="changeTab"></tab>
+                    </view>
+                </mp-sticky>
+                <navigator hover-class="none" wx:for="{{list}}" wx:for-item="article"url="/pages/article/article/article?article_id={{article.article_id}}" class="p-16 ub ub-ac m-8 bg-white br-4">
+                    <view class="ub-f1 mr-16">
+                        <view class="font-16 line-h-20 hidden" style="height:120rpx;">{{article.title}}</view>
+                        <view class="font-12 color-grey"><view class="display-ib">{{article.article_class_name}}</view> <view class="ml-8 display-ib">{{article.created}}</view></view>
+                    </view>
+                    <image class="img-84-76 br-4" src="{{article.photo}}" mode="aspectFit" lazy-load="true"></image>
+                </navigator>
+                <view wx:if="{{listPage.page<listPage.page_count}}" class="p-16 text-center color-grey font-14" bindtap="getList">
+                    点击加载下一页
+                </view>
+                <view wx:else class="p-16 text-center color-grey font-14" bindtap="getList">
+                    数据已经加载完毕
+                </view>
+            </scroll-view>
+    </view>
+</page-loadding>

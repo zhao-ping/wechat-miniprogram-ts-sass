@@ -1,0 +1,6 @@
+.videoTitle{
+    background: linear-gradient(to bottom, rgba(0,0,0,0.4) ,rgba(0,0,0,0.2) ,rgba(0,0,0,0));line-height: 28rpx;color: white;font-size:32rpx;position: absolute;top:0;left: 0;right: 0; padding: 16rpx 64rpx 16rpx 16rpx;border-radius: 10rpx 10rpx 0 0;
+}
+.videoViewed{
+    position: absolute;right:-56rpx;top: -4rpx;width: 160rpx;text-align: center;background-color:#aaa;color: white;line-height: 60rpx;font-size: 24rpx;padding-top: 4rpx;transform: rotate(45deg);
+}

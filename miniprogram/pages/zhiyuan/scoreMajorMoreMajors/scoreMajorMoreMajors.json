@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "ym-table":"../../component/table/table",
+    "bottom-in-container":"../../component/bottomInContainer/bottomInContainer"
+  }
+}

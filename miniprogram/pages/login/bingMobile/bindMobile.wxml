@@ -1,0 +1,34 @@
+<view class="full-screen bg-white">
+    <view class="">
+        <view class="p-16 ub ub-ac">
+            <view class="ub-f1"></view>
+            <view bind:tap="submit" class="color-grey font-14">跳过</view>
+        </view>
+        <view class="p-tb-32">
+            <view class="text-center">
+                <image class="img-72 round" src="{{wechatInfo.userInfo.avatarUrl}}" ></image>
+                <view class="pt-16 font-16">{{wechatInfo.userInfo.nickName}}</view>
+            </view>
+        </view>
+        <view class="p-16">
+            <view wx:if="{{step==1}}">
+                <view class="mb-16">
+                    <ym-input model:value="{{mobile}}" placeholder="请输入手机号"></ym-input>
+                </view>
+                <view class="btn green" bind:tap="getCode">获取验证码</view>
+            </view>
+            <view wx:else>
+                <view class="ub ub-ac color-grey mb-16">
+                    <view class="ub-f1">验证码已发送至 <view class="color-2f display-ib" >{{mobile}}</view> </view>
+                    <view wx:if="{{lastTime==0}}">重新获取</view>
+                    <view wx:else>{{lastTime}}后可重新获取</view>
+                </view>
+                <view class="mb-16">
+                    <ym-input model:value="{{code}}" placeholder="请输入验证码"></ym-input>
+                </view>
+                <view class="btn green" bind:tap="submit">确定</view>
+            </view>
+        </view>
+    </view>
+</view>
+

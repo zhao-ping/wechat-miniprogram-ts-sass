@@ -1,0 +1,12 @@
+{
+  "usingComponents": {
+    "ym-table":"../../component/table/table",
+    "bottom-in-container":"../../component/bottomInContainer/bottomInContainer",
+    "no-data":"../../component/noData/noData",
+    "page-loadding":"../../component/pageLoadding/pageLoadding",
+    "tab":"../../component/tab/tab",
+    "table":"../../component/table/table",
+    "selects":"../../component/selects/selects",
+    "mp-sticky": "@miniprogram-component-plus/sticky"
+  }
+}

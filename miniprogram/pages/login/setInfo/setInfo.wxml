@@ -1,0 +1,58 @@
+<view class="bg-white p-16" style="min-height:100vh;box-sizing:border-box;">
+  <view class="pt-32 font-28 bold">完善资料</view>
+  <view class="color-grey font-14 pt-8">提交资料后省份不能修改，请正确选择！</view>
+  <!-- 表单信息 -->
+  <view class="p-tb-32">
+  <!-- 省份 -->
+    <view class="mb-32">
+      <view class="bold mb-8">高考省份</view>
+      <view class="b-1 br-4 p-tb-12 ub ub-ac" bindtap="showProvince">
+        <view class="p-lr-16 br-1"><view class="iconfont iconicon_address color-green"></view></view>
+        <view class="ub-f1 p-lr-16">{{province.name}}</view>
+        <view class="color-grey font-12">{{province.name&&province.name?'点击重选':'请选择省份'}}</view>
+        <view class="iconfont iconarrow-right color-40 pr-16 font-12"></view>
+      </view>
+    </view>
+    <!-- 科目 -->
+    <view wx:if="province" wx:for="{{province.sub_list}}" wx:for-index="subsIndex" wx:for-item="subs" class="mb-32">
+      <view class="bold">{{subs.sub_title}}</view>
+      <view class="col3" style="margin:0 -16rpx;">
+        <view class="col p-8" wx:for="{{subs.sub_info}}" wx:for-index="subIndex" wx:for-item="sub">
+          <view bindtap="changeSub" data-subs-index="{{subsIndex}}" data-sub-index="{{subIndex}}" class="br-4 line-h-42 text-center {{sub.checked?'bg-green color-white':'bg-ea'}}">{{sub.k}}</view>
+        </view>
+      </view>
+    </view>
+    <!-- 成绩 -->
+    <view class="mb-32">
+      <view class="bold">考试成绩</view>
+      <ym-input  model:value="{{score}}" clas="pt-16" placeholder="请输入成绩" type="number">
+      <view  class="line-h-48 bg-f7 p-lr-16">高考分数</view>
+      </ym-input>
+    </view>
+    <view bindtap="setInfo" class="btn green mt-16">开启圆梦志愿</view>
+  </view>
+</view>
+<right-in-container id="provinceList">
+  <view class="ub ub-ac">
+    <scroll-view class="ub-f1" style="height:100vh;" scroll-y="true">
+      <view class="p-lr-16" >
+        <view wx:for="{{info}}" wx:for-item="letter" wx:if="{{letter.initials}}" data-prov-letter="{{letter.initials}}">
+          <view class="p-tb-16">{{letter.initials}}</view>
+          <view class="bb-1 p-tb-16 ub ub-ac" wx:for="{{letter.prov_list}}" wx:for-item="prov" wx:if="prov.name" data-province="{{prov}}" bindtap="changeProvince">
+            <view class="ub-f1">
+              {{prov.name}}
+            </view>
+            <view class="{{prov.is_support?'':'color-grey'}}">
+              {{prov.tag||prov.no_support_str}}
+            </view>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+    <view class="pr-16">
+       <view class="p-tb-4 color-grey" bindtap="scrollProv" wx:for="{{info}}" wx:for-item="letter" data-letter="{{letter.initials}}" wx:if="{{letter.initials}}">
+       {{letter.initials}}
+       </view>
+    </view>
+  </view>
+</right-in-container>

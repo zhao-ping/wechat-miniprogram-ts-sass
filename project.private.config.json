@@ -1,0 +1,60 @@
+{
+  "setting": {},
+  "condition": {
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "name": "登录",
+          "pathName": "pages/login/login/login",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "个人中心",
+          "pathName": "pages/user/user/user",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "成绩报告",
+          "pathName": "pages/scoreReport/report/report",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "能上院校",
+          "pathName": "pages/zhiyuan/possibleSchools/possibleSchools",
+          "query": "uca_id=2466",
+          "scene": null
+        },
+        {
+          "name": "学校数据",
+          "pathName": "pages/school/data/data",
+          "query": "school_id=261",
+          "scene": null
+        },
+        {
+          "name": "录取概率评测",
+          "pathName": "pages/school/possiblity/possibility",
+          "query": "school_id=261&subject_group_id=1",
+          "scene": null
+        },
+        {
+          "name": "填报速学",
+          "pathName": "pages/article/suxueDetail/suxueDetail",
+          "query": "article_id=22",
+          "scene": null
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,2 @@
+.copyBtn{display: inline-block;position: absolute;top:-16rpx;left: 50%;line-height:64rpx;transform: translate(-50%,-100%);border-radius: 8rpx;background-color: #333;color: #fff;padding: 0 16rpx;word-break: keep-all;}
+.copyBtn::before{content: "";width: 30rpx;height: 30rpx;position:absolute;bottom:0rpx;left:50%;transform: translate(-50%,30%) rotate(45deg); background-color: #333;display: block;z-index: 0;}

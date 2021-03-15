@@ -1,0 +1,13 @@
+.item-video{
+    width: 288rpx;height:156rpx;box-sizing: border-box;
+}
+.playing{width: 30rpx;height: 28rpx;position: absolute;bottom: 16rpx; right: 16rpx;}
+.playing .item{height: 28rpx;width: 6rpx;background: #FD7649;border-radius: 2rpx;animation-name: ani-play;animation-duration: 1s;animation-iteration-count: infinite;}
+.delay25{animation-delay: -0.25s;-webkit-animation-delay:-0.25s;}
+.delay50{animation-delay: -0.5s;-webkit-animation-delay:-0.5s;}
+.delay75{animation-delay: -0.75s;-webkit-animation-delay:-0.75s;}
+@keyframes ani-play{
+    0%{height: 30%;}
+    50%{height: 100%;}
+    100%{height: 30%;}
+}

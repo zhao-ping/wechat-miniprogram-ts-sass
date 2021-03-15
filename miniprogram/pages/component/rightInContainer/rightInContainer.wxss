@@ -1,0 +1,2 @@
+.rightContainer{width: 100vw;height: 100vh;box-sizing: border-box;position: fixed;left: 120vw;top: 0;transition: all 0.3s ease-in;background-color: white;z-index:1000;}
+.rightContainer.show{left: 0;transition: all 0.3s ease-in;}

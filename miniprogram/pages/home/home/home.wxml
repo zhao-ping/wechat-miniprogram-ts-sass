@@ -1,0 +1,166 @@
+<!-- 首页 -->
+<wxs src="../../../util.wxs" module="tools"></wxs>
+<import src="../../article/temp.wxml"/>
+<!-- <view data-url="ddd" data-a="111" bindtap="attr">ATTR</view> -->
+<page-loadding show="{{info}}">
+  <scroll-view scroll-x="false" scroll-y="true" upper-threshold="50" lower-threshold="50" scroll-top="0" scroll-left="0">
+    <!-- 圆形背景框内容 -->
+    <view class="bg-green br-b-round overflow-hidden">
+      <navigator hover-class="none" url="/pages/home/search/search" class="p-lr-16">
+        <view class="br-16 bg-white-3 p-lr-16 mt-8 line-h-30 font-14 color-white text-center">
+        <view class="iconfont color-white iconicon_search mr-4"></view>
+        找大学/查专业
+        </view>
+      </navigator>
+      <view class="p-16 mt-16">
+        <view class="ub ub-ac color-white">
+          <navigator hover-class="none" url="/pages/user/setScore/setScore" class="font-18 ub-f1">
+            {{info.user_info.grade_info}}
+            <view class="iconfont iconicon_modify"></view>
+          </navigator>
+          <view wx:if="{{info.user_info.is_grade_report}}" class="relative">
+            <view class="display-ib bg-red color-white font-10 p-lr-4 br-4 line-h-20 botArrow red" style="top:-100%;right:0;position:absolute;">必看</view>
+            <navigator hover-class="none" url="/pages/scoreReport/report/report">
+            {{info.user_info.is_grade_report_str}}
+            </navigator>
+          </view>
+          <view wx:else>{{info.user_info.is_grade_report_str}}</view>
+        </view>
+      </view>
+      <view class="p-16"></view>
+    </view>
+    <view class="p-lr-16 pb-16 relative" style="margin-top:-84rpx;z-index:1;">
+      <!-- 能上的学校 -->
+      <navigator hover-class="none" url="/pages/zhiyuan/possibleSchools/possibleSchools" class="bg-white shadow p-16 ub ub-ac br-8">
+        <view class="ub-f1">
+          <rich-text class="font-bold font-18" nodes="{{info.can_up_school_info.can_up_all_count}}"></rich-text>
+          <view class="pt-8 color-grey font-14">{{info.can_up_school_info.can_up_tags}}</view>
+        </view>
+        <view class="br-12 line-h-24 bg-orange color-white font-12 p-lr-8">马上看</view>
+        <view class="iconfont iconarrow-right font-10 color-grey"></view>
+      </navigator>
+      <!-- 学校&专业 -->
+      <view class="ub ub-stretch mt-16">
+        <view class="ub-f1 mr-4">
+          <navigator hover-class="none" url="/pages/school/schools/schools" class="bg-white br-4 ub ub-ac ub-center" style="height:{{globalUserInfo.prov_model!=3?120:248}}rpx;">
+            <view class="font-16 mr-8 font-bold">找大学</view>
+            <cover-image class="img-32" src="https://m.ymzy.cn/static/images/home/iconSchool.png"></cover-image>
+          </navigator>
+          <navigator wx:if="{{globalUserInfo.prov_model!=3}}" hover-class="none" url="/pages/zhiyuan/scoreSchool/scoreSchool" class="bg-white br-4 ub ub-ac ub-center mt-4" style="height:120rpx;">
+            <view class="font-16 mr-8 font-bold">按分数找</view>
+            <cover-image style="height:34rpx;width:74rpx;" src="https://m.ymzy.cn/static/images/home/wordSchool.png"></cover-image>
+          </navigator>
+        </view>
+        <view class="ub-f1 mr-4">
+          <navigator hover-class="none" url="/pages/major/majors/majors" class="bg-white br-4 ub ub-ac ub-center" style="height:120rpx;">
+            <view class="font-16 mr-8 font-bold">查专业</view>
+            <cover-image class="img-32" src="https://m.ymzy.cn/static/images/home/iconMajor.png"></cover-image>
+          </navigator>
+          <navigator hover-class="none" url="/pages/zhiyuan/scoreMajor/scoreMajor" class="bg-white br-4 ub ub-ac ub-center mt-4" style="height:120rpx;">
+            <view class="font-16 mr-8 font-bold">按分数找</view>
+            <cover-image style="height:34rpx;width:74rpx;" src="https://m.ymzy.cn/static/images/home/wordMajor.png"></cover-image>
+          </navigator>
+        </view>
+      </view>
+      <!-- 快讯&菜单 -->
+      <view class="br-4 bg-white shadow mt-16 p-16">
+        <!-- 快讯 -->
+        <view wx:if="{{info.index_message_list.length>0}}" class="pb-16 bb-1 ub ub-ac">
+          <cover-image style="width:60rpx;height:30rpx;" src="https://m.ymzy.cn/static/images/home/message.png"></cover-image>
+          <view class="ub-f1 ml-16 overflow-hidden relative" style="height:40rpx;">
+            <navigator hover-class="none" wx:for="{{info.index_message_list}}" wx:for-index="index" wx:key="message" wx:for-item="message" class="home-message {{index==messageIndex?'active':''}}" target="" url="">
+              {{message.title}}
+            </navigator>
+          </view>
+        </view>
+        <!-- 菜单 -->
+        <view class="{{info.menu_list.length>6?'col4':'col3'}} pt-16">
+          <navigator hover-class="none" wx:for="{{info.menu_list}}" wx:key="menus" wx:for-index="menuIndex" wx:for-item="menu" url="{{tools.translateUrl[menu.menu_code]}}" class="col text-center p-8">
+            <cover-image class="img-24 display-ib" src="{{menu.menu_img}}"></cover-image>
+            <view class="pt-8 font-14">{{menu.menu_title}}</view>
+          </navigator>
+        </view>
+      </view>
+      <!-- 志愿风险评估 -->
+      <navigator wx:if="{{info.user_info.uca_assess_total_num_is_show}}" url="/pages/zhiyuan/zhiyuans/zhiyuans" class="br-4 bg-white shadow mt-16 p-16 ub ub-ac">
+        <view class="ub-f1">
+          <view class="font-18">
+            志愿风险评估
+            <cover-image class="img-24 display-ib ml-8" style="width:96rpx;height:32rpx;" src="https://m.ymzy.cn/static/images/home/tag_innovation.png"></cover-image>
+          </view>
+          <view class="pt-16 font-14 color-grey">{{info.user_info.uca_assess_total_num}}</view>
+        </view>
+        <cover-image class="img-24 display-ib ml-8" style="width:88rpx;height:128rpx;" src="https://m.ymzy.cn//static/images/home/zhiyuanTest.png"></cover-image>
+      </navigator>
+    </view>
+    <!-- 填报速学 -->
+    <view wx:if="{{suxueRecommend}}" class="bg-white">
+      <navigator hover-class="none" class="mb-8 pt-16 p-lr-16" url="/pages/article/suxueTypes/suxueTypes?article_class_id=0">
+        <view class="ub ub-ac">
+          <view class="bold font-18 ub-f1">填报速学</view>
+          <view class="font-12 color-grey"><rich-text class="" nodes="{{suxueRecommend.tip}}"></rich-text></view>
+          <view class="iconfont iconarrow-right font-8 color-grey"></view>
+        </view>
+      </navigator>
+      <view class="bb-1">
+        <tab items="{{['推荐','已看过']}}" bind:change="goSuxuePage"></tab>
+      </view>
+      <template is="suxueArticleList" data="{{list:suxueRecommend.list}}"></template>
+      <view wx:if="{{info.article_class.length>0}}" class="p-tb-16 ub ub-ac text-center">
+        <navigator wx:for="{{info.article_class}}" wx:for-index="index" url="/pages/article/suxueTypes/suxueTypes?article_class_id={{item.v}}" class="{{index!=0?'bl-1':''}} ub-f1 line-h-18 color-blue">
+          {{item.k}}
+        </navigator>
+      </view>
+    </view>
+    <!-- 视频 -->
+    <view class="p-lr-16">
+      <view class="mt-16">
+        <navigator hover-class="none" class="mb-8" target="" url="/pages/home/videos/videos">
+          <view class="ub ub-ac">
+            <view class="bold font-18 ub-f1">大家都在看</view>
+            <view class="font-12 color-grey">更多</view>
+            <view class="iconfont iconarrow-right font-8 color-grey"></view>
+          </view>
+        </navigator>
+        <view class="br-4" style="margin:0 -32rpx;">
+          <scroll-view id="scrollProvince" scroll-with-animation="{{true}}" scroll-x="{{true}}" enhanced="{{true}}" show-scrollbar="{{false}}" style="width:750rpx;">
+            <view class="videos p-lr-8">
+              <view wx:for="{{info.menu_video}}" wx:key="video" wx:for-index="videoIndex" wx:for-item="video" bind:tap="changeVideo" data-index="{{videoIndex}}" class="m-8 display-ib">
+                <view wx:if="{{playingVideoIndex==videoIndex}}" class="container">
+                  <video class="container" id="video" src="{{video.url}}"  autoplay="{{true}}" auto-pause-if-open-native="{{true}}" show-progress="{{true}}" show-fullscreen-btn="{{true}}" show-play-btn="{{true}}" show-center-play-btn="{{true}}"></video>
+                </view>
+                <view wx:else class="container">
+                  <image class="video-img" src="{{video.picture}}" lazy-load="true"></image>
+                  <view class="title">{{video.title}}</view>
+                  <view wx:if="video.user_played" class="videoViewed">看过</view>
+                  <view class="viewed-num">{{video.view_num}}人看过</view>
+                  <view class="video-icon">
+                    <view class="iconfont iconsanjiaoxing color-white"></view>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </scroll-view>
+        </view>
+      </view>
+    </view>
+    <!-- 资讯 -->
+    <view class="mt-16 bg-white">
+      <navigator hover-class="none" url="/pages/article/articles/articles" class="ub ub-ac p-16">
+        <view class="bold font-18 ub-f1">为您精选资讯</view>
+        <view class="font-12 color-grey">更多</view>
+        <view class="iconfont iconarrow-right font-8 color-grey"></view>
+      </navigator>
+      <navigator hover-class="none" wx:for="{{info.recommend_article_list}}" wx:for-item="article" url="/pages/article/article/article?article_id={{article.article_id}}" class="bt-1 p-16 ub ub-ac">
+        <view class="ub-f1 mr-16">
+          <view class="font-16 line-h-20 hidden" style="height:120rpx;">{{article.title}}</view>
+          <view class="font-12 color-grey">
+            <view class="display-ib">{{article.article_class_name}}</view>
+            <view class="ml-8 display-ib">{{article.created}}</view>
+          </view>
+        </view>
+        <image class="img-84-76 br-4" src="{{article.photo}}" mode="aspectFit" lazy-load="true"></image>
+      </navigator>
+    </view>
+  </scroll-view>
+</page-loadding>

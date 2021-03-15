@@ -1,0 +1,9 @@
+<wxs src="../../../util.wxs" module="tools" />
+<view class="color-2f font-14" style="border-bottom:1rpx solid rgba(247,247,247,0.5);">
+    <view class="bg-ea ub ub-stretch p-12">
+        <view wx:for="{{table.header_list}}" wx:for-item="th" wx:for-index="i" class="ub-f1 {{i==0?'':'text-center'}}">{{th}}</view>
+    </view>
+    <view wx:for="{{table.row_list}}" wx:for-index="rowIndex" wx:for-item="row" class="{{rowIndex%2==0?'':'bg-f7-5'}} ub ub-stretch p-12">
+        <view wx:for="{{row.row_values}}" wx:for-item="td" wx:for-index="i" class="ub-f1 {{i>0&&tools.hasStr(row.row_values[0],'最低')?'bold':''}} {{i>0?'text-center':'text-left'}}">{{td}}</view>
+    </view>
+</view>

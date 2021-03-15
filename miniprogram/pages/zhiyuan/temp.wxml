@@ -1,0 +1,192 @@
+<import src="../temp.wxml" />
+<template name="majorList">
+    <view wx:for="{{list}}" class="bg-white mb-12 {{isZhiyuanPage&&item.is_application_checked?'opacity-5':''}}">
+        <view bind:tap="toSchoolDetail" data-item="{{item}}" class="ub ub-ac p-lr-16 p-tb-8 bb-1">
+            <view class="ub-f1">{{item.subject_group_name||item.school_name}}</view>
+            <rich-text class="font-12 color-grey" nodes="{{item.school_info}}"></rich-text>
+            <view wx:if="{{!isZhiyuanPage}}" class="bg-f7 color-grey line-h-14 br-4 p-lr-4 display-ib ml-4">··</view>
+        </view>
+        <view class="ub p-lr-16 pb-16 pt-20" bind:tap="getMajorInfo" data-item="{{item}}">
+            <view wx:if="{{item.probability||item.probability_level}}" class="w-46">
+                <view wx:if="{{item.probability}}" class="font-10">
+                    <view class="font-20 display-ib font-number">{{item.probability<10?'<9':item.probability}}</view>%
+                </view>
+                <view wx:if="{{item.probability_level}}" class="possibility" style="border: 1px solid {{item.probability_level_color}}; color: {{item.probability_level_color}};">
+                    {{item.probability_level}}
+                </view>
+            </view>
+            <view class="ub-f1">
+                <view>
+                    <view class="font-16 mr-8 color-00 display-ib">{{item.major_name}}</view>
+                    <view wx:if="{{item.subject_limit}}" class="ml-8 bg-f7 br-4 display-ib line-h-24 p-lr-8 font-12 color-grey display-ib">
+                        {{item.subject_limit}}
+                    </view>
+                </view>
+                <view wx:if="{{item.major_tag}}" class="pt-8 color-grey">{{item.major_tag}}</view>
+                <view class="ub ub-ac">
+                    <view class="ub-f1">
+                        <view wx:for="{{item.score_info}}" wx:for-item="node" class="pt-8">
+                            <rich-text class="font-14 color-grey" nodes="{{node}}"></rich-text>
+                        </view>
+                    </view>
+                    <view class="iconfont iconarrow-right font-10 color-grey"></view>
+                </view>
+                <view wx:if="{{item.major_tags.length>0}}" class="clearfix" style="max-height: 120rpx; overflow: hidden; margin: 16rpx -8rpx -8px;">
+                    <view wx:for="{{item.major_tags}}" wx:for-item="tag" class="bg-green-light font-12 line-h-22 color-grey display-b m-4 p-lr-16 br-12 float-l">
+                        {{tag}}
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view wx:if="{{isZhiyuanPage}}" class="bt-1" bind:tap="addMajor" data-item="{{item}}" data-index="{{index}}">
+            <view wx:if="{{item.is_application_checked}}" class="ub ub-ac ub-center h-48 color-green">
+                <view class="iconfont iconicon_Check mr-4"></view>
+                <view>已填报</view>
+            </view>
+            <view wx:else class="ub ub-ac ub-center h-48">
+                <view class="iconfont iconbutton_Addto mr-4"></view>
+                <view>填报该专业</view>
+            </view>
+        </view>
+        <view wx:else class="bt-1 h-48 text-center ub ub-ac ub-center">
+            <view bind:tap="showMoreMajors" data-item="{{item}}" data-index="{{index}}" class="ub-f1 br-1">该校其他专业</view>
+            <view bind:tap="beixuan" data-item="{{item}}" data-index="{{index}}" class="ub-f1">
+                <view wx:if="{{item.is_alternative}}" class="ub ub-ac ub-center color-green">
+                    <view class="iconfont iconCheckbox_Selected font-16 mr-4"></view>
+                    <view>已备选</view>
+                </view>
+                <view wx:else class="ub ub-ac ub-center">
+                    <view class="iconfont iconjiarubeixuan font-16 mr-4"></view>
+                    <view>添加到备选</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <template is="listPage" data="{{list,listPage}}" />
+    <template is="moreMajors" data="{{moreMajors,isZhiyuanPage}}"></template>
+    <template is="popupMajor" data="{{popupMajor,isZhiyuanPage}}"></template>
+</template>
+<!-- 上海和常规省使用一个模板 排版略有不同 -->
+<template name="cahnggui">
+    <view class="mb-12 bg-white {{isZhiyuanPage&&item.is_application_checked?'opacity-5':''}}">
+        <view class="ub p-lr-16 p-tb-20 bb-1 bg-white w-100">
+            <view wx:if="{{mode!=2&&(item.probability||item.probability_level)}}" class="w-46">
+                <view wx:if="{{item.probability}}" class="font-10">
+                    <view class="font-20 display-ib font-number">{{item.probability<10?'<9':item.probability}}</view>%
+                </view>
+                <view wx:if="{{item.probability_level}}" class="possibility" style="border: 1px solid {{item.probability_level_color}}; color: {{item.probability_level_color}};">
+                    {{item.probability_level}}
+                </view>
+            </view>
+            <view class="ub-f1">
+                <navigator hover-class="none" url="/pages/school/school/school?school_id={{item.school_id}}">
+                    <view class="ub">
+                        <view class="font-16 ub-f1 bold">{{item.subject_group_name||item.school_name}}</view>
+                        <view><rich-text class="color-grey font-12" nodes="{{item.subject_info?item.school_info:item.city}}"></rich-text></view>
+                    </view>
+                    <view class="pt-8">
+                        <rich-text class="font-14 display-ib color-2f" nodes="{{item.subject_info?'科目要求：'+'<span class=\"color-00\">'+item.subject_info+'</span>':item.school_info}}"></rich-text>
+                        <view wx:if="{{mode==2&&item.probability_level}}" class="possibility small ml-4" style="border: 1px solid {{item.probability_level_color}}; color: {{item.probability_level_color}};">
+                            {{item.probability_level}}
+                        </view>
+                    </view>
+                </navigator>
+                <view bind:tap="getSchoolInfo" data-item="{{item}}" data-index="{{index}}">
+                    <view wx:if="{{item.score_info.length>0}}" class="pt-8 color-2f ub ub-ac">
+                        <view class="ub-f1">
+                            <view wx:for="{{item.score_info}}" wx:for-item="score" class="pt-4">
+                                <rich-text class="color-grey font-14" nodes="{{score}}"></rich-text>
+                            </view>
+                        </view>
+                        <view wx:if="{{item.is_history}}" class="iconfont iconarrow-right font-10 color-grey"></view>
+                    </view>
+                    <view wx:if="{{item.rank_info}}" class="ub ub-ac pt-8">
+                        <view class="ub-f1">
+                            <rich-text class="color-grey font-14" nodes="{{item.rank_info}}"></rich-text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view wx:if="{{item.is_have_plan_desc}}" class="h-40 text-center color-grey font-14">
+            <rich-text nodes="{{item.is_have_plan_desc}}"></rich-text>
+        </view>
+        <view wx:else>
+            <view wx:if="{{isZhiyuanPage}}">
+                <view class="ub ub-ac h-48">
+                    <view bind:tap="addSchool" data-item="{{item}}" data-index="{{index}}" class="ub-f1 text-center br-1 {{item.is_application_checked?'color-green':''}}">
+                        <view wx:if="{{item.is_application_checked}}">
+                            <view class="iconfont iconCheckbox_Selected"></view>
+                            已填报
+                        </view>
+                        <view wx:else>
+                            <view class="iconfont iconbutton_Addto"></view>
+                            选择填报
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view wx:else class="ub ub-ac h-48">
+                <view bind:tap="beixuanSchool" data-item="{{item}}" data-index="{{index}}" class="ub-f1 text-center br-1 {{item.is_alternative?'color-green':''}}">
+                    <view wx:if="{{item.is_alternative}}">
+                        <view class="iconfont iconCheckbox_Selected"></view>
+                        已备选该学校
+                    </view>
+                    <view wx:else>
+                        <view class="iconfont iconbutton_Addto"></view>
+                        备选学校
+                    </view>
+                </view>
+                <view bind:tap="showMoreMajors" data-item="{{item}}" data-index="{{index}}" class="ub-f1 text-center {{item.alternative_major_count>0?'color-green':''}}">
+                    <view wx:if="{{item.alternative_major_count>0}}">
+                        <view class="iconfont iconCheckbox_Selected"></view>
+                        已备选专业{{item.alternative_major_count}}
+                    </view>
+                    <view wx:else>
+                        <view class="iconfont iconbutton_alternative"></view>
+                        备选专业
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+<template name="zhejiang">
+    <view class="mb-12 bg-white {{isZhiyuanPage&&item.is_application_checked?'opacity-5':''}}">
+        <view hover-class="none" bind:tap="toSchoolDetail" data-item="{{item}}" class="ub ub-ac p-lr-16 p-tb-20 bb-1 bg-white w-100">
+            <image class="img-48" src="{{item.logo}}" lazy-load="{{true}}"></image>
+            <view class="ub-f1 ml-16">
+                <view class="ub ub-ac">
+                    <view class="ub-f1 font-18">{{item.school_name}}</view>
+                    <view wx:if="{{!isZhiyuanPage}}" class="color-grey font-12">院校详情</view>
+                    <view wx:if="{{!isZhiyuanPage}}" class="iconfont iconnav_right color-grey font-8 ml-4"></view>
+                </view>
+                <view class="color-grey pt-8 font-14"><rich-text nodes="{{item.school_info}}"></rich-text></view>
+            </view>
+        </view>
+        <view class="p-lr-16 p-tb-8" bind:tap="{{item.is_history?'getMajorInfo':'showMoreMajors'}}" data-item="{{item}}" data-index="{{index}}">
+            <view class="ub ub-ac pt-8">
+                <view class="font-16">{{item.major_name}}</view>
+                <view wx:if="{{item.subject_limit}}" class="bg-f7 br-4 ml-4 line-h-22 p-lr-4">{{item.subject_limit}}</view>
+            </view>
+            <view class="pt-8">
+                <view wx:for="{{item.score_info}}" wx:for-item="score" class="pb-8"><rich-text class="color-grey font-14" nodes="{{score}}"></rich-text></view>
+            </view>
+        </view>
+        <view bind:tap="showMoreMajors" data-item="{{item}}" data-index="{{index}}" class="text-center p-16 bt-1 color-grey">{{item.major_num_desc}}</view>
+    </view>
+</template>
+<template name="schoolList">
+    <view wx:for="{{list}}">
+        <view wx:if="{{prov_model_ex==3}}">
+            <template is="zhejiang" data="{{item,index,isZhiyuanPage,mode}}"/>
+        </view>
+        <view wx:else>
+            <template is="cahnggui" data="{{item,index,isZhiyuanPage,mode}}"/>
+        </view>
+    </view>
+    <template is="listPage" data="{{list,listPage}}" />
+    <template is="popupSchool" data="{{popupSchool,isZhiyuanPage}}"></template>
+    <template is="moreMajors" data="{{moreMajors,isZhiyuanPage}}"></template>
+    <template is="popupMajor" data="{{popupMajor,isZhiyuanPage}}"></template>
+</template>

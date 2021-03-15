@@ -1,0 +1,27 @@
+<import src="../temp.wxml" />
+<scroll-view class="full-screen" scroll-x="{{false}}" scroll-y="{{true}}" lower-threshold="50" scroll-top="{{scrollTop}}"  bindscrolltolower="getList" >
+    <mp-sticky>
+        <view class="w-100vw shadow bg-white" style="padding-top:{{statusBarHeight}}px;">
+            <view class="p-lr-16 p-tb-4 ub ub-ac" style="width:70%">
+                <view bind:tap="back" class="iconfont iconnav_back font-16 mr-16"></view>
+                <view class="ub-f1 line-h-28 bg-f7 br-24 ub ub-ac p-lr-8">
+                    <view class="ub-f1">
+                        <input model:value="{{school_name}}" bindconfirm="reserch" type="text" auto-focus="{{true}}" placeholder="请输入学校名"  confirm-type="search" />
+                    </view>
+                    <view class="iconfont iconicon_search ml-16" bind:tap="reserch"></view>
+                </view>
+            </view>
+        </view>
+    </mp-sticky>
+    <view wx:if="{{list}}">
+        <view wx:if="{{globalUserInfo.prov_model_ex==3&&tabIndex==0}}">
+            <!-- 从我的备选中添加能上的学校浙江版本 -->
+            <template is="majorList" data="{{list,listPage,popupMajor,popupSchool,isZhiyuanPage}}"></template>
+        </view>
+        <view wx:else>
+            <template is="schoolList" data="{{list,listPage,popupMajor,popupSchool,isZhiyuanPage,prov_model_ex:globalUserInfo.prov_model_ex,mode:globalUserInfo.mode}}"></template>
+        </view>
+    </view>
+    <view style="height:104rpx;"></view>
+    <view bind:tap="toApplication" class="fixed bottom bg-green p-12 text-center font-16 color-white">返回志愿表</view>
+</scroll-view>

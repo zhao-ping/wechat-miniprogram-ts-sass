@@ -1,0 +1,11 @@
+.tabContainer{
+    display: flex;
+    background-color: white;
+    align-items: center;
+    justify-content: space-around;
+    // box-shadow: 0 0 12rpx #ddd;
+    .item{line-height: 112rpx;font-size: 32rpx;color: #999;}
+    .item.active{font-weight: bold;color: #2f2f2f;}  
+}
+.container{position: relative;}
+.line{height: 8rpx;border-radius: 8rpx;background-color: #50CC94;position: absolute;bottom: 0;}

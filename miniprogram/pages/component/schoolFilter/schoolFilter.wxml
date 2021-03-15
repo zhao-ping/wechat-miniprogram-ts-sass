@@ -1,0 +1,18 @@
+<bottom-in-container id="bottomInContainer" bindhide="hideByModal">
+    <view style="height:80vh;display:flex;flex-direction: column;">
+        <view class="filterContainer" style="overflow-y:scroll;flex:1;">
+            <view wx:for="{{search_list}}" wx:for-item="filter" wx:for-index="filtersIndex" class="mb-32" style="{{filter.hide&&'display:none'}}">
+                <view class="pb-8 font-16">{{filter.title}} <view class="display-ib font-12 color-grey">({{filter.type==0?'单选':'多选'}})</view></view>
+                <view class="col4 filter" style="margin:-8rpx">
+                    <view wx:for="{{filter.values}}" wx:for-item="item" wx:for-index="filterIndex" class="col p-4">
+                        <view class="{{filter.type==0?(item.v==filter.default_value.v?'active':''):(item.checked?'active':'')}} item" bindtap="chooseFilter" data-filters-index="{{filtersIndex}}" data-filter-index="{{filterIndex}}">{{item.k}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="col2 shadow">
+            <view class="col text-center p-16" bindtap="initFilters">重置</view>
+            <view class="col text-center p-16 bg-green color-white" bindtap="submit" >确定</view>
+        </view>
+    </view>
+</bottom-in-container>

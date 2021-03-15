@@ -1,0 +1,32 @@
+<view class="bg-white mb-8 p-lr-16">
+    <view class="p-tb-16 ub ub-ac bb-1">
+        <view class="ub-f1 font-16">高考总分</view>
+        <rich-text class="color-grey font-14" nodes="{{info.cee_score_tip}}"></rich-text>
+    </view>
+    <view class="p-tb-16 ub ub-ac">
+        <view class="ub-f1 font-16">高考位次</view>
+        <rich-text class="color-grey font-14" nodes="{{info.cee_rank_tip}}"></rich-text>
+    </view>
+</view>
+<view wx:if="{{info.mock_score_tip}}" class="bg-white mb-8 p-lr-16">
+    <navigator hover-class="none" url="/pages/user/setScore/setScore" class="p-tb-16 ub ub-ac">
+        <view class="ub-f1 font-16">模考总分</view>
+        <view>
+            <rich-text class="color-grey font-14" nodes="{{info.mock_score_tip}}"></rich-text>
+        </view>
+        <i class="iconfont iconarrow-right font-10 color-grey ml-4"></i>
+    </navigator>
+</view>
+<view class="p-16 color-grey">{{info.tip}}</view>
+<view class="bg-white mb-8 p-lr-16">
+    <navigator hover-class="none" hover-class="none" url="/pages/user/singleScore/singleScore" class="p-tb-16 ub ub-ac bb-1">
+        <view class="ub-f1 font-16">单科成绩</view>
+        <view class="color-grey font-14">{{info.single_score_tip}}</view>
+        <i class="iconfont iconarrow-right font-10 color-grey ml-4"></i>
+    </navigator>
+    <navigator hover-class="none" url="/pages/user/nature/nature" class="p-tb-16 ub ub-ac">
+        <view class="ub-f1 font-16">性格特征</view>
+        <view class="color-grey font-14">{{info.nature_trait_tip}}</view>
+        <i class="iconfont iconarrow-right font-10 color-grey ml-4"></i>
+    </navigator>
+</view>

@@ -1,0 +1,7 @@
+<view id="canvasContainer" style="position:relative;" bindtap="changeByTab">
+    <view style="position: absolute; width: 50%; left: 25%; text-align: center; transform: translateY(-50%); top: 50%;">
+        <view class="font-20 bold font-number">{{datas[index].v}}%</view> 
+        <view class="pt-8 color-grey font-12">{{datas[index].k}}</view>
+    </view>
+    <canvas id="canvas" type="2d" style="width:{{width}}px;height:{{width}}px;"></canvas>
+</view>

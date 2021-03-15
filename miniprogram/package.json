@@ -2,14 +2,17 @@
   "name": "miniprogram",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "dependencies": {},
-  "devDependencies": {},
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
   "author": "",
-  "private": true,
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@miniprogram-component-plus/select-text": "^1.0.1",
+    "@miniprogram-component-plus/sticky": "^1.0.1",
+    "tim-upload-plugin": "^1.0.1",
+    "tim-wx-sdk": "^2.9.3",
+    "ts-md5": "^1.2.7"
+  }
 }

@@ -1,0 +1,13 @@
+<!--miniprogram/pages/init.wxml-->
+
+<view class="full-screen bg-green ub ub-ver ub-center text-center">
+    <view class="ub-f1"></view>
+    <view>
+        <cover-image class="display-ib" src="https://m.ymzy.cn/static/images/logo.png" style="width:112rpx;height:144rpx" bindload="" binderror=""></cover-image>
+    </view>
+    <view class="ub-f1"></view>
+    <view class="color-white font-24 font-bold">圆梦志愿，助您圆梦！</view>
+    <view class="color-white font-14 pb-32 pt-16" >
+        数据均来自省教育厅官网.
+    </view>
+</view>

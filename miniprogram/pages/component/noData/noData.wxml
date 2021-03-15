@@ -1,0 +1,4 @@
+<view class="text-center" style="padding-top:100rpx">
+    <view class="iconfont iconillustration_default1 color-grey" style="font-size:160rpx;"></view>
+    <view class="pt-16 color-grey"><rich-text nodes="{{content}}"></rich-text></view>
+</view>

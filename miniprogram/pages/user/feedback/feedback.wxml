@@ -1,0 +1,15 @@
+<view>
+    <form bindsubmit="feedback">
+        <view class="p-16">反馈内容</view>
+        <view class="p-16 bg-white">
+            <textarea auto-focus="{{true}}" model:value="{{content}}" placeholder="请描述你在使用产品过程中遇到的问题或意见"></textarea>
+        </view>
+        <view class="p-16">联系方式</view>
+        <view class="p-16 bg-white">
+            <input placeholder="请填入QQ、电话或邮箱，便于我们联系你" type="number" model:value="{{contact}}"></input>
+        </view>
+        <view class="p-16">
+            <view bind:tap="feedback" class="btn green">提交反馈</view>
+        </view>
+    </form>
+</view>

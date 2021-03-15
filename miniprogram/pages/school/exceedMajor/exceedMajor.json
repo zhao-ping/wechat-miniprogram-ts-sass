@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText":"专业对比",
+  "usingComponents": {
+    "tab":"../../component/tab/tab",
+    "mp-sticky": "@miniprogram-component-plus/sticky"
+  }
+}

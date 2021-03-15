@@ -1,0 +1,9 @@
+<view class="bg-white">
+    <view class="p-16 text-center font-18">{{info.school_name}}</view>
+    <view class="color-grey font-14 pb-16 p-lr-16">请选择您想要测评的{{globalUserInfo.prov_model==4?'专业组':'专业'}}</view>
+    <view wx:for="{{info.list}}" wx:for-item="school" bindtap="toPossibility" data-school="{{school}}" class="ub ub-ac p-lr-16 p-tb-24 bt-1 {{school.subject_equal?'':'bg-ea'}}">
+        <view class="font-16 bold mr-8">{{school.subject_group_name||school.major_name}}</view>
+        <view class="ub-f1 color-grey font-14">科目要求：<view class="color-green display-ib ml-4">{{school.subject_limit}}</view></view>
+        <view class="iconfont iconarrow-right ml-4 font-8 color-grey"></view>
+    </view>
+</view>

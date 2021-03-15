@@ -1,0 +1,37 @@
+<scroll-view class="full-screen" scroll-x="{{false}}" scroll-y="{{true}}">
+    <mp-sticky>
+        <view class="w-100vw shadow"><tab items="{{['本科榜单','专科榜单']}}" index="{{tab}}" bind:change="changeTab"/></view>
+    </mp-sticky>
+    <view wx:if="{{tab==0}}">
+        <view class="col2 p-8">
+            <view wx:for="{{info.bk_rank_type_list}}" wx:for-item="item"  class="p-8 col">
+                <navigator hover-class="none" url="/pages/school/rankList/rankList?type_id={{item.type_id}}" class="shadow bg-white text-center br-4 p-lr-4 ub ub-ac" style="height: 360rpx;">
+                    <view class="w-100">
+                        <image class="img-48 display-ib" src="{{item.pic}}"></image>
+                        <view class="pt-24 font-18">{{item.name}}</view> 
+                        <view class="pt-8 font-14 color-grey">{{item.tag}}</view>
+                    </view>
+                </navigator>
+            </view>
+        </view>
+        <view wx:if="{{info.bk_article_list}}" class="p-lr-16 bg-white">
+            <navigator hover-class="none" wx:for="{{info.bk_article_list}}" wx:for-item="item" url="/pages/article/webview/webview" class="bb-1 p-tb-24 ub ub-ac">
+                <image class="img-32" src="{{item.photo}}"></image>
+                <view class="ml-16 font-18">{{item.title}}</view>
+            </navigator>
+        </view>
+    </view>
+    <view wx:else>
+        <view class="col2 p-8">
+            <view wx:for="{{info.zk_rank_type_list}}" wx:for-item="item"  class="p-8 col">
+                <navigator hover-class="none" url="/pages/school/rankList/rankList?type_id={{item.type_id}}" class="shadow bg-white text-center br-4 p-lr-4 ub ub-ac" style="height: 360rpx;">
+                    <view class="w-100">
+                        <image class="img-48 display-ib" src="{{item.pic}}"></image>
+                        <view class="pt-24 font-18">{{item.name}}</view> 
+                        <view class="pt-8 font-14 color-grey">{{item.tag}}</view>
+                    </view>
+                </navigator>
+            </view>
+        </view>
+    </view>
+</scroll-view>

@@ -1,0 +1,15 @@
+<view wx:if="{{info}}">
+    <view class="p-16 font-14 color-grey text-center">{{info.tip}}</view>
+    <view class="bg-white">
+        <view wx:for="{{info.list}}" wx:for-item="items" wx:for-index="index" class="p-tb-16 p-lr-8">
+            <view class="font-16 p-lr-8">{{items.title}}</view>
+            <view class="col{{items.value.length>2?'3':'2'}} clearfix p-tb-8">
+                <view wx:for="{{items.value}}" wx:for-index="i" wx:for-item="item" bind:tap="select" data-index="{{index}}" data-i="{{i}}" class="col p-8">
+                    <view class="btn {{item.is_choose?'green b-1-green':'b-1 color-2f'}}">{{item.k}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view style="height:100rpx"></view>
+    <view bind:tap="submit" class="fixed bottom p-16 bg-green text-center font-16 color-white">确定</view>
+</view>

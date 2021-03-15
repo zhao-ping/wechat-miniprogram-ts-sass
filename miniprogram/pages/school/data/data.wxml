@@ -1,0 +1,147 @@
+<import src="../../temp.wxml" />
+<page-loadding show="{{info}}">
+    <scroll-view class="full-screen" scroll-x="false" scroll-y="{{true}}">
+        <!-- 水平滚动分校切换 -->
+        <scroll-view wx:if="{{info.single_major_school_list.length>1}}" scroll-into-view="school-{{info.school_id}}" scroll-with-animation="{{true}}" scroll-left="{{scrollLeft}}" scroll-x="{{true}}" enhanced="{{true}}" show-scrollbar="{{false}}" >
+            <view class="scroll-x">
+                <view wx:for="{{info.single_major_school_list}}" wx:for-item="item" id="school-{{item.school_id}}" bindtap="changeSchool" data-schoolId="{{item.school_id}}" class="item {{info.school_id==item.school_id?'active':''}}">{{item.school_name}}</view>
+            </view>
+        </scroll-view>
+        <!-- 吸顶选项卡 -->
+        <mp-sticky>
+            <view class="w-100vw bb-1" style="height:114rpx;">
+                <tab style="{{stickyTop?'position: fixed;top: 0;right: 0;left: 0;box-shadow:0 0 12px #ddd;':''}}" items="{{['学校录取数据','专业录取数据','招生计划']}}" index="{{tab}}" bindchange="setTab"></tab>
+            </view>
+        </mp-sticky>
+        <!-- 学校录取数据 -->
+        <view style="display:{{tab==0?'':'none'}}" class="bg-white p-tb-16" hover-class="none" hover-stop-propagation="false">
+            <view wx:if="{{schoolAdmit.tables.length==0}}">
+                <no-data content="{{majorAdmit.base_data.un_enable_remark||'没有检索到数据'}}"></no-data>
+            </view>
+            <view wx:else>
+                <view class="p-tb-24 text-center" bind:tap="elToast" data-message="{{schoolAdmit.base_data.data_source}}">
+                    <view class="display-ib p-lr-4 bg-linear-golden color-golden-dark mr-4" style="border-radius: 10rpx 0; line-height: 32rpx;">VIP</view>{{schoolAdmit.base_data.score_desc}} <view class="iconfont iconyiwenjieda ml-5 color-grey"></view>
+                </view>
+                <view wx:if="{{schoolAdmit&&schoolAdmit.search_list.length!=0}}">
+                    <selects  search-list="{{schoolAdmit.search_list}}" binddone="reSearch"/>
+                </view>
+                <view wx:for="{{schoolAdmit.tables}}" wx:for-item="table" class="pb-16">
+                    <view wx:if="{{table.table_name}}" class="pt-16 pb-8 text-center bold">{{table.table_name}}</view>
+                    <view wx:if="{{table.subjects}}" class="pb-8 text-center font-14 color-grey">科目要求：<view class="color-green display-ib">{{table.subjects}}</view></view>
+                    <view><table class="pt-16" table="{{table}}"/></view>
+                    <view wx:if="{{table.explain}}" class="font-14 color-grey p-16">{{table.explain}}</view>
+                </view>    
+            </view>
+        </view>
+        <!-- 专业录取数据 -->
+        <view style="display:{{tab==1?'':'none'}}" class="bg-white p-tb-16">
+            <view wx:if="{{majorAdmit.tables.length==0}}">
+                <no-data content="{{majorAdmit.base_data.un_enable_remark}}"></no-data>
+            </view>
+            <view wx:else>
+                <view class="p-tb-24 text-center" bind:tap="elToast" data-message="{{majorAdmit.base_data.data_source}}">
+                    <view class="display-ib p-lr-4 bg-linear-golden color-golden-dark mr-4" style="border-radius: 10rpx 0; line-height: 32rpx;">VIP</view>{{majorAdmit.base_data.score_desc}} <view class="iconfont iconyiwenjieda ml-5 color-grey"></view>
+                </view>
+                <view wx:if="{{majorAdmit.base_data.data_time_warning}}" class="pb-16 text-center color-orange">{{majorAdmit.base_data.data_time_warning}}</view>
+                <view wx:if="{{majorAdmit&&majorAdmit.search_list.length!=0}}">
+                    <selects search-list="{{majorAdmit.search_list}}" binddone="reSearch"/>
+                </view>
+                <view wx:for="{{majorAdmit.tables}}" wx:for-item="table" class="">
+                    <view wx:if="{{table.avg_data.subjects}}" class="p-16 ml-4 color-grey text-center">
+                        <view class="iconfont iconicon_about color-orange font-14"></view>
+                        科目要求：<view class="color-green display-ib">{{table.avg_data.subjects}}</view>
+                    </view>
+                    <view class="pb-16 ub ub-ac ub-center">
+                        <view wx:if="{{table.avg_data.average_score}}" class="p-lr-8">
+                            <view class="display-ib color-grey mr-4">平均分</view>
+                            <view class="display-ib">{{table.avg_data.average_score}}</view>
+                        </view>
+                        <view wx:if="{{table.avg_data.min_score}}" class="p-lr-8">
+                            <view class="display-ib color-grey mr-4">最低分</view>
+                            <view class="display-ib">{{table.avg_data.min_score}}</view>
+                        </view>
+                        <view wx:if="{{table.avg_data.min_score_rank}}" class="p-lr-8">
+                            <view class="display-ib color-grey mr-4">最低位次</view>
+                            <view class="display-ib">{{table.avg_data.min_score_rank}}</view>
+                        </view>
+                    </view>
+                    <view class="ub ub-ac bg-ea color-grey line-h-40 p-lr-16 font-14">
+                        <view wx:for="{{table.header_list}}" wx:for-item="th" wx:for-index="i" class="mr-8 {{i==0?'ub-f2':'ub-f1 text-center'}} ">{{th}}</view>
+                        <view class="iconfont iconarrow-right font-8" style="color: transparent;"></view>
+                    </view>
+                    <view wx:for="{{table.row_list}}" wx:for-index="rowIndex" wx:for-item="row" bind:tap="getMajorInfo" data-item="{{row}}" class="p-16 bb-1">
+                        <view class="ub ub-ac">
+                            <view class="ub-f1">
+                                <view class="ub ub-ac">
+                                    <view wx:for="{{row.row_values}}" wx:for-item="td" wx:for-index="i" class="mr-8 {{i==0?'ub-f2 bold':'ub-f1 text-center'}} ">{{td}}</view>
+                                </view>
+                                <view wx:if="{{row.major_tag}}" class="pt-8 font-12 color-grey line-h-16">{{row.major_tag}}</view>
+                                <view wx:if="{{row.major_warning}}" class="pt-8 font-12 color-orange line-h-16"> <view class="iconfont iconicon_about mr-4"></view> {{row.major_warning}}</view>
+                            </view> 
+                            <view class="iconfont iconarrow-right font-8 color-grey"></view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <!-- 招生计划 -->
+        <view style="display:{{tab==2?'':'none'}}" class="bg-white p-tb-16" hover-class="none" hover-stop-propagation="false">
+            <view wx:if="{{plan.tables.length==0}}">
+                <no-data content="{{majorAdmit.base_data.un_enable_remark}}"></no-data>
+            </view>
+            <view wx:else>
+                <view class="p-tb-24 text-center" bind:tap="elToast" data-message="{{plan.base_data.data_source}}">
+                    {{plan.base_data.score_desc}} <view class="iconfont iconyiwenjieda ml-5 color-grey"></view>
+                </view>
+                <view wx:if="{{plan&&plan.search_list.length!=0}}">
+                    <selects search-list="{{plan.search_list}}" binddone="reSearch"/>
+                </view>
+                <view wx:for="{{plan.tables}}" wx:for-item="table" class="">
+                    <view wx:if="{{table.subjects}}" class="p-16 ml-4 color-grey">科目要求：<view class="color-green display-ib">{{table.subjects}}</view></view>
+                    <view class="ub ub-ac bg-ea color-grey line-h-40 p-lr-16 font-14">
+                        <view wx:for="{{table.header_list}}" wx:for-item="th" wx:for-index="i" class="mr-8 {{i==0?'ub-f2':'ub-f1 text-center'}} ">{{th}}</view>
+                    </view>
+                    <view wx:for="{{table.row_list}}" wx:for-index="rowIndex" wx:for-item="row" class="p-16 bb-1">
+                        <view class="ub ub-ac">
+                            <view class="ub-f1">
+                                <view class="ub ub-ac">
+                                    <view wx:for="{{row.row_values}}" wx:for-item="td" wx:for-index="i" class="mr-8 {{i==0?'ub-f2 bold':'ub-f1 text-center'}} ">{{td}}</view>
+                                </view>
+                                <view wx:if="{{row.major_tag}}" class="pt-8 font-12 color-grey line-h-16">{{row.major_tag}}</view>
+                                <view wx:if="{{row.major_warning}}" class="pt-8 font-12 color-orange line-h-16"> <view class="iconfont iconicon_about mr-4"></view> {{row.major_warning}}</view>
+                            </view> 
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <!-- 备选与概率评测 -->
+        <view class="p-16">
+            <!-- 浙江版本 不分批次 无备选学校-->
+            <view wx:if="{{info.page_model==3}}">
+                <navigator hover-class="none" url="/pages/school/majorGroup/majorGroup?school_id={{info.school_id}}" class="btn green">录取概率评测</navigator>
+            </view>
+            <!-- 上海版本 -->
+            <view wx:if="{{info.page_model==4}}">
+                <navigator hover-class="none" url="/pages/school/majorGroup/majorGroup?school_id={{info.school_id}}" class="btn green">录取概率评测</navigator>
+                <view wx:if="{{tab==2&&plan&&plan.tables.length>0&&plan.tables[0].subject_equal}}" class="btn {{plan.tables[0].is_alternative?'green':'bg-white'}} mt-16" bind:tap="beixuanSchool">
+                    <view wx:if="{{plan.tables[0].is_alternative}}"><view class="iconfont iconCheckbox_Selected mr-4"></view> 已加入备选</view>
+                    <view wx:else><view class="iconfont iconjiarubeixuan mr-4"></view> 加入备选</view>
+                </view>
+            </view>
+            <!-- 常规版本 -->
+            <view wx:else>
+                <navigator hover-class="none" url="/pages/school/possiblity/possibility?school_id={{info.school_id}}" class="btn green">录取概率评测</navigator>
+                <view wx:if="{{(tab==0&&schoolAdmit&&schoolAdmit.tables.length>0&&schoolAdmit.tables[0].subject_equal)||(tab==1&&majorAdmit&&majorAdmit.tables.length>0&&majorAdmit.tables[0].subject_equal)||(tab==2&&plan&&plan.tables.length>0&&plan.tables[0].subject_equal)}}" bind:tap="beixuanSchool">
+                    <view wx:if="{{tab==0?schoolAdmit.tables[0].is_alternative:(tab==1?majorAdmit.tables[0].is_alternative:plan.tables[0].is_alternative)}}" class="btn green mt-16">
+                        <view class="iconfont iconCheckbox_Selected mr-4"></view> 已加入备选
+                    </view>
+                    <view wx:else class="btn bg-white mt-16">
+                        <view class="iconfont iconjiarubeixuan mr-4"></view> 加入备选
+                    </view>
+                </view>
+            </view>
+        </view>
+        <template is="popupMajor" data="{{popupMajor}}"></template>
+    </scroll-view>
+</page-loadding>

@@ -1,0 +1,4 @@
+<view class="popupContainerBg {{isShow?'show':''}}" bindtap="toHide"></view>
+<view class="popupContainer {{isShow?'show':''}}">
+    <slot></slot>
+</view>

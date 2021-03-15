@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "tabs":"../../component/tab/tab",
+    "mp-sticky": "@miniprogram-component-plus/sticky"
+  }
+}

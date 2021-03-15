@@ -1,0 +1,5 @@
+.schoolHistory:before{content: ""; position:absolute;height:100%;width:6rpx;background-color: rgba(233, 195, 139, 0.2);display: block;left: 1rpx;}
+.schoolHistory .step{position: relative;}
+.schoolHistory .step:after{content:""; background-color: #E9C38B;width: 16rpx;height: 16rpx;border-radius: 50%;border: 1rpx solid white; display: block;left: -4rpx;top: 14rpx;position: absolute;}
+.img-full-cover{width: 100%;height: 100%;object-fit: cover;}
+.over-hidden{overflow: hidden;}

@@ -1,0 +1,15 @@
+<view class="bg-white">
+    <view class="p-16 bb-1 ub ub-ac">
+        <view class="text-right">手机号:</view>
+        <view class="ub-f1 m-lr-16">{{userInfo.mobile}}</view>
+    </view>
+    <view class="p-16 ub ub-ac">
+        <view class="text-right">验证码:</view>
+        <view class="ub-f1 m-lr-16"><input type="number" model:value="{{code}}" placeholder="请输入验证码" /></view>
+        <view wx:if="{{lastTime==0}}" bind:tap="getCode" class="color-green text-center" style="width:160rpx;">获取验证码</view>
+        <view wx:else class="color-green text-center" style="width:160rpx;">{{lastTime}}s</view>
+    </view>
+</view>
+<view class="p-16">
+    <view class="btn green" bind:tap="logoff">确定注销账户</view>
+</view>

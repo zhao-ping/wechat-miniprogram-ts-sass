@@ -1,0 +1,7 @@
+<view wx:for="{{info.tables}}" wx:for-item="table" class="pt-32">
+    <view class="text-center font-16 pb-16 bold">{{table.table_name}}</view>
+    <view class="bg-white">
+        <table table="{{table}}"></table>
+    </view>
+</view>
+<view class="text-center p-tb-32 color-grey font-14">{{info.data_source}}</view>

@@ -1,0 +1,3 @@
+<view id="chartContainer">
+    <canvas style="width:{{width}}px;height:{{height}}px;" type="2d" id="lineCanvas"></canvas>
+</view>

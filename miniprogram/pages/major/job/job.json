@@ -1,0 +1,9 @@
+{
+  "backgroundColor":"#fff",
+  "usingComponents": {
+    "page-loadding":"../../component/pageLoadding/pageLoadding",
+    "tab":"../../component/tab/tab",
+    "cicle-pie":"../../component/chartCirclePie/chartCirclePie",
+    "no-data":"../../component/noData/noData"
+  }
+}

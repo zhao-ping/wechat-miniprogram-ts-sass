@@ -1,0 +1,66 @@
+<import src="../../temp.wxml" />
+<scroll-view class="full-screen" scroll-x="{{false}}" scroll-y="{{true}}" lower-threshold="50" scroll-top="{{scrollTop}}"  bindscrolltolower="getList" >
+    <mp-sticky>
+        <view class="w-100vw shadow">
+            <tabs items="{{['已填专业','全部专业']}}" index="{{tabIndex}}" bind:change="changeTab"></tabs>
+        </view>
+    </mp-sticky>
+    <view wx:if="{{tabIndex==0}}">
+        <view wx:for="{{checkedMajors}}" class="bg-white mb-12">
+            <view class="p-16" bind:tap="getMajorInfo" data-item="{{item}}">
+                <view class="line-h-24 bg-green display-ib p-lr-8 color-white br-4">{{item.sort_index_str}}</view>
+                <view class="pt-16 ub ub-ac">
+                    <view class="ub-f1">
+                        <view class="font-18 bold">{{item.major_name}}</view>
+                        <view wx:for="{{item.score_info}}" wx:for-item="score" class="pt-8 color-grey font-14"><rich-text class="" nodes="{{score}}"></rich-text></view>
+                    </view>
+                    <view class="iconfont iconnav_right font-10"></view>
+                </view>
+            </view>
+            <view class="bt-1 p-tb-8 ub ub-ac text-center color-grey">
+                <view bind:tap="{{index==0?'elToast':'move'}}" data-index="{{index}}" data-sort="{{1}}" data-message="已经是第一位，无法上移！" class="ub-f1">
+                    <view class="iconfont iconicon_Moveup font-18 {{index==0?'color-grey':'color-green'}}"></view>
+                    <view>上移</view>
+                </view>
+                <view bind:tap="{{(index==checkedMajors.length-1)?'elToast':'move'}}" data-index="{{index}}" data-sort="{{2}}" data-message="已经是最末位，无法下移!"  class="ub-f1">
+                    <view class="iconfont iconicon_Movedown font-18 {{(index==checkedMajors.length-1)?'color-grey':'color-green'}}"></view>
+                    <view>下移</view>
+                </view>
+                <view bind:tap="addOrDelMajor" data-item="{{item}}" data-index="{{index}}" class="ub-f1">
+                    <view class="iconfont iconlaji font-18 color-green"></view>
+                    <view>删除</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view wx:else>
+         <view wx:for="{{list}}" class="bg-white mb-12">
+            <view class="p-16" bind:tap="getMajorInfo" data-item="{{item}}">
+                <view class="pt-16 ub ub-ac">
+                    <view class="ub-f1">
+                        <view class="font-18 bold">{{item.major_name}}</view>
+                        <view wx:for="{{item.score_info}}" wx:for-item="score" class="pt-8 color-grey font-14"><rich-text class="" nodes="{{score}}"></rich-text></view>
+                    </view>
+                    <view class="iconfont iconnav_right font-10"></view>
+                </view>
+                <view wx:if="{{item.major_tag}}" class="color-grey font-14 pt-8">{{item.major_tag}}</view>
+            </view>
+            <view wx:if="{{item.is_have_plan_desc}}" class="bt-1 line-h-48 color-orange text-center">{{item.is_have_plan_desc}}</view>
+            <view wx:else class="ub ub-ac h-48 bt-1">
+                <view bind:tap="addOrDelMajor" data-item="{{item}}" data-index="{{index}}" class="ub-f1 text-center br-1 {{item.is_application_checked?'color-green':''}}">
+                    <view wx:if="{{item.is_application_checked}}">
+                        <view class="iconfont iconCheckbox_Selected"></view>
+                        已填报
+                    </view>
+                    <view wx:else>
+                        <view class="iconfont iconbutton_Addto"></view>
+                        选择填报
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <template is="popupMajor" data="{{popupMajor,isZhiyuanPage}}"></template>
+    <view style="height:104rpx;"></view>
+    <view bind:tap="toApplication" class="fixed bottom bg-green p-12 text-center font-16 color-white">返回志愿表</view>
+</scroll-view>

@@ -1,0 +1,23 @@
+.bb-dashed.bg-green-light{position: relative;overflow: hidden;font-weight: bold;}
+.bb-dashed.bg-green-light::before{
+    content: "";
+    position: absolute;
+    left: 60rpx;
+    top: -90rpx;
+    width: 180rpx;
+    height: 150rpx;
+    border-radius: 30%;
+    transform: rotate(15deg);
+    background-color:rgba(80,204,148,0.1);
+}
+.bb-dashed.bg-green-light::after{
+    content: "";
+    position: absolute;
+    right: -60rpx;
+    top: 20rpx;
+    width: 230rpx;
+    height: 180rpx;
+    border-radius: 50%;
+    transform: rotate(30deg);
+    background-color:rgba(80,204,148,0.08);
+}

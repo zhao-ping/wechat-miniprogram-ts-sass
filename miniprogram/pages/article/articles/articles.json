@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText":"高考头条",
+  "usingComponents": {
+    "tab":"../../component/tab/tab",
+    "page-loadding":"../../component/pageLoadding/pageLoadding",
+    "mp-sticky": "@miniprogram-component-plus/sticky"
+  }
+}

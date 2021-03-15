@@ -1,8 +1,0 @@
-<!--index.wxml-->
-<view>
-  <view class="ub ub-ver ub-ac ub-around" style="height:500rpx;">
-    <view>1</view>
-    <view>1</view>
-    <view>1</view>
-  </view>
-</view>

@@ -1,0 +1,12 @@
+.loaddingContent{display: flex;justify-content: space-around; width: 80rpx;}
+.loaddingContent .item{width: 30rpx;height:30rpx;background-color: #50CC94;border-radius: 50%;display: inline-block;}
+.loaddingContent .item.item1{animation: ani 0.5s infinite alternate ease-in-out;}
+.loaddingContent .item.item2{animation: ani 0.5s -0.5s infinite alternate ease-in-out;}
+@keyframes ani{
+    from{
+        transform: scale(0.1);
+    }
+    to{
+        transform: scale(1);
+    }
+}

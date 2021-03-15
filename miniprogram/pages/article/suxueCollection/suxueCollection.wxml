@@ -1,0 +1,7 @@
+<import src="../../article/temp.wxml"></import>
+<scroll-view class="full-screen" scroll-x="{{false}}" scroll-y="{{true}}" upper-threshold="50" lower-threshold="50" bindscrolltolower="getList" >
+    <view class="bg-f7 p-16">
+        <rich-text class="" nodes="{{list.tip}}"></rich-text>
+    </view>
+    <template is="suxueArticleListPage" data="{{list:list.list,listPage}}"></template>
+</scroll-view>

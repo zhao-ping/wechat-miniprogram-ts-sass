@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "school-filter":"../../component/schoolFilter/schoolFilter",
+    "tab":"../../component/tab/tab",
+    "mp-sticky": "@miniprogram-component-plus/sticky"
+  }
+}

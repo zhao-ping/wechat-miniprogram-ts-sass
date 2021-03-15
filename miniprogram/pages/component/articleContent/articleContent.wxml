@@ -1,0 +1,16 @@
+<view wx:for="{{nodes}}"class="perfectArticle" >
+    <view wx:if="{{item.type=='image'}}" bind:tap="previewImg" data-item="{{item}}">
+        <rich-text  nodes="{{item.node}}"></rich-text>
+    </view>
+    <view wx:elif="{{item.type=='pdf'}}" bind:tap="previewPdf" data-item="{{item}}">
+        <rich-text  nodes="{{item.node}}"></rich-text>
+    </view>
+    <view wx:elif="{{item.type=='link'}}">
+        <navigator url="{{item.link}}">
+            <rich-text nodes="{{item.node}}"></rich-text>
+        </navigator>
+    </view>
+    <view wx:else>
+        <rich-text nodes="{{item.node}}"></rich-text>  
+    </view>
+</view>

@@ -1,0 +1,121 @@
+<!-- 个人中心 -->
+<scroll-view class="" scroll-x="false" scroll-y="true"scroll-top="0" scroll-left="0" scroll-into-view="" scroll-with-animation="false" enable-back-to-top="false">
+    <view class="bg-white">
+        <!-- 用户信息 -->
+        <view class="p-lr-16 pb-16 ub ub-ac">
+            <cover-image  class="avatar-72" src="{{info.avatar||'../../../images/logo.png'}}" bindload="" binderror=""></cover-image>
+            <view class="ub-f1 ml-16">
+                <view class="font-18">
+                    <view class="display-ib">
+                        {{info.nickname}}
+                    </view>
+                    <view class="display-ib br-4 bg-linear-black ml-4 p-lr-4" wx:if="{{info.is_vip}}">
+                        <view class="color-golden font-14">尊享<view class="iconfont iconvip display-ib display-i color-linear-golden"></view></view>
+                    </view>
+                </view>
+                <navigator hover-class="none" url="/pages/user/setScore/setScore" class="font-14 color-2f mt-8">
+                    {{info.base_info}}
+                    <view class="iconfont iconicon_modify"></view>
+                </navigator>
+            </view>
+        </view>
+        <!-- VIP信息 -->
+        <navigator hover-class="none" url="/pages/vip/info/info" class="p-lr-16">
+            <view class="br-t-16 p-16 bg-linear-black ub ub-ac">
+                <view class="iconfont iconvip display-ib display-i color-linear-golden font-32"></view>
+                <view class="ub-f1 p-lr-16">
+                    <view class="color-white font-14">
+                        {{info.vip_desc}}
+                    </view>
+                    <view class="mt-4 color-white-5 font-12">{{info.group_exp_time_str}}</view>
+                </view>
+                <view class="b-1-golden color-golden display-ib line-h-24 br-12 font-14 p-lr-8">VIP介绍</view>
+            </view>
+        </navigator>
+    </view>
+    <!-- 按钮菜单 -->
+    <view class="p-lr-16">
+        <view class="p-tb-16 ub br-b-16 bg-white color-99 text-center">
+            <navigator hover-class="none" url="/pages/user/scoreNature/scoreNature" class="ub-f1">
+                <view class="iconfont iconchengji color-green font-28"></view>
+                <view class="pt-4 font-14">成绩与性格</view>
+            </navigator>
+            <navigator hover-class="none"  url="/pages/zhiyuan/beixuan/beixuan" class="ub-f1">
+                <view class="iconfont iconicon_Myalternative color-green font-28"></view>
+                <view class="pt-4 font-14">备选</view>
+            </navigator>
+            <navigator hover-class="none" url="/pages/zhiyuan/zhiyuans/zhiyuans" class="ub-f1">
+                <view class="iconfont iconicon_Myvolunteerlist color-green font-28"></view>
+                <view class="pt-4 font-14">志愿表</view>
+            </navigator>
+            <navigator hover-class="none" url="/pages/user/concerned/concerned" class="ub-f1">
+                <view class="iconfont iconicon_myfocus color-green font-28"></view>
+                <view class="pt-4 font-14">关注</view>
+            </navigator>
+        </view>
+    </view>
+
+    <view class="bg-white p-lr-16 mt-8">
+        <navigator hover-class="none" wx:if="{{info.buy_goods_desc}}" url="/pages/vip/pay/pay" class="ub ub-ac">
+            <cover-image style="width:44rpx" src="https://m.ymzy.cn/static/images/vip/vip-zhuanshi.png" bindload="" binderror=""></cover-image>
+            <view class="ub-f1 ub ub-ac p-tb-16 bb-1">
+                <view class="ub-f1 p-lr-16 font-16">{{info.buy_goods_desc}}</view>
+                <view class="br-12 line-h-24 bg-orange color-white font-12 p-lr-8">马上买</view>
+                <view class="iconfont iconarrow-right font-10 color-grey"></view>
+            </view>
+        </navigator>
+        <navigator hover-class="none" url="/pages/user/messageCenter/messageCenter" class="ub ub-ac">
+            <view class="iconfont iconicon_callme color-grey font-22"></view>
+            <view class="ub-f1 ub ub-ac p-tb-16">
+                <view class="ub-f1 p-lr-16 font-16">消息中心</view>
+                <view wx:if="{{unreadCount}}" class="line-h-18 p-lr-4 br-12 bg-red color-white">{{unreadCount}}</view>
+                <view class="iconfont iconarrow-right font-10 color-grey"></view>
+            </view>
+        </navigator>
+    </view>
+
+    <view class="bg-white p-lr-16 mt-8">
+        <navigator hover-class="none" url="/pages/article/suxueCollection/suxueCollection" class="ub ub-ac">
+            <view class="iconfont iconshoucang1 color-grey font-22"></view>
+            <view class="ub-f1 ub ub-ac p-tb-16 bb-1">
+                <view class="ub-f1 p-lr-16 font-16">收藏的文章</view>
+                <view class="iconfont iconarrow-right font-10 color-grey"></view>
+            </view>
+        </navigator>
+        <navigator hover-class="none" url="/pages/user/question/questions/questions" class="ub ub-ac">
+            <view class="iconfont iconyiwenjieda color-grey font-22"></view>
+            <view class="ub-f1 ub ub-ac p-tb-16 bb-1">
+                <view class="ub-f1 p-lr-16 font-16">常见问题</view>
+                <view class="iconfont iconarrow-right font-10 color-grey"></view>
+            </view>
+        </navigator>
+        <navigator hover-class="none" url="/pages/user/feedback/feedback" class="ub ub-ac">
+            <view class="iconfont iconicon_Feedback color-grey font-22"></view>
+            <view class="ub-f1 ub ub-ac p-tb-16 bb-1">
+                <view class="ub-f1 p-lr-16 font-16">意见反馈</view>
+                <view class="iconfont iconarrow-right font-10 color-grey"></view>
+            </view>
+        </navigator>
+        <navigator hover-class="none" url="/pages/user/setting/setting" class="ub ub-ac">
+            <view class="iconfont iconicon_setting color-grey font-22"></view>
+            <view class="ub-f1 ub ub-ac p-tb-16 bb-1">
+                <view class="ub-f1 p-lr-16 font-16">设置</view>
+                <view class="iconfont iconarrow-right font-10 color-grey"></view>
+            </view>
+        </navigator>
+        <!-- <navigator hover-class="none" class="ub ub-ac">
+            <view class="iconfont iconicon_share color-grey font-22"></view>
+            <view class="ub-f1 ub ub-ac p-tb-16 bb-1">
+                <view class="ub-f1 p-lr-16 font-16">分享给好友</view>
+                <view class="iconfont iconarrow-right font-10 color-grey"></view>
+            </view>
+        </navigator> -->
+        <navigator hover-class="none" url="/pages/user/aboutUs/aboutUs" class="ub ub-ac">
+            <view class="iconfont iconicon_about color-grey font-22"></view>
+            <view class="ub-f1 ub ub-ac p-tb-16">
+                <view class="ub-f1 p-lr-16 font-16">关于我们</view>
+                <view class="iconfont iconarrow-right font-10 color-grey"></view>
+            </view>
+        </navigator>
+    </view>
+</scroll-view>

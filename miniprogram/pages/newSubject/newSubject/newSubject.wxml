@@ -1,0 +1,30 @@
+<view wx:if="{{info}}">
+    <view class="br-b-round overflow-hidden" style="background-color:#5773DB;">
+        <view class="text-center font-32 color-white p-tb-24">新高考 · 选科</view>
+        <view style="height:80rpx;"></view>
+    </view>
+    <view class="relative p-lr-16" style="margin-top:-140rpx;">
+        <view class="p-lr-16 p-tb-32 bg-white br-8 mb-16 shadow font-18">
+            {{info.user_info}}
+        </view>
+        <navigator hover-class="none" url="/pages/newSubject/possibleMajor/possibleMajor" class="p-16 bg-white br-8 mb-16 shadow ub ub-ac">
+            <image class="img-48" src="https://m.ymzy.cn/static/images/newSubject/indexIcon1.png"></image>
+            <view class="ub-f1 p-lr-16 bold font-16">我选科能报考的</view>
+            <view class="iconfont iconarrow-right color-grey font-12"></view>
+        </navigator>
+        <navigator hover-class="none" url="/pages/newSubject/searchSchool/searchSchool" class="p-16 bg-white br-8 mb-16 shadow ub ub-ac">
+            <image class="img-48" src="https://m.ymzy.cn/static/images/newSubject/indexIcon2.png"></image>
+            <view class="ub-f1 p-lr-16 bold font-16">按学校查选科要求</view>
+            <view class="iconfont iconarrow-right color-grey font-12"></view>
+        </navigator>
+        <navigator hover-class="none" url="/pages/newSubject/searchMajor/searchMajor" class="p-16 bg-white br-8 mb-16 shadow ub ub-ac">
+            <image class="img-48" src="https://m.ymzy.cn/static/images/newSubject/indexIcon3.png"></image>
+            <view class="ub-f1 p-lr-16 bold font-16">按专业查选科要求</view>
+            <view class="iconfont iconarrow-right color-grey font-12"></view>
+        </navigator>
+    </view>
+    <view class="p-16 color-grey font-14 line-h-24">
+        <view bind:tap="elToast" data-message="{{info.data_source}}">{{info.data_title}} <view class="iconfont color-green iconicon_commonproblem"></view></view>
+        <view class="pt-8">{{info.data_desc}}</view>
+    </view>
+</view>

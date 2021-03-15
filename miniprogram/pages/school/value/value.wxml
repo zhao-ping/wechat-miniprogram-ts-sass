@@ -1,0 +1,214 @@
+<page-loadding show="{{info}}">
+    <view class="bg-green br-b-round overflow-hidden">
+        <view class="p-16 ub ub-ac">
+            <view class="bg-white br-4 p-4 mr-16">
+                <image class="img-48" src="{{info.logo}}"></image>
+            </view>
+            <view class="ub-f1 font-18 bold color-white">{{info.school_name}}</view>
+        </view>
+        <view style="height:60rpx"></view>
+    </view>
+    <view class="relative" style="margin-top:-120rpx;z-index:1;">
+        <view class="bg-white br-8 m-16 p-16">
+            <!-- fame_list -->
+            <view wx:if="{{info.fame_list.length>0}}" style="margin:0 -8rpx">
+                <view wx:for="{{info.fame_list}}" wx:for-item="fame" class="tag-f7-24 m-4">{{fame}}</view>
+            </view>
+            <!-- 求学价值标签 -->
+            <view wx:if="{{info.kyjx_list.length>0}}" class="pt-8 col3">
+                <view wx:for="{{info.kyjx_list}}" wx:for-item="item" class="text-center col p-8">
+                    <view class="display-ib">
+                        <view class="circle50 b-1-golden">
+                            <view class="font-number color-golden font-24">{{item.v}}</view>
+                        </view>
+                    </view>
+                    <view class="font-14 mt-8 line-h-28 overflow-hidden text-ellipsis" style="height:56rpx;">{{item.k}}</view>
+                </view>
+            </view>
+        </view>
+        <view class="bg-white">
+            <!-- 排行榜 -->
+            <view wx:if="{{info.rank_data_list.length>0}}" class="pb-32">
+                <view class="p-tb-16"><view class="title-bl-green">排行榜</view></view>
+                <view class="p-16 color-grey">{{info.describe_config.rank_title.title}}</view>
+                <view wx:for="{{info.rank_data_list}}" wx:for-index="index" wx:for-item="item" class="p-16">
+                    <view>{{item.type_name}}</view> 
+                    <view class="ub ub-ac p-tb-16">
+                        <view class="text-center ub-f1">
+                            <view class="ub ub-ac ub-start">
+                                <view class="iconfont iconicon_Ranking font-24 schoolValueColor{{index}} mr-24"></view> 
+                                <view class="text-left">
+                                    <view class="font-28">{{item.rank}}</view> 
+                                    <view class="color-grey">(内地)</view>
+                                    </view>
+                                </view>
+                            </view> 
+                            <view class="text-center ub-f1">
+                                <view class="ub ub-ac ub-center">
+                                    <view class="text-left">
+                                        <view class="font-28">{{item.global_rank}}</view>
+                                        <view class="color-grey">(国际)</view>
+                                    </view>
+                                </view>
+                            </view>
+                        </view> 
+                    <view class="p-8 br-3 bg-f7 color-grey">{{item.tag}}</view>
+                </view>
+            </view>
+            <!-- 特色专业 -->
+            <view wx:if="{{info.major_special_country_list.length>0}}" class="pb-32">
+                <view class="p-tb-16"><view class="title-bl-green">国家级特色专业</view></view>
+                <view class="p-lr-16 line-h-32">
+                    {{info.major_special_country_list}}
+                </view>
+                <view class="p-8 br-3 bg-f7 color-grey m-lr-16 mt-16 font-14">{{info.describe_config.major_country_desc.title}}</view>
+            </view>
+            <!-- 一级学科评估 -->
+            <view wx:if="{{info.subject_evaluation_list.length>0}}" class="pb-32">
+                <view class="p-tb-16"><view class="title-bl-green">一级学科评估</view></view>
+                <view class="p-lr-16 line-h-24">
+                    <view class="table">
+                        <view class="bg-f7">
+                            <view class="ub ub-stretch">
+                                <view class="td p-8 bold" style="width: 160rpx;">评估结果</view>
+                                <view class="td p-8 bold text-left">具体学科</view>
+                            </view>
+                        </view> 
+                        <view wx:for="{{info.subject_evaluation_list}}" wx:for-item="item" class="ub ub-stretch">
+                            <view class="td text-center p-8" style="width: 160rpx;">{{item.title}}</view>
+                            <view class="td ub-f1 p-8">{{item.subjects}}</view>
+                        </view>
+                    </view>
+                </view>
+                <view class="p-8 br-3 bg-f7 color-grey m-lr-16 mt-16 font-14">{{info.describe_config.subject_evaluation.title}}</view>
+            </view>
+            <!-- 双一流建设学科 -->
+            <view wx:if="{{info.subject_syl_building_list.length>0}}" class="pb-32">
+                <view class="p-tb-16"><view class="title-bl-green">“双一流”建设学科</view></view>
+                <view class="p-lr-16 line-h-32">
+                    {{info.subject_syl_building_list}}
+                </view>
+                <view class="p-8 br-3 bg-f7 color-grey m-lr-16 mt-16 font-14">{{info.describe_config.subject_syl_building.title}}</view>
+            </view>
+            <!-- ESI前1%、1‰ -->
+            <view wx:if="{{info.subject_esi_list.length>0}}" class="pb-32">
+                <view class="p-tb-16"><view class="title-bl-green">ESI前1%、1‰ </view></view>
+                <view class="p-16 color-grey">ESI基本科学指标数据库</view>
+                <image src="https://m.ymzy.cn/static/images/schoolValueTop.png" style="height:168rpx;width:442rpx;display:block;margin:0 auto;"></image>
+                <view class="p-lr-16">
+                    <view class="p-tb-16">进入ESI排名全球前1%的学科领域 <view class="bold color-green display-ib">{{info.subject_esi_list[0].count}}</view> 个</view>
+                    <view class="line-h-32">{{info.subject_esi_list[0].subject_list}}</view>
+                    <view wx:if="info.subject_esi_list.length>1" class="pt-16 line-h-32">
+                        其中：{{info.subject_esi_list[1].subject_list}} 学科领域进入全球 <view class="bold color-green display-ib">前1‰</view>            
+                    </view>
+                </view>
+                <view class="p-8 br-3 bg-f7 color-grey m-lr-16 mt-16 font-14">{{info.describe_config.subject_esi.title}}</view>
+            </view>
+            <!-- 国家重点学科 -->
+            <view wx:if="{{info.subject_country_major.length>0}}" class="pb-32">
+                <view class="p-tb-16"><view class="title-bl-green">国家重点学科</view></view>
+                <view wx:for="{{info.subject_country_major}}" wx:for-item="item" class="p-lr-16 p-tb-8">
+                    <view class="pb-8">{{item.title}}：<view class="color-green bold font-24 display-ib">{{item.count}}</view> 个</view>
+                    <view class="line-h-32 color-grey">{{item.subject_list}}</view>
+                </view>
+                <view class="p-8 br-3 bg-f7 color-grey m-lr-16 font-14">{{info.describe_config.subject_country_major.title}}</view>
+            </view>
+            <!-- gdi1000 排行榜-->
+            <view wx:if="{{info.gdi_rank_data}}">
+                <view class="pb-32">
+                    <view class="p-tb-16"><view class="title-bl-green">{{info.gdi_rank_data.title}}</view></view>
+                    <view class="ub ub-ac p-tb-16">
+                        <view class="text-center ub-f1">
+                            <view class="ub ub-ac ub-center">
+                                <view class="iconfont iconicon_Ranking font-24 color-green mr-24"></view> 
+                                <view class="text-left">
+                                    <view class="color-99">综合排名</view> 
+                                    <view class="text-28">{{info.gdi_rank_data.rank}}</view>
+                                </view>
+                            </view>
+                        </view>
+                        <view class="text-center ub-f1">
+                            <view class="ub ub-ac ub-center">
+                                <view class="iconfont iconAdmissiondata font-24 color-orange mr-24"></view> 
+                                <view class="text-left">
+                                    <view class="color-99">综合指数</view> 
+                                    <view class="text-28">{{info.gdi_rank_data.level}}</view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="p-lr-16 p-tb-8">
+                        <view wx:for="{{info.gdi_rank_data.rank_data}}" wx:for-item="item" class="p-tb-8">
+                            {{item.name}}：{{item.level}}
+                        </view>
+                    </view>
+                    <view class="p-8 br-3 bg-f7 color-grey m-lr-16 font-14">{{info.describe_config.gdi1000.title}}</view>
+                </view>
+            </view>
+            <!-- 双高计划 -->
+            <view wx:if="{{info.plan_double_list.length>0}}">
+                <view wx:for="{{info.plan_double_list}}" wx:for-item="item" class="pb-32">
+                    <view class="p-tb-16"><view class="title-bl-green">{{item.title}}</view></view>
+                    <view class="p-lr-16 line-h-32 pb-8"><view class="color-grey display-ib">专业群：</view> {{item.subject_list}}</view>
+                    <view class="p-8 br-3 bg-f7 color-grey m-lr-16 font-14">{{info.describe_config.plan_double_desc.title}}</view>
+                </view>
+            </view>
+            <!-- 骨干专业 -->
+            <view wx:if="{{info.ggzy_list.length>0}}" class="pb-32">
+                <view class="p-tb-16"><view class="title-bl-green">骨干专业</view></view>
+                <view class="p-lr-16 line-h-32 pb-8">{{info.ggzy_list}}</view>
+                <view class="p-8 br-3 bg-f7 color-grey m-lr-16 font-14">{{info.describe_config.main_subject_desc.title}}</view>
+            </view>
+            <!-- 国家示范院校重点建设专业 -->
+            <view wx:if="{{info.gjsfzdjszy_list.length>0}}" class="pb-32">
+                <view class="p-tb-16"><view class="title-bl-green">国家示范院校重点建设专业</view></view>
+                <view class="p-lr-16 line-h-32 pb-8">{{info.gjsfzdjszy_list}}</view>
+                <view class="p-8 br-3 bg-f7 color-grey m-lr-16 font-14">{{info.describe_config.country_school_main_build_subject_desc.title}}</view>
+            </view>
+            <!-- 创新实践能力 -->
+            <view wx:if="{{info.subject_competition}}" class="pb-32">
+                <view class="p-tb-16"><view class="title-bl-green">创新实践能力</view></view>
+                <view class="p-16 olor-grey">{{info.describe_config.subject_competition_title.title}}</view>
+                <view class="ub ub-ac ub-around p-tb-24 p-lr-16 m-tb-8">
+                    <view class="text-center">
+                        <view class="display-ib">
+                            <view class="circle50 b-1-golden">
+                                <view class="font-number color-golden font-24">{{info.subject_competition.award_count}}</view>
+                            </view>
+                        </view>
+                        <view class="font-14 mt-8 line-h-28 overflow-hidden text-ellipsis" style="height:56rpx;">奖项总数</view>
+                    </view>
+                    <view class="text-center">
+                        <view class="display-ib">
+                            <view class="circle50 b-1-golden">
+                                <view class="font-number color-golden font-24">{{info.subject_competition.rank}}</view>
+                            </view>
+                        </view>
+                        <view class="font-14 mt-8 line-h-28 overflow-hidden text-ellipsis" style="height:56rpx;">排名</view>
+                    </view>
+                </view>
+                <view class="p-8 br-3 bg-f7 color-grey m-lr-16 font-14">{{info.describe_config.subject_competition_desc.title}}</view>
+            </view>
+            <!-- 师资力量 -->
+            <view wx:if="{{info.laboratory_list.length>0}}" class="pb-32">
+                <view class="p-tb-16"><view class="title-bl-green">师资力量</view></view>
+                <view class="p-lr-16">
+                    <rich-text class="line-h-32" nodes="{{info.faculty}}"></rich-text>
+                </view>
+            </view>
+            <!-- 重点实验室 -->
+            <view wx:if="{{info.laboratory_list.length>0}}" class="pb-32">
+                <view class="p-tb-16"><view class="title-bl-green">{{info.school_level_name=="专科"?'生产实训':'重点实验室'}}</view></view>
+                <view class="p-16 color-grey">{{info.school_level_name=="专科"?info.describe_config.produce_base_title.title:info.describe_config.laboratory_title.title}}</view>
+                <view class="p-lr-16">
+                    <view wx:for="{{info.laboratory_list}}" wx:for-item="item" class="ub ub-ac p-tb-8">
+                        <view class="ub ub-ac square-40-40 mr-8 line-h-38">
+                            <view class="font-26 color-green font-number">{{item.count}}</view>
+                        </view> 
+                        <view class="ub-f1 p-8 line-h-24 bg-f7 br-3">{{item.name}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</page-loadding>

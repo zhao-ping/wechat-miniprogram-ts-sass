@@ -1,0 +1,6 @@
+<view style="display:inline-block;">
+    <view class="loaddingContent">
+        <view class="item item1"></view>
+        <view class="item item2"></view>
+    </view>
+</view>

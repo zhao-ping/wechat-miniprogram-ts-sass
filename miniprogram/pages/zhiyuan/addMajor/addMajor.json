@@ -1,0 +1,12 @@
+{
+  "usingComponents": {
+    "tabs":"../../component/tab/tab",
+    "school-filter":"../../component/schoolFilter/schoolFilter",
+    "bottom-in-container":"../../component/bottomInContainer/bottomInContainer",
+    "mp-sticky": "@miniprogram-component-plus/sticky",
+    "page-loadding":"../../component/pageLoadding/pageLoadding",
+    "loadding":"../../component/loadding/loadding",
+    "ym-table":"../../component/table/table",
+    "right-in-container":"../../component/rightInContainer/rightInContainer"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "navigationBarBackgroundColor": "#E9C38B",
+  "navigationBarTextStyle": "black",
+  "navigationBarTitleText": "圆梦志愿VIP",
+  "usingComponents": {
+    "bottom_in-containner":"../../component/bottomInContainer/bottomInContainer"
+  }
+}

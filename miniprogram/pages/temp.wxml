@@ -1,0 +1,100 @@
+<template name="listPage">
+    <view wx:if="{{listPage.page==0}}" class="text-center" style="padding-top:300rpx">
+        <loadding></loadding>
+        <view class="pt-16 color-grey">加载中，请稍后</view>
+    </view>
+    <view wx:else>
+        <view wx:if="{{listPage.page<listPage.page_count}}" bindtap="getList" class="p-16 text-center color-grey">
+            点击加载下一页
+        </view>
+        <view wx:else class="text-center p-16">
+            <view wx:if="{{list.length>0}}" class="font-14 color-grey">数据已经全部加载完毕</view>
+            <view wx:elif="{{!hideNoList}}" style="padding-top:200rpx">
+                <view wx:if="{{filter}}" class="color-green">{{filter.filterStr}}</view>
+                <view wx:else class="iconfont iconillustration_default1 color-grey" style="font-size:128rpx;"></view>
+                <view class="pt-16 color-grey">没有检索到数据</view>
+            </view>
+        </view>
+    </view>
+</template>
+<template name="popupMajor">
+    <bottom-in-container id="popupMajor">
+        <view class="bg-white">
+            <view style="">
+                <view class="p-16 ub ub-start">
+                    <view wx:if="{{mode!=2&&(popupMajor.major_info.probability||popupMajor.major_info.probability_level)}}" class="w-46">
+                        <view wx:if="{{popupMajor.major_info.probability}}" class="font-10">
+                            <view class="font-20 display-ib">{{popupMajor.major_info.probability<10?'<9':popupMajor.major_info.probability}}</view>%
+                        </view>
+                        <view wx:if="{{popupMajor.major_info.probability_level}}" class="possibility" style="border: 1px solid {{popupMajor.major_info.probability_level_color}}; color: {{popupMajor.major_info.probability_level_color}};">
+                            {{popupMajor.major_info.probability_level}}
+                        </view>
+                    </view>
+                    <view class="ub-f1">
+                        <view class="ub">
+                            <view class="font-18 ub-f1">{{popupMajor.major_info.major_name}}</view>
+                            <view wx:if="{{popupMajor.subject_equal}}" bind:tap="beixuanPopMajor" class="bg-green br-4 color-white text-center line-h-24" style="width:120rpx;">
+                                {{popupMajor.is_alternative?'已备选':'+ 备选'}}
+                            </view>
+                        </view>
+                        <view wx:if="{{popupMajor.major_info.school_name}}" class="pt-8 font-12 color-grey">
+                            <view class="mr-8 color-2f font-14 display-ib">{{popupMajor.major_info.school_name}}</view>
+                            <view class="mr-8 display-ib">{{popupMajor.major_info.city}}</view>
+                        </view>
+                        <view wx:if="{{popupMajor.msg_info.subjects}}" class="pt-8 font-14 color-grey">科目要求：<view class="color-green display-ib">{{popupMajor.msg_info.subjects}}</view> 
+                             <view wx:if="{{mode==2&&popupSchool.school_info.probability_level}}" class="possibility small ml-4 display-ib" style="border: 1px solid {{popupSchool.school_info.probability_level_color}}; color: {{popupSchool.school_info.probability_level_color}};"></view>
+                        </view>
+                        <view wx:if="{{popupMajor.msg_info.major_tag}}" class="pt-8 font-12 color-grey">{{popupMajor.msg_info.major_tag}}</view>
+                        <view wx:if="{{popupMajor.msg_info.major_warning}}" class="pt-8 font-12 color-orange">
+                            <view class="iconfont iconicon_about display-ib"></view>
+                            <view class="display-ib ml-4">{{popupMajor.msg_info.major_warning}}</view>
+                        </view>
+                    </view>
+                </view>
+                <view wx:if="{{popupMajor.major_info.major_tag||popupMajor.major_info.major_warning}}" class="p-lr-16 pb-16" style="margin-top: -1.6rem;">
+                    <view wx:if="{{popupMajor.major_info.major_tag}}" class="color-grey line-h-20 pt-8">{{popupMajor.msg_info.major_tag}}</view>
+                    <view wx:if="{{popupMajor.major_info.major_warning}}" class="color-grey line-h-20 pt-8">{{popupMajor.msg_info.major_warning}}</view>
+                </view>
+            </view>
+            <ym-table table="{{popupMajor.tables}}"></ym-table>
+            <view wx:if="{{!isZhiyuanPage}}" class="p-16 ub ub-ac">
+                <navigator wx:if="{{!popupMajor.no_school_link}}" url="/pages/school/school/school?school_id={{popupMajor.major_info.school_id}}" class="btn round b-1-green color-green mr-16">查看该校详情</navigator>
+                <navigator wx:if="popMajor.msg_info.is_base_major" url="/pages/major/major/major?major_id={{popupMajor.major_info.major_id}}" wx:if="{{popupMajor.msg_info.is_base_major}}" class="btn round green">查看专业详情</navigator>
+            </view>
+        </view>
+    </bottom-in-container>
+</template>
+<template name="popupSchool">
+    <bottom-in-container id="popupSchool">
+        <view class="bg-white">
+            <view class="ub p-lr-16 p-tb-20 bb-1 bg-white w-100">
+                <view wx:if="{{mode!=2&&(popupSchool.school_info.probability||popupSchool.school_info.probability_level)}}" class="w-46">
+                    <view wx:if="{{popupSchool.school_info.probability}}" class="font-10">
+                        <view class="font-20 display-ib">{{popupSchool.school_info.probability<10?'<9':popupSchool.school_info.probability}}</view>%
+                    </view>
+                    <view wx:if="{{popupSchool.school_info.probability_level}}" class="possibility" style="border: 1px solid {{popupSchool.school_info.probability_level_color}}; color: {{popupSchool.school_info.probability_level_color}};">
+                        {{popupSchool.school_info.probability_level}}
+                    </view>
+                </view>
+                <view class="ub-f1">
+                    <view class="ub">
+                        <view class="font-16 ub-f1 bold">{{popupSchool.school_info.subject_group_name||popupSchool.school_info.school_name}}</view>
+                    </view>
+                    <view wx:if="{{popupSchool.msg_info.subjects}}" class="pt-8">
+                        <rich-text class="font-14 color-grey" nodes="{{popupSchool.msg_info.subjects}}"></rich-text>
+                        <view wx:if="{{mode==2&&popupSchool.school_info.probability_level}}" class="possibility small ml-4 display-ib" style="border: 1px solid {{popupSchool.school_info.probability_level_color}}; color: {{popupSchool.school_info.probability_level_color}};">
+                        {{popupSchool.school_info.probability_level}}
+                    </view>
+                        </view>
+                    <view wx:if="{{popupSchool.msg_info.rank_info}}" class="pt-8"><rich-text class="font-14 color-grey" nodes="{{popupSchool.msg_info.rank_info}}"></rich-text></view>
+                    <view wx:if="{{popupSchool.msg_info.data_source}}" class="pt-8"><rich-text class="font-14 color-grey" nodes="{{'数据来源：'+popupSchool.msg_info.data_source}}"></rich-text></view>
+                </view>
+            </view>
+            <ym-table table="{{popupSchool.tables}}"></ym-table>
+            <view wx:if="{{!isZhiyuanPage}}" class="pb-16 p-lr-16 pt-8">
+                <navigator wx:if="{{popupSchool.msg_info.rank_info}}" url="/pages/zhiyuan/scoreMajorMoreMajors/scoreMajorMoreMajors?school_id={{popupSchool.school_info.school_id}}&admit_order_type={{popupSchool.school_info.admit_order_type}}&subject_group_id={{popupSchool.school_info.subject_group_id}}&index={{schoolIndex}}" class="btn round b-1-green color-green mt-8"><rich-text class="" nodes="{{popupSchool.msg_info.rank_info}}"></rich-text></navigator>
+                <navigator url="/pages/school/school/school?school_id={{popupSchool.school_info.school_id}}" class="btn round green mt-8">查看该校详情</navigator>
+            </view>
+        </view>
+    </bottom-in-container>
+</template>

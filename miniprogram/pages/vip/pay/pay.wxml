@@ -1,0 +1,79 @@
+<view wx:if="{{info}}">
+	<view class="br-b-round bg-golden p-lr-16 overflow-hidden" style="height:200rpx">
+		<view class="pt-16">
+			<view class="bg-linear-black br-16 pb-32 relative">
+				<view class="iconfont iconlogo" style="bottom: -40rpx; right: 3%; color: rgba(255, 255, 255, 0.2); font-size: 200rpx;position:absolute;" />
+				<view class="ub ub-ac p-32 text-center">
+					<navigator class="ub-f1 line-h-32 br-16 bg-golden mr-32">VIP特权介绍></navigator>
+					<navigator class="ub-f1 line-h-32 br-16 bg-golden">VIP会员区别></navigator>
+				</view>
+			</view>
+		</view>
+	</view>
+	<view class="p-16">
+		<view wx:for="{{info.goods_list}}" data-index="{{index}}" bind:tap="checkGood" class="good shadow relative mb-8 br-4 {{item.is_default?'bg-golen-light':'bg-white'}} {{item.is_enable?'':'bg-ea opacity-5'}}">
+			<view wx:if="{{item.is_default}}">
+                <view class="checked" />
+			    <view class="iconfont icongou check" />
+            </view>
+			<view class="br-4 hidden {{item.is_default?'bg-linear-golden-light':''}}" style="box-sizing: border-box;">
+				<view wx:if="{{item.red_packet}}" class="ub ub-ac line-h-24">
+                    <view class="bg-red color-white p-lr-8" style="border-radius:0 0 32rpx 0;">红包价</view>
+                    <view class="ub-f1 text-right color-red font-14 pr-8">{{item.red_packet}}</view>
+                </view>
+				<view class="ub ub-ac p-16">
+					<view class="ub-f1 color-golden-dark">
+						<view class="font-20 color-golden-dark">{{item.goods_name}}</view>
+						<view class="font-12 pt-8">{{item.content}}</view>
+					</view>
+					<view class="text-right">
+						<view class="font-16 {{item.is_default?'color-red':'color-golden-dark'}}">￥
+							<view class="display-ib font-32 font-number">{{item.pay_price}}</view>
+						</view>
+                        <view class="color-grey font-16 text-delete ">{{item.price}}</view>
+					</view>
+				</view>
+				<view class="m-lr-16 p-tb-16 bt-golden-1-dotted">
+					<view wx:for="{{item.remark}}" wx:for-item="remark" class="color-golden-dark font-12 line-h-18">{{remark}}</view>
+				</view>
+			</view>
+		</view>
+	</view>
+	<view style="height:120rpx;"></view>
+    <view bind:tap="showPay" class="fixed bottom bg-red p-16 text-center color-white font-16">立即支付</view>
+    <bottom_in-containner id="payInfo">
+        <view wx:if="{{payInfo}}" class="p-16" hover-class="none" hover-stop-propagation="false">
+            <view class="bold font-22">{{payInfo.title}}</view>
+            <view class="pt-8">
+                <view wx:if="{{payInfo.prov_name}}" class="pt-8">开通省份：{{payInfo.prov_name}}</view>
+                <view wx:if="{{payInfo.end_time}}" class="pt-8">有效期至：{{payInfo.end_time}}</view>
+            </view>
+            <view class="pt-16 mt-16 bt-1">
+                <view wx:if="{{payInfo.red_packet}}">
+                    <view class="ub ub-ac pt-8">
+                        <view class="ub-f1">原价</view>
+                        <view>￥ <view class="font-number font-22 display-ib font-number">{{payInfo.price}}</view> </view>
+                    </view>
+                    <view class="ub ub-ac pt-8">
+                        <view class="ub-f1">已享优惠</view>
+                        <view class="b-1-red color-red p-lr-8 line-h-20 mr-8 font-12" style="border-radius:32rpx 0 32rpx 0;">优惠券抵扣</view>
+                        <view class="color-red">- ￥<view class="font-number font-22 display-ib font-number">{{payInfo.red_packet}}</view> </view>
+                    </view>
+                    <view class="ub ub-ac pt-16">
+                        <view class="ub-f1 bold">优惠后金额</view>
+                        <view class="color-red">￥<view class="font-number display-ib font-number bold font-38">{{payInfo.pay_price}}</view> </view>
+                    </view>
+                </view>
+                <view wx:else class="ub ub-ac pt-16">
+                    <view class="ub-f1 bold">支付金额</view>
+                    <view class="color-red">￥<view class="font-number display-ib font-number bold font-38">{{payInfo.pay_price}}</view> </view>
+                </view>
+            </view>
+            <view bind:tap="order" class="br-24 ub ub-ac ub-center bg-green color-white p-8 mt-16">
+                <view class="iconfont icongongzhonghao font-24 mr-4 display-ib"></view>
+                <view>微信支付</view>
+            </view>
+        </view>
+    </bottom_in-containner>
+</view>
+

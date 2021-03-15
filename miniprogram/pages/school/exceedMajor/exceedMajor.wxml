@@ -1,0 +1,30 @@
+
+<view wx:if="{{info}}" class="bg-white">
+    <scroll-view class="full-screen" scroll-x="false" scroll-y="{{true}}">
+            <mp-sticky>
+                <view  class="shadow w-100vw"><tab items="{{tabItems}}" index="{{tab}}" bind:change="changeTab"></tab></view>
+            </mp-sticky>
+            <view wx:if="{{tab==0}}">
+                <view wx:if="{{info.exceed_major_list.length==0}}" style="padding-top:200rpx;" class="text-center color-grey">
+                    你没有超过任何专业
+                </view>
+                <view wx:for="{{info.exceed_major_list}}" wx:for-item="major"  wx:for-item="major" class="p-16 bb-1">
+                    <view class="bold font-16">{{major.major_name}}</view>
+                    <view class="col2">
+                        <view wx:for="{{major.score_info}}" wx:for-item="info" class="col p-tb-4"><rich-text class="color-grey" nodes="{{info}}"></rich-text></view>
+                    </view>
+                </view>
+           </view>
+           <view wx:if="{{tab==1}}">
+                <view wx:if="{{info.not_exceed_major_list.length==0}}" style="padding-top:200rpx;" class="text-center color-grey">
+                    你没有超过任何专业
+                </view>
+                <view wx:for="{{info.not_exceed_major_list}}" wx:for-item="major"  wx:for-item="major" class="p-16 bb-1">
+                    <view class="bold font-16">{{major.major_name}}</view>
+                    <view class="col2">
+                        <view wx:for="{{major.score_info}}" wx:for-item="info" class="col p-tb-4"><rich-text class="color-grey" nodes="{{info}}"></rich-text></view>
+                    </view>
+                </view>
+           </view>
+        </scroll-view>
+</view>

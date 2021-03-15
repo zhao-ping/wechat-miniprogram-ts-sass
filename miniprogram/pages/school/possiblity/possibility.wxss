@@ -1,0 +1,7 @@
+.wavebg{width: 100%;height: 360rpx;background-image: url("../images/schoolWave/wavebg.png");background-size: 100% 100%;}
+.waveMajor{position: relative;overflow: hidden;border-radius: 12rpx;}
+.waveMajor .major{border: 1rpx solid white;background-color: white;border-radius: 12rpx;width: 100%;box-sizing: border-box;}
+.waveMajor .check{width: 64rpx;height: 50rpx;text-align: center;line-height: 48rpx;display: block;position: absolute;right:-1rpx;top:-1rpx;background-color: #eaeaea;border-radius: 0 0 0 40rpx;}
+.waveMajor.active .check{background-color: #42C288;}
+.waveMajor .check .iconfont{color: white;font-size: 40rpx;}
+.waveMajor.active .major{border: 1rpx solid #42C288;background-color:#EDF9F4;}

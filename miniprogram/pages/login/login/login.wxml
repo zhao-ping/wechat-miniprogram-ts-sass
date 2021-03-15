@@ -1,0 +1,45 @@
+<!-- 登录注册 -->
+<view class="full-screen ub ub-ver bg-white">
+    <view class="ub-f1"></view>
+    <!-- 登录框 -->
+    <view class="p-lr-16">
+        <view class="font-24">{{loginType==0?"登录/注册":"登录"}}</view>
+        <view class="pt-8 ub ub-ac" style="height:140rpx">
+            <view class="color-grey font-14 ub-f1">
+                {{step==1?"未注册的手机号验证后将自动注册":"验证码已发送至 "+mobile}}
+            </view>
+            <view wx:if="{{step==2&&lastTime>0}}" class="color-grey font-14">{{lastTime}}s</view>
+        </view>
+        <ym-input wx:if="{{step==1}}" model:value="{{mobile}}" clas="pt-16" placeholder="请输入手机号" type="number"><view  class="iconfont iconphone color-grey p-lr-8 br-1"></view></ym-input>
+        <view wx:if="{{loginType==1}}">
+            <ym-input  model:value="{{password}}" clas="pt-16" placeholder="请输入密码" type="password"><view  class="iconfont iconicon_Password color-grey p-lr-8 br-1"></view></ym-input>
+        </view>
+        <view wx:elif="{{step==2}}">
+            <ym-input model:value="{{code}}" clas="pt-16" placeholder="请输入验证码" type="number"><view  class="iconfont iconicon_Password color-grey p-lr-8 br-1"></view></ym-input>
+        </view>
+        <view bindtap="login" class="btn green mt-16">{{(loginType==0&&step==1)?"获取验证码":"登录"}}</view>
+        <view  v-if="step==1" class="ub ub-ac pt-16 color-grey ">
+            <view class="ub-f1" bindtap="changeLoginType">{{loginType==0?'账号密码登录':'手机验证码登录'}}</view>
+            <navigator hover-class="none" wx:if="{{loginType!=0}}" url="/pages/user/password/password">忘记密码</navigator>
+        </view>
+        
+    </view>
+    <view class="ub-f1"></view>
+    <view class="p-16 mb-16">
+        
+        <view class="ub ub-ac margin-auto" style="width:60%">
+            <view class="ub-f1 bb-1"></view>
+            <view class="p-lr-16 color-grey font-12">微信登录</view>
+            <view class="ub-f1 bb-1"></view>
+        </view>
+        <view class="p-16 text-center">
+            <view wx:if="{{authUserInfo}}" class="iconfont iconlogo_wechat color-green font-32"></view>
+            <view wx:else>
+                <button bindgetuserinfo="wechatLogin" open-type="getUserInfo" style="background:none;padding:0;" class="iconfont iconlogo_wechat color-green font-32"></button>
+            </view>
+        </view>
+        <view class="font-12 color-grey">
+            注册或登录表示同意 <navigator hover-class="none" url="" class="color-green display-ib">《用户注册服务协议》</navigator>与<navigator hover-class="none" url="" class="color-green display-ib">《用户隐私协议》</navigator>
+         </view>
+    </view>
+</view>

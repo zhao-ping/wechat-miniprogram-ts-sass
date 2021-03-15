@@ -1,0 +1,10 @@
+.messageBox{margin: 32rpx 0;}
+.messageBox .message{padding: 16rpx;line-height: 48rpx;font-size: 28rpx;background-color: white;display: inline-block;}
+.messageBox .message::before{content: "";width: 30rpx;height: 30rpx;transform: rotate(45deg);position:absolute;top: 20rpx;background-color: white;display: block;z-index: 0;}
+.messageBox.left{flex-direction: row;}
+.messageBox.right{flex-direction: row-reverse;}
+.messageBox.left .message::before{left: -10rpx;}
+.messageBox.right .message::before{right: -10rpx;}
+.img-emoji{width: 32rpx;height:32rpx;line-height: 48rpx;vertical-align: middle;}
+.state{transform: translateX(0);transition: all 0.1s;}
+.state.state2{transform: translateX(96rpx);transition: all 0.1s;}

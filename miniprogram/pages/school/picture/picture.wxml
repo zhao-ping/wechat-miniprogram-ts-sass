@@ -1,0 +1,10 @@
+<import src="../temp.wxml" />
+<template is="schoolHeader" data="{{info}}"/>
+<view class="p-lr-8 p-tb-16 col3 bg-white">
+    <view wx:for="{{info.attach_list}}" wx:for-item="attach" bindtap="previewImage" data-url="{{attach.v}}" class="col p-4">
+        <view class="relative br-4 overflow-hidden">
+            <image src="{{attach.v}}" class="attatch" lazy-load="{{true}}" binderror="" bindload=""></image>
+            <view class="attach-name">{{attach.k||'校园风光'}}</view>
+        </view>
+    </view>
+</view>

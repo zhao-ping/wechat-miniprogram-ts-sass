@@ -1,0 +1,4 @@
+.bottomContainer{width: 100vw;max-height: 90vh; box-sizing: border-box;position: fixed;bottom: -120vh;left: 0;transition: all 0.3s ease-out;background-color: white;z-index:1000;border-radius: 16px 16px 0px 0px;overflow: hidden;}
+.bottomContainer.show{bottom: 0;transition: all 0.3s ease-out;}
+.bottomContainerBg{position: fixed;left: 0;right: 0;bottom: 0;top: 0;background-color: rgba(0,0,0,0.3);opacity: 0;display: none;transition: all 0.3s ease-in;z-index: 1000;}
+.bottomContainerBg.show{opacity: 1;display: block;transition: all 0,3s ease-in;}

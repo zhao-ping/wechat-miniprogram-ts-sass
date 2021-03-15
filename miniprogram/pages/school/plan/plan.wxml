@@ -1,0 +1,8 @@
+<import src="../temp.wxml" />
+<template is="schoolHeader" data="{{info}}"/>
+<view class="p-lr-16 bg-white color-2f">
+    <navigator hover-class="none" wx:for="{{info.admission_guide_list}}" wx:for-item="item" url="/pages/school/planDetail/planDetail?id={{item.v}}" class="p-tb-16 ub ub-ac bb-1" >
+        <view class="ub-f1 mr-16">{{item.k}}</view>
+        <view class="iconfont iconarrow-right font-8 color-grey"></view>
+    </navigator>
+</view>

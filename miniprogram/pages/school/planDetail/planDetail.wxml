@@ -1,0 +1,4 @@
+<view class="p-16 bg-white">
+    <view class="pb-16 bold font-20">{{info.title}}</view>
+    <rich-text class="color-2f" nodes="{{info.content}}"></rich-text>
+</view>

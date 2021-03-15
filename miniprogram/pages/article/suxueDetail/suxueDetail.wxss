@@ -1,0 +1,18 @@
+.perfectArticle .p{text-align: justify;line-height: 56rpx;font-size: 32rpx;padding: 16rpx 0;}
+.perfectArticle .title1{text-align: center;}
+.perfectArticle .h2{text-align: center;padding: 32rpx 0;}
+.perfectArticle .h2 .num{display: inline-block;margin-bottom: 10rpx;border-radius: 50%;line-height: 80rpx; width: 80rpx;height: 80rpx;background-color: #20B670; color: white;font-size: 40rpx;font-weight: bold;}
+.perfectArticle .h2 .title{font-size: 40rpx;font-weight: bold;text-align: center;color: #20B670;}
+.perfectArticle .h3{text-align:center;line-height: 64rpx;}
+.perfectArticle .h3 .b{background-color: rgba(32, 182, 112, 0.2);font-size: 40rpx;}
+.perfectArticle .h4{text-align: left;font-size: 40rpx !important;}
+.perfectArticle .blockquote{color: #999;font-size: 32rpx;border: none;background-color: #f7f7f7;padding: 20rpx;border-radius: 8rpx;line-height: 48rpx;text-align: justify;margin-bottom: 20rpx;}
+.perfectArticle .blockquote b{color: #2f2f2f;}
+.perfectArticle .img{max-width: 100%;border-radius: 8rpx;display: block;}
+.perfectArticle .imgIntro{font-size:24rpx !important;color: #999 !important;text-align: center;display: block !important;padding-top: 16rpx;}
+/* 文章链接 */
+.perfectArticle .articleLink{display: flex;padding: 20rpx;align-items: center;background: #f7f7f7;border-radius: 8rpx;margin: 40rpx 0;}
+.perfectArticle .articleLink .title{flex: 1;font-size: 36rpx;padding: 0 20rpx;color: #2f2f2f;}
+.perfectArticle .articleLink .image{width:80rpx;height: 80rpx;object-fit: cover;border-radius: 8rpx;}
+
+.rotate{transform: rotate(360deg);animation: all 0.1s ease-out;}

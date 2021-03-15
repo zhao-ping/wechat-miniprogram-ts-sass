@@ -1,0 +1,32 @@
+<view wx:if="{{info}}">
+    <view class="bg-white p-16">
+        <view wx:if="{{info.base_info.menu_info.values.length>0}}" class="text-center mb-16">
+            <view class="display-ib b-1-green br-4 overflow-hidden line-h-24">
+                <view wx:for="{{info.base_info.menu_info.values}}"  class="p-lr-8 display-ib {{item.v==info.base_info.menu_info.default_value.v?'bg-green color-white':''}}" bind:tap="changeAdmit" data-admit="{{item.v}}">{{item.k}}</view>
+            </view>
+        </view>
+        <view class="margin-auto relative" style="width:200rpx;">
+            <view class="absolute w-100 text-center" style="top:50%;transform: translateY(-50%);">
+                <view class="font-number display-ib font-38">{{info.base_info.match_percent}}</view>%
+            </view>
+            <circle-percent id="percent" color="#4d89ff" percent="{{info.base_info.match_percent/100}}"></circle-percent>
+        </view>
+        <view class="pt-16">
+            <rich-text class="color-grey font-14 text-center" nodes="{{info.base_info.match_info}}"></rich-text>
+        </view>
+    </view>
+    <view class="bg-f7 color-grey font-14 ub ub-ac">
+        <view class="p-16 text-left ub-f1">{{info.major_data.header_info[0]}}</view>
+        <view class="p-16 text-right">{{info.major_data.header_info[1]}}</view> 
+        <view class="mr-16" style="width: 20rpx;"></view>
+    </view>
+    <view class="bg-white">
+        <navigator hover-class="none" wx:for="{{info.major_data.major_list}}" url="/pages/newSubject/majors/majors?major_id={{item.major_id}}&admit_order_type={{info.base_info.admit_order_type}}" class="color-99 text-14 ub ub-ac bb-1">
+            <view class="ub-f1 p-16 bold color-2f font-16">{{item.major_name}}</view> 
+            <view class="p-16 text-right"><rich-text class="font-14 color-grey" nodes="{{item.count_str}}"></rich-text></view>
+            <view class="mr-16" style="width:20rpx;">
+                <view class="iconfont iconarrow-right color-grey font-12"></view>
+            </view>
+        </navigator>
+    </view>
+</view>

@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "popup":"../../component/popup/popup",
+    "bottom-in-container":"../../component/bottomInContainer/bottomInContainer",
+    "ym-table":"../../component/table/table",
+    "right-in-container":"../../component/rightInContainer/rightInContainer"
+  }
+}

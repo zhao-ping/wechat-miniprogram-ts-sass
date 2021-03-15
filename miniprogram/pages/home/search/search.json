@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "ym-input":"../../component/input/input",
+    "tabs":"../../component/tab/tab",
+    "mp-sticky": "@miniprogram-component-plus/sticky"
+  }
+}

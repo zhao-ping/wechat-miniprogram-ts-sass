@@ -1,0 +1,12 @@
+<template name="majorHeader">
+    <view class="bg-white p-16 ub ub-ac">
+         <image class="avatar-48 mr-16" src="{{info.major_info.major_logo}}"></image>
+         <view class="ub-f1">
+            <view class="ub ub-ac" hover-class="none" hover-stop-propagation="false">
+                <view class="ub-f1 font-18 bold">{{info.major_info.major_name}}</view>
+                <view wx:if="{{hasAttent}}" bind:tap="attentMajor" class="iconfont iconbutton_attention {{info.major_info.is_attention?'color-orange':'color-grey'}}"></view>
+            </view>
+             <view class="pt-4 font-14 color-grey">{{info.major_info.root_major_name}} > {{info.major_info.parent_major_name}}</view>
+         </view>
+    </view>
+</template>

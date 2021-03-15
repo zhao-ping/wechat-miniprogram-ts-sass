@@ -1,0 +1,62 @@
+.circle50{display: table-cell;vertical-align: middle;text-align: center;box-sizing: border-box;width: 100rpx;height: 100rpx;border-radius: 50%;}
+.square-40-40{width:80rpx;height: 80rpx;border:1px solid #7FD9B0;box-sizing: border-box; border-radius: 8rpx;display: table-cell;text-align: center;vertical-align: middle;}
+.schoolValueColor0{
+    color: #4CAFE9;
+}
+.schoolValueColor1{
+    color: #FD7649;
+}
+.schoolValueColor2{
+    color: #42C288;
+}
+.schoolValueColor3{
+    color: #E9C38B;
+}
+.schoolValueColor4{
+    color: #FE5462;
+}
+.schoolValueColor5{
+    color: #b8bbbf;
+}
+.schoolValueColor6{
+    color: #865E30;
+}
+.schoolValueColor7{
+    color: #4E4;
+}
+.schoolValueColor8{
+    color: #4E45;
+}
+.schoolValueColor9{
+    color: #62d19f;
+}
+.schoolValueColor10{
+    color: #ff6c6c;
+}
+.schoolValueColor11{
+    color: #07c160;
+}
+.schoolValueColor12{
+    color: #E9C38B;
+}
+.schoolValueColor13{
+    color: #4D89FF;
+}
+.schoolValueColor14{
+    color: #62d19f;
+}
+.schoolValueColor15{
+    color: #c8c9cc;
+}
+.schoolValueColor16{
+    color: #75bcff;
+}
+.schoolValueColor17{
+    color: #ed6a0c;
+}
+.schoolValueColor18{
+    color: #ee0a24;
+}
+.schoolValueColor19{
+    color: #e5e5e5;
+}

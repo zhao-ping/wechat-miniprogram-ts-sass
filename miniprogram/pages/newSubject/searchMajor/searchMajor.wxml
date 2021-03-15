@@ -1,0 +1,72 @@
+<view class="br-b-round bg-blue">
+	<!-- <view class="p-32 text-center font-18 color-white">高校招生计划查询</view> -->
+	<view style="height:300rpx;" />
+</view>
+<view class="relative" style="margin-top:-300rpx;z-index:1;">
+	<view class="m-16 p-16 shadow br-12 bg-white relative">
+		<view class="p-16 br-24 absolute" style="background-color:rgba(255,255,255,0.2);margin-top:-56rpx;width:80%;" />
+		<view class="font-16 color-2f p-tb-8">
+			<rich-text class="font-16 color" nodes="{{info.user_mode_info}}" />
+		</view>
+		<view class="m-tb-16 relative">
+			<ym-input
+			 model:value="{{major_name}}"
+			 auto-focus="{{true}}"
+			 placeholder="请输入目标学校"
+			 type="text"
+			 confirmtype="search"
+			 bind:confirm="toSearch"
+			 bind:rightslottap="toSearch"
+			 bind:change="change"
+			>
+				<view slot="right" class="line-h-48 color-green bl-1 p-lr-16 ml-8">
+					<view class="iconfont iconicon_search" />
+					搜索
+				</view>
+			</ym-input>
+			<view wx:if="{{major_name&&search.length>0}}" class="absolute bg-white b-1 br-b-16 w-100" style="top:98rpx;max-height:440rpx;overflow-y:auto;">
+				<view
+				 wx:for="{{search}}"
+				 bindtap="chooseSchool"
+				 data-item="{{item}}"
+				 class="p-16 bb-1"
+				>
+					<view class="font-16">
+						<view class="display-ib">{{item.major_name}}</view>
+						<view wx:if="{{item.admit_order_type_str}}" class="display-ib color-grey font-14 ml-8">（{{item.admit_order_type_str}}）</view>
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+	<view wx:if="{{info.major_list.length>0}}" class="font-14 color-grey m-16">
+		<view class="mb-8 font-16">热门搜索</view>
+		<view class="clearfix" style="margin: 0px -0.4rem;">
+			<view wx:for="{{info.major_list}}" bind:tap="setMajorName" data-major="{{item}}" class="display-b float-l color-2f line-h-32 p-lr-16 b-1 m-4 br-4">{{item}}</view>
+		</view>
+	</view>
+	<view wx:if="{{history.length>0}}" class="color-grey">
+		<view class="ub ub-ac p-16 bb-1">
+			<view class="ub-f1 font-16">搜索历史</view>
+			<view bindtap="clearHistory" class="iconfont iconlaji" />
+		</view>
+		<navigator hover-class="none"
+		 wx:for="{{history}}"
+		 wx:for-item="school"
+		 class="p-16 bb-1 font-14"
+		 url="/pages/newSubject/schools/schools?major_id={{school.major_id}}&admit_order_type={{school.admit_order_type}}"
+		 hover-class="navigator-hover"
+		 open-type="navigate"
+		>
+			<view class="display-ib">{{school.major_name}}</view>
+			<view wx:if="{{school.admit_order_type_str}}" class="display-ib color-grey font-14 ml-8">（{{school.admit_order_type_str}}）</view>
+		</navigator>
+	</view>
+	<view class="p-16 color-grey font-14 line-h-24">
+		<view bind:tap="source">{{info.data_title}}
+			<view class="iconfont color-green iconicon_commonproblem" />
+		</view>
+		<view class="pt-8">{{info.data_desc}}</view>
+	</view>
+</view>
+

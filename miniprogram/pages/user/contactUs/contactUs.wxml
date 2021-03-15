@@ -1,0 +1,12 @@
+<view class="p-16">
+    <view wx:for="{{info}}" wx:for-item="item" class="ub ub-ac shadow br-8 p-16 mb-16 bg-white">
+        <image style="width:72rpx;height:72rpx;" src="{{item.picture}}"></image>
+        <view class="ub-f1 m-lr-16">
+            <view class="font-16 bold" style="color:{{item.title_color}}">
+                {{item.title}}
+            </view>
+            <view class="pt-8 color-2f font-14">{{item.content}}</view>
+        </view>
+        <view bind:tap="contact" data-type="{{item.button_type}}" data-value="{{item.content}}" class="line-h-38 br-20 color-white text-center" style="background-color:{{item.button_color}};width:240rpx;">{{item.button_text}}</view>
+    </view>
+</view>

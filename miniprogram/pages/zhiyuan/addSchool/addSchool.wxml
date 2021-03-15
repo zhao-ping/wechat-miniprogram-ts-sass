@@ -1,0 +1,30 @@
+<import src="../temp.wxml" />
+<scroll-view class="full-screen" scroll-x="{{false}}" scroll-y="{{true}}" lower-threshold="50" scroll-top="{{scrollTop}}"  bindscrolltolower="getList" >
+    <mp-sticky>
+        <view class="w-100vw shadow bg-white" style="padding-top:{{statusBarHeight}}px;">
+            <view class="p-lr-16 p-tb-4 ub ub-ac" style="width:70%">
+                <view bind:tap="back" class="iconfont iconnav_back font-16 mr-16"></view>
+                <navigator hover-class="none" url="/pages/zhiyuan/addSearch/addSearch?uca_id={{uca_id}}&sort_index={{sort_index}}" open-type="redirect" class="ub-f1 line-h-28 bg-f7 br-24 ub ub-ac p-lr-8">
+                    <view class="iconfont iconicon_search mr-8"></view>
+                    <view class="color-grey">搜索院校</view>
+                </navigator>
+            </view>
+            <tabs id="tabs" items="{{['我的备选','VIP精选']}}" bind:change="changeTab"></tabs>
+        </view>
+    </mp-sticky>
+    <view wx:if="{{globalUserInfo.prov_model_ex==3&&tabIndex==0}}">
+        <!-- 从我的备选中添加能上的学校浙江版本 -->
+        <template is="majorList" data="{{list,listPage,popupMajor,popupSchool,isZhiyuanPage}}"></template>
+    </view>
+    <view wx:else>
+        <template is="schoolList" data="{{list,listPage,popupMajor,popupSchool,isZhiyuanPage,prov_model_ex:globalUserInfo.prov_model_ex,mode:globalUserInfo.mode}}"></template>
+    </view>
+    <view wx:if="{{sorts[tabIndex].values.length>1}}" class="fixedSchoolSort {{isShowSorts?'active':''}}">
+        <view class="sorts">
+            <view wx:for="{{sorts[tabIndex].values}}" wx:for-index="index" bind:tap="changeSort" data-item="{{item}}" data-index="{{index}}" class="sortItem {{'item'+index}} {{sorts[tabIndex].default_value.v==item.v?'active':''}}">{{item.k}}</view>
+        </view> 
+        <view bind:tap="showSorts" class="ub ub-ac pr-8"><view class="ub-f1"></view> <view class="sortBtn">学校排序</view></view>
+    </view>
+    <view style="height:104rpx;"></view>
+    <view bind:tap="toApplication" class="fixed bottom bg-green p-12 text-center font-16 color-white">返回志愿表</view>
+</scroll-view>

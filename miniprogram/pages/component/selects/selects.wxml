@@ -1,0 +1,8 @@
+<picker wx:if="{{objectMultiArray}}" mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{objectMultiArray}}" range-key="k">
+    <view class="ub ub-ac ub-around p-tb-16 bb-1">
+        <view wx:for="{{objectMultiArray}}" wx:for-item="select" wx:for-index="i" class="ub ub-ac">
+            <view class="font-14">{{select[multiIndex[i]].k}}</view>
+            <view wx:if="{{select.length>1}}" class="iconfont iconComboicon color-grey font-10 ml-4"></view>
+        </view>
+    </view>
+</picker>

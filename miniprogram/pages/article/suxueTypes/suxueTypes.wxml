@@ -1,0 +1,23 @@
+<import src="../temp.wxml"/>
+<scroll-view scroll-top="{{scrollTop}}" scroll-x="{{false}}" scroll-y="{{true}}" bindscrolltolower="getList">
+    <!-- 筛选条件栏 -->
+    <view wx:if="{{types}}">
+        <mp-sticky>
+            <view wx:if="{{types}}" class="ub ub-ac bg-white pr-16 bb-1" style="overflow-y:hidden;">
+                <view class="ub-f1 mr-8">
+                    <scroll-view scroll-with-animation="{{true}}" scroll-into-view="type-{{currentType.v}}" scroll-x="{{true}}" enhanced="{{true}}" show-scrollbar="{{false}}" style="width:572rpx;">
+                        <view class="p-2 provinceList" style="white-space:nowrap;">
+                            <view wx:for="{{types}}" id="type-{{item.v}}" bindtap="changeType" data-index="{{index}}" data-item="{{item}}" class="{{item.v==currentType.v?'bb-4-green':'color-grey'}} prov mr-4 line-h-40 br-4 p-lr-8 m-lr-8 font-14 display-ib">
+                                {{item.k}}
+                            </view>
+                        </view>
+                    </scroll-view>
+                </view>
+                <view  bindtap="changeType" class="br-20 p-lr-8 line-h-28 font-14 {{currentType.v==-1?'bg-green b-1-green color-white':'b-1'}}" style="height:56rpx;">
+                    已看过
+                </view>
+            </view>
+        </mp-sticky>
+    </view>
+    <template is="suxueArticleListPage" data="{{list:list.list,listPage}}"/>
+</scroll-view>

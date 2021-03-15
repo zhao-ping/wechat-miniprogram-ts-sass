@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText":"院校大全",
+  "usingComponents": {
+    "school-filter":"../../component/schoolFilter/schoolFilter",
+    "loadding":"../../component/loadding/loadding",
+    "mp-sticky": "@miniprogram-component-plus/sticky"
+  }
+}

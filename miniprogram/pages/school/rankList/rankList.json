@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "school-filter":"../../component/schoolFilter/schoolFilter"
+  }
+}

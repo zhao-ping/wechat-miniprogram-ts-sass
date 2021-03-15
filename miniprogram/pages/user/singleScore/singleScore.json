@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "设置单科成绩",
+  "usingComponents": {
+    "ym-input":"../../component/input/input"
+  }
+}

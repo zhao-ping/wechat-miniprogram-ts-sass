@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "circle-percent":"../../component/circlePercent/circlePercent",
+    "page-loadding":"../../component/pageLoadding/pageLoadding"
+  }
+}

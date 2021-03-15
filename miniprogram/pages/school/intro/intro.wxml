@@ -1,0 +1,5 @@
+<import src="../temp.wxml" />
+<template is="schoolHeader" data="{{info}}"/>
+<view class="bg-white p-16">
+    <rich-text class="line-h-24 font-14" nodes="{{info.school_content}}"></rich-text>
+</view>

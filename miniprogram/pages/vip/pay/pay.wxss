@@ -1,0 +1,6 @@
+
+.good{position: relative;overflow: hidden;}
+.good .checked{position: absolute;bottom: -60rpx;right: -60rpx;width: 120rpx;height: 120rpx;transform: rotate(45deg);background-color:#DD4E2C ;}
+.good .check.iconfont{color: #fff;font-size:24rpx;position: absolute;bottom: 10rpx;right:10rpx;z-index: 1;}
+.b-2-golden{border: 4rpx solid rgba(175, 139, 84, 1);}
+.b-2-red{border:2rpx solid #DD4E2C;}

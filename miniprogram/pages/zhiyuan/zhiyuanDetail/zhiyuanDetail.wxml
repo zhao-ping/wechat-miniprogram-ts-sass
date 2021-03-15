@@ -1,0 +1,176 @@
+<import src="../../temp.wxml" />
+<wxs src="../../../util.wxs" module="tools"></wxs>
+<scroll-view class="full-screen" scroll-x="{{false}}" scroll-y="{{true}}" scroll-into-view="{{scrollview}}">
+    <view class="ub ub-ac p-16">
+        <view class="ub-f1"><rich-text class="color-grey font-14" nodes="{{info.application.first_tip}}"></rich-text></view>
+        <view><rich-text class="color-grey font-14" nodes="{{info.application.second_tip}}"></rich-text></view>
+    </view>
+    <view wx:for="{{info.application_school_list}}" class="bg-white mb-16">
+        <!-- 浙江版本 -->
+        <view wx:if="{{globalUserInfo.prov_model_ex==3}}">
+            <view bind:tap="toSchoolDetail" data-item="{{item}}" class="ub ub-ac pr-16 p-tb-8 bb-1">
+                <view class="w-46"><view class="bg-green color-white sortTag">{{item.sort_index_str}}</view></view>
+                <view class="ub-f1 ml-16">{{item.subject_group_name||item.school_name}}</view>
+                <rich-text class="font-12 color-grey" nodes="{{item.school_info}}"></rich-text>
+                <view wx:if="{{!isZhiyuanPage}}" class="bg-f7 color-grey line-h-14 br-4 p-lr-4 display-ib ml-4">··</view>
+            </view>
+            <view class="ub p-lr-16 pb-16 pt-20" bind:tap="getMajorInfo" data-item="{{item}}">
+                <view wx:if="{{item.probability||item.probability_level}}" class="w-46">
+                    <view wx:if="{{item.probability}}" class="font-10">
+                        <view class="font-20 display-ib font-number">{{item.probability<10?'<9':item.probability}}</view>%
+                    </view>
+                    <view wx:if="{{item.probability_level}}" class="possibility" style="border: 1px solid {{item.probability_level_color}}; color: {{item.probability_level_color}};">
+                        {{item.probability_level}}
+                    </view>
+                </view>
+                <view class="ub-f1">
+                    <view>
+                        <view class="display-ib color-00 bold font-16">{{item.major_name}}</view>
+                        <view wx:if="{{item.subject_info}}" class="bg-f7 br-4 ml-8 line-h-22 p-lr-4 display-ib">
+                            {{item.subject_info}}
+                        </view>
+                    </view>
+                    <view class="pt-8">{{item.school_name}} <view class="color-grey font-14 ml-4 display-ib">{{item.city}}</view></view>
+                    <view class="ub ub-ac">
+                        <view class="ub-f1">
+                            <view wx:for="{{item.score_info}}" wx:for-item="node" class="pt-8">
+                                <rich-text class="font-14 color-grey" nodes="{{node}}"></rich-text>
+                            </view>
+                        </view>
+                        <view class="iconfont iconarrow-right font-10 color-grey"></view>
+                    </view>
+                    <view wx:if="{{item.major_tag}}" class="pt-8 color-grey">{{item.major_tag}}</view>
+                    <view wx:if="{{item.major_tags.length>0}}" class="clearfix" style="max-height: 120rpx; overflow: hidden; margin: 16rpx -8rpx -8px;">
+                        <view wx:for="{{item.major_tags}}" wx:for-item="tag" class="bg-green-light font-12 line-h-22 color-grey display-b m-4 p-lr-16 br-12 float-l">
+                            {{tag}}
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <!-- 其他版本 -->
+        <view wx:else class="ub ub-start pt-16">
+            <view class="bg-green color-white sortTag">{{item.sort_index_str}}</view>
+            <view class="ub-f1">
+                <view wx:if="{{!item.school_id}}" bind:tap="toAddSchool" data-sort="{{index+1}}" class="p-16 bg-white text-center color-green">
+                    <view class="iconfont iconicon_add font-32"></view>
+                    <view class="pt-8 font-16">新增学校</view>
+                </view>
+                <view wx:else class="p-lr-16 ub ub-start pb-8">
+                    <view wx:if="{{globalUserInfo.mode!=2&&(item.probability||item.probability_level)}}" class="w-46">
+                        <view wx:if="{{item.probability}}" class="font-10">
+                            <view class="font-20 display-ib font-number">{{item.probability<10?'<9':item.probability}}</view>%
+                        </view>
+                        <view wx:if="{{item.probability_level}}" class="possibility" style="border: 1px solid {{item.probability_level_color}}; color: {{item.probability_level_color}};">
+                            {{item.probability_level}}
+                        </view>
+                    </view>
+                    <view class="ub-f1 ub ub-ac" bind:tap="getSchoolInfo" data-item="{{item}}" data-index="{{index}}">
+                        <view class="ub-f1">
+                            <view class="mb-8">
+                                <view class="bold font-18 display-ib">{{item.subject_group_name||item.school_name}}</view>
+                                <view  class="color-grey font-12 ml-8 display-ib">{{item.city}}</view>
+                            </view>
+                            <view wx:if="{{item.subject_info}}" class="color-grey mb-8 font-14">
+                                <rich-text class="display-ib" nodes="{{item.subject_info}}"></rich-text>
+                                <view wx:if="{{globalUserInfo.mode==2&&item.probability_level}}" class="possibility small display-ib ml-4" style="border: 1px solid {{item.probability_level_color}}; color: {{item.probability_level_color}};">
+                                {{item.probability_level}}
+                                </view>
+                                </view>
+                            <view wx:for="{{item.score_info}}" wx:for-item="score" class="mb-8 color-grey"><rich-text class="" nodes="{{score}}"></rich-text></view>
+                        </view>
+                        <view class="iconfont iconnav_right color-grey font-8"></view>
+                    </view>
+                </view>
+                <view wx:if="{{item.school_id}}" class="bt-1">
+                    <view wx:if="{{item.application_major_list.length==0}}" bind:tap="toAddMajor" data-item="{{item}}" class="p-16 bg-white text-center">
+                        <view class="iconfont iconicon_add font-24 color-green"></view>
+                        <view class="pt-8 font-16 color-grey">新增专业</view>
+                    </view>
+                    <view wx:else class="ub ub-ac pr-16" bind:tap="toAddMajor" data-item="{{item}}">
+                        <view class="ub-f1 clearfilx ub p-tb-8" style="flex-wrap: wrap;">
+                            <view wx:for="{{item.application_major_list}}" wx:for-item="major" class="col p-tb-8 ub" style="width:50%;box-sizing:border-box;">
+                                <view class="color-grey mr-4">{{major.sort_index_str}}.</view>
+                                <view class="ub-f1">
+                                    <view>{{major.major_name}}</view>
+                                    <view wx:if="{{major.major_tag}}" class="pt-4 font-12 color-grey">{{tools.substr(major.major_tag,10)+'···'}}</view>
+                                </view>
+                            </view>
+                        </view>
+                        <view class="iconfont iconnav_right font-10"></view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view wx:if="{{item.school_id}}" class="bt-1 p-tb-8 ub ub-ac ub-around text-center color-grey">
+            <view bind:tap="{{index==0?'elToast':'move'}}" data-index="{{index}}" data-sort="{{1}}" data-message="已经是第一位，无法上移！" class="ub-f1">
+                <view class="iconfont iconicon_Moveup font-18 {{index==0?'color-grey':'color-green'}}"></view>
+                <view>上移</view>
+            </view>
+            <view bind:tap="{{(index==info.application_school_list.length-1)?'elToast':'move'}}" data-index="{{index}}" data-sort="{{2}}" data-message="已经是最末位，无法下移!"  class="ub-f1">
+                <view class="iconfont iconicon_Movedown font-18 {{(index==info.application_school_list.length-1)?'color-grey':'color-green'}}"></view>
+                <view>下移</view>
+            </view>
+            <view bind:tap="edit" data-index="{{index}}" class="ub-f1">
+                <view class="iconfont iconjiaohuan3 font-18 color-green"></view>
+                <view>修改</view>
+            </view>
+            <view wx:if="{{globalUserInfo.prov_model_ex==1}}" bind:tap="adjust" data-index="{{index}}" class="ub-f1">
+                <view class="iconfont {{item.is_adjust?'iconicon_Check color-green':'iconicon_dont color-orange'}} font-18"></view>
+                <view>{{item.is_adjust?'服从调剂':'不服从调剂'}}</view>
+            </view>
+            <view bind:tap="delete" data-index="{{index}}" class="ub-f1">
+                <view class="iconfont iconlaji font-18 color-green"></view>
+                <view>删除</view>
+            </view>
+        </view>
+        <view wx:if="{{item.adjust_type_str}}" bind:tap="showAdjust" data-item="{{item}}" data-index="{{index}}" class="ub ub-ac h-48 p-lr-16 color-grey bt-1">
+            <view class="ub-f1 text-center">{{item.adjust_type_str}}</view>
+            <view class="iconfont iconarrow-right font-10 color-grey"></view>
+        </view>
+    </view>
+    <template is="popupSchool" data="{{popupSchool,isZhiyuanPage}}"></template>
+    <template is="popupMajor" data="{{popupMajor,isZhiyuanPage}}"></template>
+    <view wx:if="{{info.application_school_list.length<info.application.max_school_count}}" bind:tap="toAddSchool" class="p-16 bg-white text-center color-green">
+        <view class="iconfont iconicon_add font-32"></view>
+        <view class="pt-8 font-16">新增{{globalUserInfo.prov_model_ex==3?'专业':(globalUserInfo.prov_model_ex==4?'专业组':'学校')}}</view>
+    </view>
+    <view wx:if="{{globalUserInfo.prov_model_ex!=1}}" class="newZhiyuan"  bind:tap="toAddSchool"><rich-text class="line-h-16" nodes="{{'新增<br/>'+(globalUserInfo.prov_model_ex==3?'专业':(globalUserInfo.prov_model_ex==4?'专业组':'学校'))}}"></rich-text></view>
+    <view style="height:104rpx;"></view>
+    <view id="bottom"></view>
+    <navigator hover-class="none" url="/pages/zhiyuan/zhiyuanTest/zhiyuanTest?uca_id={{uca_id}}" class="fixed bottom bg-green p-12 text-center font-16 color-white">查看评估报告 ></navigator>
+    <bottom-in-container id="sort">
+        <view class="ub ub-ac p-lr-16 pt-16">
+            <view class="ub-f1">
+                <view class="bold font-16">{{info.application_school_list[currentIndex].major_name}}({{info.application_school_list[currentIndex].school_name}})</view>
+                <view class="pt-8 color-grey font-14">从第 {{sorts[currentIndex]}} 志愿改为第 {{sorts[sortIndex]}} 志愿</view>
+            </view>
+            <view class="br-4 bg-green p-lr-32 line-h-32 color-white" bind:tap="setSort">确定</view>
+        </view>
+        <picker-view style="height:300rpx;" value="{{[sortIndex]}}" bindchange="watchSort">
+            <picker-view-column>
+                <view wx:for="{{sorts}}" class="text-center line-h-34" >
+                    {{item}}
+                </view>
+            </picker-view-column>
+        </picker-view>
+    </bottom-in-container>
+    <popup wx:if="{{info}}" id="adjust">
+        <view style="width:80vw;">
+            <view class="font-18 text-center pt-16">请选择专业调剂</view>
+            <view class="p-8 font-12 text-center color-grey line-h-18">
+                <rich-text class="" nodes="{{info.adjust_type_info.message}}"></rich-text>
+            </view>
+            <view class="pt-16 pb-32 p-lr-32">
+                <view wx:for="{{info.adjust_type_info.adjust_type_list}}" bind:tap="chooseAdjust" data-item="{{item}}" data-index="{{index}}" class="ub ub-ac p-4">
+                    <view class="iconfont mr-8 {{tools.includes(currentAdjust,item.v)?'color-green iconCheckbox_Selected':'color-grey iconCheckbox_Unselected'}}"></view>
+                    <view class="ub-f1">{{item.k}}</view>
+                </view>
+            </view>
+            <view class="p-4 bt-1 ub ub-ac line-h-48 text-center">
+                <view bind:tap="hideAdjust" class="ub-f1">取消</view>
+                <view bind:tap="adjustShanghai" class="ub-f1 bg-green color-white br-16">确定</view>
+            </view>
+        </view>
+    </popup>
+</scroll-view>

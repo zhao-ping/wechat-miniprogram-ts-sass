@@ -1,0 +1,63 @@
+module.exports.hasStr = function (str, testItem) {
+    return str.indexOf(testItem) == -1 ? false : true;
+}
+module.exports.includes = function (arr, testItem) {
+    for(var i=0;i<arr.length;i++){
+        if(arr[i]==testItem){
+            return true
+        }
+    }
+    return false;
+}
+module.exports.translateUrl = {
+    "yuanmeng://home": "/pages/home/home/home",                    // APP首页 只要是yuanmeng:// 都可以到app首页
+    "yuanmeng://major_detail": "/pages/major/major/major",                   //专业详情
+    "yuanmeng://school_detail": "/pages/school/school/school",                  //学校详情
+    "yuanmeng://buy_vip": "/pages/vip/info/info",                        //VIP展示页面
+    "yuanmeng://user_bei_xuan": "/pages/zhiyuan/beixuan/beixuan",                  //用户中心我的备
+    "yuanmeng://can_school": "/pages/zhiyuan/possibleSchools/possibleSchools",                     //能上的学校
+    "yuanmeng://school_rank": "/pages/school/rankType/rankType",                    //学校排行首页
+    "yuanmeng://school_rank_detail": "/pages/school/rankType/rankType",             //学校排行 指定页   id// 武书连Id。。message// 武书连。。。
+    "yuanmeng://all_scholl": "/pages/school/schools/schools",                    //学校大全
+    "yuanmeng://all_major": "/pages/major/majors/majors",                     //专业大全
+    "yuanmeng://probability_forecast_search": "/pages/school/searchSchoolPossibility/searchSchoolPossibility",    //概率预测搜索页面
+    "yuanmeng://school_probability_detail": "/pages/school/searchSchoolPossibility/searchSchoolPossibility",      //学校概率测试页面。  需要后台判断用户是否是VIP id 学校ID
+    "yuanmeng://problem_home": "/pages/user/question/questions/questions",                  //常见问题首页 id // 1产品使用 2 产品购买 3 产品安全
+    "yuanmeng://major_home": "/pages/major/majors/majors",                    //专业大全首页
+    "yuanmeng://update_score": "/pages/user/setScore/setScore",                  //修改分数
+    "yuanmeng://valunteer_edit": "/pages/zhiyuan/zhiyuans/zhiyuans",               //填志愿  0 新建 其他为修改志愿
+    "yuanmeng://score_line": "/pages/home/provinceLine/provinceLine",                  //批次线
+    "yuanmeng://subsection_line": "/pages/home/scoreRank/scoreRank",               //一分一段表
+    "yuanmeng://plan_detail": "/pages/school/searchSchoolPlan/searchSchoolPlan",                  //招生计划详情
+    "yuanmeng://plan_search": "/pages/school/searchSchoolPlan/searchSchoolPlan",                  //招生计划搜索
+    "yuanmeng://question": "/pages/user/question/questions/questions",                    // 常见问题
+    "yuanmeng://choose_subject": "/pages/newSubject/newSubject/newSubject",                //新高考选科
+    "yuanmeng://my_volunteer_form":"/pages/zhiyuan/zhiyuans/zhiyuans",//志愿风险评估
+    "yuanmeng://grade_report":"/pages/scoreReport/report/report",//成绩报告
+    "yuanmeng://search_major":"/pages/zhiyuan/scoreMajor/scoreMajor", //按分数选专业
+    "yuanmeng://search_school":"/pages/zhiyuan/scoreSchool/scoreSchool",//按分数选学校
+    "yuanmeng://quality_article_detail":"/pages/article/suxueDetail/suxueDetail"//填报速学
+}
+module.exports.toFixed=function(num,count){
+    return num.toFixed(count);
+}
+module.exports.getMaps = function(array,key) {
+    return array.map(function(item){return item[key]});
+}
+module.exports.formateTimeforTime=function(timeStamp){
+    var time=getDate(timeStamp*1000);
+    var now=getDate();
+    var date=time.getDate(), month=time.getMonth(),hour=time.getHours(),minute=time.getMinutes();
+    if(month==now.getMonth()&&date==now.getDate()){
+        // 今天
+        return (hour>10?hour:"0"+hour)+":"+(minute>10?minute:"0"+minute);
+    }else{
+        return month+"月"+date+"日 "+(hour>10?hour:"0"+hour)+":"+(minute>10?minute:"0"+minute);
+    }
+}
+module.exports.replace=function(str,oldStr,newStr){
+    return str.replace(oldStr,newStr);
+}
+module.exports.substr=function(str,count){
+    return str.substring(0,count);
+}

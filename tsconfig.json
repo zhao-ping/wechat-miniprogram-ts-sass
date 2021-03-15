@@ -1,5 +1,7 @@
 {
     "compilerOptions": {
+        "removeComments":true,
+        "downlevelIteration": true,
         "strictNullChecks": true,
         "strictPropertyInitialization": true,
         "module": "commonjs",

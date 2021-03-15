@@ -1,0 +1,98 @@
+<import src="../temp.wxml" />
+<page-loadding show="{{info}}">
+    <template is="majorHeader" data="{{info,hasAttent:true}}"/>
+    <view class="bg-white p-16 ub ub-around text-center">
+        <view wx:if="{{info.major_info.major_type_name}}" class="ub-f1">
+            <view class="font-16">{{info.major_info.major_type_name}}</view>
+            <view class="ub ub-ac ub-center pt-4">
+                <view class="iconfont iconicon_Education color-golden"></view>
+                <view class="ml-4 color-grey font-12">学历层次</view>
+            </view>
+        </view>
+        <view wx:if="{{info.major_info.major_type_name}}" class="ub-f1 bl-1">
+            <view class="font-16">{{info.major_info.degree}}</view>
+            <view class="ub ub-ac ub-center pt-4">
+                <view class="iconfont iconicon_degree color-golden"></view>
+                <view class="ml-4 color-grey font-12">授予学位</view>
+            </view>
+        </view>
+        <view wx:if="{{info.major_info.major_type_name}}" class="ub-f1 bl-1">
+            <view class="font-16">{{info.major_info.year}}</view>
+            <view class="ub ub-ac ub-center pt-4">
+                <view class="iconfont iconicon_Schoolsystem color-golden"></view>
+                <view class="ml-4 color-grey font-12">学制年限</view>
+            </view>
+        </view>
+    </view>
+    <!-- 第一印象 -->
+    <view class="ub ub-between bg-white p-16 m-16 br-8">
+        <view wx:for="{{info.first_impression_list}}" wx:for-item="item" class="text-center">
+            <image class="img-32" src="{{item.v}}"></image>
+            <view class="pt-8 font-12 color-grey">{{item.k}}</view>
+        </view>
+    </view>
+    <!-- 选考学科 -->
+    <view wx:if="{{info.major_limit}}" class="br-24 line-h-48 bg-white m-16 color-grey font-16 text-center">
+        选考（学科）建议：<view class="display-ib color-green">{{info.major_limit}}</view>
+    </view>
+    <!-- 专业初识 -->
+    <navigator hover-class="none" wx:if="{{info.professional_knowledge}}" url="/pages/major/detail/detail?major_id={{info.major_info.major_id}}" class="bg-white mb-8">
+        <view class="font-18 bold p-16 bb-1">专业初识</view>
+        <view wx:if="{{info.professional_knowledge.major_warning}}" class="ub color-orange p-16 line-h-24">
+            <view class="iconfont iconjingshi mr-8"></view>
+            <view class="font-14">{{info.professional_knowledge.major_warning}}</view>
+        </view>
+        <view wx:for="{{info.professional_knowledge.content_list}}" wx:for-item="item" class="p-lr-16 mb-16">
+            <view class="bg-f7 display-ib line-h-28 br-12 p-lr-16 mt-16 font16 mb-8">{{item.title}}</view>
+            <view class="line-h-24 color-grey font-14">{{item.content}}</view>
+        </view>
+        <view class="text-center color-green p-tb-16 font-14">专业详解 ></view>
+    </navigator>
+    <!-- 专升本方向 -->
+    <view wx:if="{{info.undergraduate_direction}}" url="/pages/major/detail/detail?major_id={{info.major_info.major_id}}" class="bg-white mb-8">
+        <view class="font-18 bold p-16 bb-1">专升本方向</view>
+        <view class="color-2f p-16 line-h-24 font-16">{{info.undergraduate_direction}}</view>
+    </view>
+    <!-- 就业相关 -->
+    <navigator hover-class="none" wx:if="{{info.professional_knowledge}}" url="/pages/major/job/job?major_id={{info.major_info.major_id}}" class="bg-white mb-8">
+        <view class="font-18 bold p-16 bb-1">就业相关</view>
+        <view class="bg-f7 display-ib line-h-28 br-12 p-lr-16 mt-16 font16 mb-8">年度毕业生规模</view>
+        <view class="p-16" hover-class="none" hover-stop-propagation="false">
+            <view class="font-number font-24 bold color-golden display-ib">{{info.about_employment.number_of_graduates}}</view> 人
+        </view>
+        <view wx:if="{{info.about_employment.employment_rate_list.length>0}}">
+            <view class="bg-f7 display-ib line-h-28 br-12 p-lr-16 mt-16 m-lr-16 font16 mb-8">就业率</view>
+            <view class="ub ub-between p-16 text-center">
+                <view wx:for="{{info.about_employment.employment_rate_list}}" wx:for-item="item">
+                    <view class="display-ib" style="width:160rpx;">
+                        <circle-percent title="{{item.year}}" percent="{{item.min_ratio/100}}"></circle-percent>
+                    </view>
+                    <view class="pt-8 font-number font-16">{{item.min_ratio}}% ~ {{item.max_ratio}}%</view>
+                </view>
+            </view>
+        </view>
+        <view class="text-center color-green p-tb-16 font-14">就业前景 ></view>
+    </navigator>
+    <view wx:if="{{info.about_article_list.length>0}}" class="bg-white mb-8">
+        <view class="font-18 bold p-16 bb-1">相关文章</view>
+        <navigator hover-class="none" wx:for="{{info.about_article_list}}" wx:for-item="item" class="p-16 bb-1 ub ub-ac" target="" url="/pages/article/article/article?article_id={{item.v}}" >
+            <view class="ub-f1 font-14 color-2f">{{item.k}}</view>
+            <view class="iconfont iconarrow-right font-10 color-grey"></view>
+        </navigator>
+    </view>
+    <view style="height:100rpx;"></view>
+    <!-- 底部菜单 -->
+    <view class="fixed bottom bg-green p-tb-4">
+        <view class="ub ub-ac ub-around text-center color-white">
+            <navigator hover-class="none" url="/pages/major/schools/schools?major_id={{info.major_info.major_id}}" class="">
+                <view class="iconfont iconTabbutton_school1 font-20"></view>
+                <view class="font-12">开设院校</view>
+            </navigator>
+            <navigator hover-class="none" url="/pages/major/job/job?major_id={{info.major_info.major_id}}" class="">
+                <view class="iconfont iconTabbutton_job1 font-20"></view>
+                <view class="font-12">就业前景</view>
+            </navigator>
+        </view>
+    </view>
+</page-loadding>
+

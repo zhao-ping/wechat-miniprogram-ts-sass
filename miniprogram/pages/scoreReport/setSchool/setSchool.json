@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText":"",
+  "navigationBarBackgroundColor":"#50CC94",
+  "navigationBarTextStyle":"white",
+  "usingComponents": {
+    "ym-input":"../../component/input/input"
+  }
+}

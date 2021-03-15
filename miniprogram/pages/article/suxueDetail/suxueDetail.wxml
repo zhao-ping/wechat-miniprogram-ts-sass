@@ -1,0 +1,44 @@
+<view wx:if="{{info}}" class="bg-white">
+    <view class="o">{{wxNodes}}</view>
+    <view class="p-16 bb-1">
+        <view class="font-18 bold line-h-32">{{info.article_detail.title}}</view>
+        <view class="ub ub-ac pt-16">
+            <navigator hover-class="none" url="/pages/article/suxueTeatcher/suxueTeatcher?author_id={{info.article_detail.author_id}}"  class="ub-f1 ub ub-ac">
+                <image class="img-24 round" src="{{info.article_detail.photo||'../../../images/logo.png'}}" mode="aspectFill"></image>
+                <view class="ml-4 color-dark-blue">{{info.article_detail.author_name}}</view>
+            </navigator>
+            <navigator hover-class="none" url="/pages/article/suxueTopics/suxueTopics?topic_id={{info.article_detail.topic_id}}" class="color-dark-blue">{{info.article_detail.topic_name}}</navigator>
+        </view>
+    </view>
+    <view wx:if="{{info.article_detail.content}}" class="p-16 perfectArticle" style="min-height:1000rpx;">
+        <article-content content="{{info.article_detail.content}}"></article-content>
+    </view>
+    <view class="ub ub-ac ub-around p-16">
+        <view bind:tap="collection" class="b-1 line-h-32 br-24 ub ub-ac ub-center" style="width:240rpx;">
+            <view class="iconfont iconicon_star {{info.article_detail.is_collentions?'color-orange':' color-d5'}}"></view>
+            <view class="font-grey m-lr-8">收藏</view>
+            <view wx:if="{{info.article_detail.collections}}" class="font-2f">{{info.article_detail.collections}}</view>
+        </view>
+        <view bind:tap="zan" class="b-1 line-h-32 br-24 ub ub-ac ub-center" style="width:240rpx;">
+            <view class="iconfont iconzan {{info.article_detail.is_thumbs?'color-orange':'color-d5'}}"></view>
+            <view class="font-grey m-lr-8">点赞</view>
+            <view wx:if="{{info.article_detail.thumbs}}" class="font-2f">{{info.article_detail.thumbs}}</view>
+        </view>
+    </view>
+    <view class="p-16">
+        <view class="bg-f7 p-tb-24 p-lr-16 text-center">
+            <navigator hover-class="none" url="/pages/article/suxueTopics/suxueTopics?topic_id={{info.article_detail.topic_id}}">
+                <rich-text class="font-14 color-grey" nodes="{{info.article_detail.topic_tip}}"></rich-text>
+            </navigator>
+            <navigator hover-class="none" url="/pages/article/suxueDetail/suxueDetail?article_id={{info.next_article.article_id}}" wx:if="{{info.next_article.title}}" class="pt-16 ub ub-center">
+                <rich-text class="color-2f" nodes="{{info.next_article.title}}"></rich-text>
+            </navigator>
+        </view>
+    </view>
+    <view class="p-16">
+        <view class="bold font-18">更多话题：</view>
+        <view class="color-dark-blue font-16" style="margin:16rpx -16rpx;">
+            <navigator hover-class="none" wx:for="{{info.topic_more}}" url="/pages/article/suxueTopics/suxueTopics?topic_id={{item.v}}" class="display-ib m-lr-8 m-tb-4">{{item.k}}</navigator>
+        </view>
+    </view>
+</view>

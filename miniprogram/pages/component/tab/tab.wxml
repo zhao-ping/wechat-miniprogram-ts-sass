@@ -1,0 +1,6 @@
+<view class="container">
+    <view class="tabContainer">
+        <view wx:for="{{items}}" wx:for-index="i" wx:for-item="item" data-index="{{i}}" bindtap="setTab" class="item {{index==i?'active':''}}">{{mode=='string'?item:item[key]}}</view>
+    </view>
+    <view class="line" animation="{{aniLine}}"></view>
+</view>
